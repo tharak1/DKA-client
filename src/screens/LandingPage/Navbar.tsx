@@ -97,7 +97,8 @@ const Navbar: React.FC = () => {
           CONTACT US
         </NavLink>
       </div>
-      <Link to="/join-now" className="text-black text-lg py-2 px-4">Join now</Link>
+      <Link to='/performance' className='text-black text-lg py-2 px-4'>Performnace</Link>
+      <Link to="/joinnow" className="text-black text-lg py-2 px-4">Join now</Link>
     </nav>
   );
 }
