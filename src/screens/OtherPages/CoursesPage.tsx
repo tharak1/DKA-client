@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { db } from '../../firebase_config';
 import { CourseModel } from '../../models/CourseModel';
 import Navbar from '../LandingPage/Navbar';
+import CourseCard from '../../components/CourseCard';
 
 const CoursesPage:React.FC = () => {
     const location = useLocation();
@@ -14,16 +15,20 @@ const CoursesPage:React.FC = () => {
 
     useEffect(()=>{
         fetchCoursesByCategory();
-    },[]);
+    },[location.search]);
 
     const fetchCoursesByCategory = async()=>{
         const q = query(collection(db, "courses"), where("category", "==", category));
 
         const querySnapshot = await getDocs(q);
-        const data = querySnapshot.docs.map((doc) => {
-            return doc.data().name;
-          });
-        setCourses(data);
+        const courses: CourseModel[] = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        })) as CourseModel[];
+
+
+
+        setCourses(courses);
     }
 
 
@@ -33,14 +38,18 @@ const CoursesPage:React.FC = () => {
         <Navbar/>
       </div>
 
-    <div className='px-10'>
+    <div className='pt-20 px-20 flex flex-col'>
         <div className=' w-full flex flex-col items-start mb-4'>
-            <h1 className='text-lg font-bold '>{category}</h1>
+            <h1 className='text-2xl font-bold '>{category}</h1>
             <p>Here are your details about the {category}</p>
         </div>
 
-        <div>
-            
+        <div className='w-full flex flex-col space-y-5'>
+            {
+                courses.map((obj)=>(
+                    <CourseCard courseDetails={obj} key={obj.id}/>
+                ))
+            }
         </div>
     </div>
 
