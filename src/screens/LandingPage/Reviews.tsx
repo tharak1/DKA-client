@@ -1,4 +1,6 @@
+
 import React, { useState } from 'react';
+import '../../App.css'; 
 
 const Reviews: React.FC = () => {
   const reviews = [
@@ -42,25 +44,33 @@ const Reviews: React.FC = () => {
     <section id="dummy" className="p-10 bg-white">
       <div className="max-w-7xl mx-auto flex flex-wrap">
         {/* Left Section */}
-        <div className="w-full md:w-1/2 pr-4 mb-10 md:mb-0">
-          <h2 className="text-6xl font-bold mb-4 text-center md:text-left">What Our <br></br>Customers Say</h2>
-          <p className="text-2xl text-center md:text-left">Hear from our satisfied customers who have experienced our excellent service.Hear from our satisfied customers who have experienced our excellent service.Hear from our satisfied customers who have experienced our excellent service.Hear from our satisfied customers who have experienced our excellent service.Hear from our satisfied customers who have experienced our excellent service.Hear from our satisfied customers who have experienced our excellent service.</p>
+        <div className="w-full md:w-1/2  pr-4 mb-10 md:mb-0">
+          <h2 className="text-6xl font-bold mb-4 text-center md:text-left">What Our <br />Customers Say</h2>
+          <p className="text-2xl text-center md:text-left">
+            Hear from our satisfied customers who have experienced our excellent service.
+          </p>
         </div>
         
         {/* Right Section */}
-        <div className="w-full md:w-1/2 overflow-y-auto h-96 pr-4">
-          <div className="space-y-4">
+        <div className="w-full  md:w-1/2 pr-4 overflow-y-scroll scrollbar-cyan" style={{ maxHeight: '400px' }}>
+          <div className="space-y-4 relative">
             {reviews.map((review, index) => (
               <div
                 key={index}
-                className="relative"
+                className={`relative transition-transform duration-300 ${hoveredIndex === index ? 'z-10' : 'z-0'}`}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
               >
+                {/* Color strip */}
                 <div
-                  className={`flex items-center border-2 border-black-300 rounded-lg p-4 transition-transform duration-300 ${
-                    hoveredIndex === index ? 'transform -translate-x-20' : ''
+                  className={`bg-${hoveredIndex === index ? 'purple' : 'gray'} h-full w-2 absolute right-0`}
+                ></div>
+
+                <div
+                  className={`flex items-center border-2 border-black-300 rounded-lg p-4 m-8 transition-transform duration-300 ${
+                    hoveredIndex === index ? 'transform -translate-x-8' : ''
                   }`}
+                  style={{ paddingRight: hoveredIndex === index ? '4px' : '' }}
                 >
                   <img
                     src={review.image}
@@ -80,8 +90,7 @@ const Reviews: React.FC = () => {
 
 export default Reviews;
 
-
-// import React from 'react';
+// import React, { useState } from 'react';
 
 // const Reviews: React.FC = () => {
 //   const reviews = [
@@ -111,26 +120,53 @@ export default Reviews;
 //     },
 //   ];
 
+//   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+//   const handleMouseEnter = (index: number) => {
+//     setHoveredIndex(index);
+//   };
+
+//   const handleMouseLeave = () => {
+//     setHoveredIndex(null);
+//   };
+
 //   return (
 //     <section id="dummy" className="p-10 bg-white">
 //       <div className="max-w-7xl mx-auto flex flex-wrap">
 //         {/* Left Section */}
 //         <div className="w-full md:w-1/2 pr-4 mb-10 md:mb-0">
-//           <h2 className="text-2xl font-bold mb-4 text-center md:text-left">What Our Customers Say</h2>
-//           <p className="text-center md:text-left">Hear from our satisfied customers who have experienced our excellent service.</p>
+//           <h2 className="text-6xl font-bold mb-4 text-center md:text-left">What Our <br />Customers Say</h2>
+//           <p className="text-2xl text-center md:text-left">Hear from our satisfied customers who have experienced our excellent service.Hear from our satisfied customers who have experienced our excellent service.Hear from our satisfied customers who have experienced our excellent service.Hear from our satisfied customers who have experienced our excellent service.Hear from our satisfied customers who have experienced our excellent service.</p>
 //         </div>
         
 //         {/* Right Section */}
-//         <div className="w-full md:w-1/2 overflow-y-auto h-96 pr-4 transition-transform duration-300 hover:transform hover:-translate-x-4">
-//           <div className="space-y-4">
+//         <div className="w-full md:w-1/2 pr-4 overflow-y-scroll" style={{ maxHeight: '400px' }}>
+//           <div className="space-y-4 relative">
 //             {reviews.map((review, index) => (
-//               <div key={index} className="flex items-center border-2 border-gray-300 rounded-lg p-4">
-//                 <img
-//                   src={review.image}
-//                   alt={`Customer ${index + 1}`}
-//                   className="w-20 h-20 object-cover rounded-full mx-4"
-//                 />
-//                 <p className="text-left">{review.text}</p>
+//               <div
+//                 key={index}
+//                 className="relative"
+//                 onMouseEnter={() => handleMouseEnter(index)}
+//                 onMouseLeave={handleMouseLeave}
+//               >
+//                 {/* Color strip */}
+//                 <div
+//                   className={`bg-${hoveredIndex === index ? 'purple' : 'gray'} h-full w-2 absolute right-0`}
+//                 ></div>
+
+//                 <div
+//                   className={`flex items-center border-2 border-black-300 rounded-lg p-4 m-8 transition-transform duration-300 ${
+//                     hoveredIndex === index ? 'transform -translate-x-8' : ''
+//                   }`}
+//                   style={{ paddingRight: hoveredIndex === index ? '4px' : '' }}
+//                 >
+//                   <img
+//                     src={review.image}
+//                     alt={`Customer ${index + 1}`}
+//                     className="w-20 h-20 object-cover rounded-full mx-4"
+//                   />
+//                   <p className="text-left">{review.text}</p>
+//                 </div>
 //               </div>
 //             ))}
 //           </div>
@@ -141,6 +177,4 @@ export default Reviews;
 // }
 
 // export default Reviews;
-
-
 

@@ -5,7 +5,7 @@ const Home: React.FC = () => {
     <header id="home" className="w-full bg-white-100 p-20 relative text-left">
       <div>
         <h1 className="text-4xl font-bold mb-6">
-          <span className="bg-gradient-to-r from-red-500 via-green-500 to-gray-600 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-pink-500 to-green-500 bg-clip-text text-transparent">
             DivyaKala Academy
           </span>
         </h1>
@@ -22,7 +22,7 @@ const Home: React.FC = () => {
           Mauris a nisl nec nisl ullamcorper efficitur.
         </p>
 
-        <button className="relative bg-gradient-to-r from-red-500 via-green-500 to-gray-600 text-white py-2 px-4 rounded">
+        <button className="relative bg-gradient-to-r from-pink-500 to-green-500  text-white py-2 px-4 rounded z-5">
           Explore Now
           <span className="absolute left-0 bottom-0 w-full h-0.5 "></span>
         </button>
