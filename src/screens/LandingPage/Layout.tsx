@@ -14,9 +14,10 @@ const Layout: React.FC = () => {
       <Navbar />
       <main className="pt-20"> {/* Add padding-top to avoid overlap with fixed navbar */}
         <Home />
-        <div className="py-10"> {/* Add padding-y between components */}
+        <div className="py-10" id="about"> {/* Add padding-y between components */}
           <About />
         </div>
+        
         <div className="py-4"> {/* Add padding-y between components */}
           <Courses />
         </div>
@@ -26,8 +27,7 @@ const Layout: React.FC = () => {
         <div className="py-10"> {/* Add padding-y between components */}
           <Achievements />
         </div>
-        
-        <div className="py-10"> {/* Add padding-y between components */}
+        <div className="py-10"> 
           <Footer />
         </div>
       </main>
