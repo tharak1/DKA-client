@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import { db } from '../../firebase_config';
+import { GoArrowUpRight } from "react-icons/go";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -71,7 +72,8 @@ const Navbar: React.FC = () => {
           COURSES
         </NavLink> */}
         <div className='relative'>
-            <button onClick={toggleDropDown} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className=" focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown button <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+
+            <button onClick={toggleDropDown} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className=" focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Courses <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
             </svg>
             </button>
@@ -81,23 +83,26 @@ const Navbar: React.FC = () => {
               {
                 courses.map((course)=>(
                   <li>
-                    <Link to={`/course?category=${course}`} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{course}</Link>
+                    <Link to={`/course?category=${course}`} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onClick={()=>{setViewDropDown(false)}}>{course}</Link>
                   </li>
                 ))
               }
             </ul>
             </div>
         </div>
-        <NavLink
+        {/* <NavLink
           to="/contact"
           className={({ isActive }) =>
             `flex items-center text-lg text-black mr-10 ${isActive ? 'bg-gray-300' : ''}`
           }
         >
           CONTACT US
-        </NavLink>
+        </NavLink> */}
+
+        <ScrollLink to="about" smooth={true} duration={500} className="flex items-center text-lg text-black cursor-pointer">CONTACT US</ScrollLink>
+
       </div>
-      <Link to="/join-now" className="text-black text-lg py-2 px-4">Join now</Link>
+      <Link to="/login" className="text-black text-lg py-2 px-4 display flex items-center space-x-5">Join now <GoArrowUpRight /></Link>
     </nav>
   );
 }
