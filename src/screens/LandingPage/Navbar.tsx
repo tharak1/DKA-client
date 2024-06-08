@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import { db } from '../../firebase_config';
-import { GoArrowUpRight } from "react-icons/go";
+// import { GoArrowUpRight } from "react-icons/go";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
