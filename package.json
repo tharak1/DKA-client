@@ -10,15 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@fortawesome/fontawesome-free": "^6.5.2",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-=======
     "@reduxjs/toolkit": "^2.2.5",
->>>>>>> ad027a9fba95cac5c573804ddbcc252cda445180
     "@tailwindcss/forms": "^0.5.7",
     "@types/react-scroll": "^1.8.10",
     "firebase": "^10.12.2",

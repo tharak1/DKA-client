@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const SignIn: React.FC = () => {
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen ">
       <div className="w-full bg-white flex items-center justify-center">
         <div className="text-center px-8">
           <h1 className="text-3xl font-bold mb-4">Create Account</h1>
@@ -39,10 +39,10 @@ const SignIn: React.FC = () => {
           </form>
         </div>
       </div>
-      <div className="w-1/3 bg-blue-500 flex items-center justify-center">
-        <div className="text-center text-white px-8">
+      <div className="w-1/2 bg-signup-pattern bg-cover flex items-center justify-center">
+        <div className="text-center text-white px-8 ml-10">
           <h1 className="text-3xl font-bold mb-4">Hello, Friend!</h1>
-          <p className="mb-6">To get connected with us please login with your already registered details</p>
+          <p className="mb-6 ml-12">To get connected with us please login with your already registered details</p>
           <Link to="/signup">
             <button className="bg-blue-500 text-white py-2 px-4 rounded-3xl font-semibold hover:bg-gray-200 hover:text-black border border-white">
               SIGN UP
