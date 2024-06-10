@@ -14,7 +14,8 @@ export const buyNow = async (course:CourseModel) => {
       handler: async function (response: any) { // Adjust the type based on Razorpay response structure
         console.log(response);
         const paymentId = response.razorpay_payment_id;
-
+        console.log(paymentId);
+        
 
 
         try {

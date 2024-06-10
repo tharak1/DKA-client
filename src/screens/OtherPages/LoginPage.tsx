@@ -2,17 +2,28 @@ import React, { useState } from 'react';
 import { auth, db, googleProvider } from "../../firebase_config";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
-import { addDoc, collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
+import {  collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
 import { useAppDispatch } from '../../redux/Store';
 // import { setUser } from '../../redux/UserCoursesSlice';
-import { UserModel } from '../../models/UserModel';
+import { GuardianModel, UserModel } from '../../models/UserModel';
 import { setUser } from '../../redux/UserSlice';
+import UsersModal from '../../components/UsersModal';
 
 const LoginPage: React.FC = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useAppDispatch();
+    const [isModalOpen,setIsModalOpen] = useState<boolean>(false);
+
+    const [Guardian,setGuardian] = useState<GuardianModel>({
+        GuardianId:'',
+        registeredID:[]
+    })
+
+    const closeUsersModal = () =>{
+        setIsModalOpen(false);
+    }
 
     const generateSpecificID = (numberOfUsers:number) => {
         const paddingLength = 5;
@@ -37,17 +48,6 @@ const LoginPage: React.FC = () => {
         }
     };
 
-    // const signUp = async () => {
-    //     try {
-    //         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    //         const user = userCredential.user;
-    //         console.log(user);
-    //         navigate("/Sign-up-form");
-    //     } catch (error) {
-    //         console.error("Error signing up:", error);
-    //     }
-    // };
-
     const signInWithGoogle = async () => {
         try {
             const userCredential = await signInWithPopup(auth, googleProvider);
@@ -59,15 +59,17 @@ const LoginPage: React.FC = () => {
             if(userDoc.exists()){
                 const userData = userDoc.data();
                 console.log(userData);
+                setIsModalOpen(true);
+                setGuardian(userData as GuardianModel);
             }
             else{
                 const querySnapshot = await getDocs(collection(db, 'students'));
                 const noofusers = querySnapshot.size;
 
                 const studentId = generateSpecificID(noofusers);
-                await addDoc(collection(db, "Guardian"),{GuardianId : userCredential.user.uid,registeredID:[studentId]})
+                await setDoc(doc(db, "Guardian",userCredential.user.uid),{GuardianId : userCredential.user.uid,registeredID:[studentId]})
                 await setDoc(doc(db, "students", studentId), {GuardianId : userCredential.user.uid,studentId:studentId});
-                navigate(`/Sign-up-form?studentId=${studentId}`);
+                navigate(`/form?studentId=${studentId}`);
 
             }
             
@@ -130,7 +132,7 @@ const LoginPage: React.FC = () => {
                     </div>
             </div>
         </div>
-        
+        <UsersModal isOpen={isModalOpen} onClose={closeUsersModal} guardian={Guardian}/>
         </>
     );
 }

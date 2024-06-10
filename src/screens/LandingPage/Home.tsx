@@ -49,38 +49,3 @@ const Home: React.FC = () => {
 export default Home;
 
 
-// import React from 'react';
-
-// const Home: React.FC = () => {
-//   return (
-//     <header id="home" className="w-[1200px] bg-white-100 p-2 relative text-left">
-//       <div>
-//         <h1 className="text-4xl font-bold mb-6">
-//           <span className="bg-gradient-to-r from-red-500 via-green-500 to-gray-600 bg-clip-text text-transparent">
-//             DivyaKala Academy
-//           </span>
-//         </h1>
-//         <h2 className="text-2xl mb-8 whitespace-pre-line">
-//           {`It's a Big World\nOut There, Go\nExplore.`}
-//         </h2>
-//         <p className="mb-6 bg-white p-0">
-//           Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br />
-//           Proin vel ultricies nulla, a fermentum ex. <br />
-//           Integer vitae orci sit amet erat vehicula euismod. <br />
-//           Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <br />
-//           Suspendisse potenti. <br />
-//           Curabitur vel sem id quam volutpat elementum. <br />
-//           Mauris a nisl nec nisl ullamcorper efficitur.
-//         </p>
-
-//         <button className="relative bg-gradient-to-r from-red-500 via-green-500 to-gray-600 text-white py-2 px-4 rounded">
-//           Explore Now
-//           <span className="absolute left-0 bottom-0 w-full h-0.5 bg-red-500"></span>
-//         </button>
-//       </div>
-//     </header>
-//   );
-// }
-
-// export default Home;
-

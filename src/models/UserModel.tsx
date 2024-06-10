@@ -1,4 +1,5 @@
 interface UserModel{
+    id:string;
     name: string;
     fatherName: string;
     motherName: string;
@@ -12,6 +13,13 @@ interface UserModel{
     password: string;
     imageUrl:string;
     registeredCourses:string[];
+    email:string;
+    country:string;
 }
 
-export type {UserModel}
+interface GuardianModel{
+    GuardianId:string;
+    registeredID:string[];
+}
+
+export type {UserModel,GuardianModel}

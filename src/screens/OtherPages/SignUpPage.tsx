@@ -28,7 +28,7 @@ const SignUpPage:React.FC = () => {
             await setDoc(doc(db, "Guardian",userCredential.user.uid),{studentId:studentId})
 
             await setDoc(doc(db, "students", studentId), {GuardianId : userCredential.user.uid,studentId:studentId});
-            navigate(`/Sign-up-form?studentId=${studentId}`);
+            navigate(`/form?studentId=${studentId}`);
 
         } catch (error) {
             console.error("Error signing up:", error);
