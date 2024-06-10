@@ -2,7 +2,7 @@ import storage from "redux-persist/lib/storage";
 import {persistReducer} from "redux-persist";
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-
+import userReducer  from "./UserSlice";
 
 const persistConfig = {
     key:"root",
@@ -11,7 +11,7 @@ const persistConfig = {
 }
 
 const reducer = combineReducers({
-
+    user:userReducer
 });
 
 const persistedReducer = persistReducer(persistConfig,reducer);

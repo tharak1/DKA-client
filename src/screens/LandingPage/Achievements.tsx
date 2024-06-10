@@ -90,7 +90,7 @@ const CharityCarousel: React.FC = () => {
             {/* Cyan-colored container */}
             <div className="absolute bg-cyan-300 h-full w-full rounded-lg opacity-60" />
           </div>
-          <div className="w-full relative z-10">
+          <div className="w-full relative">
             <img
               src={charityItems[currentIndex].image}
               alt="Charity Image"

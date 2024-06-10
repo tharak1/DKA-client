@@ -3,11 +3,16 @@ import { auth, db, googleProvider } from "../../firebase_config";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { addDoc, collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
+import { useAppDispatch } from '../../redux/Store';
+// import { setUser } from '../../redux/UserCoursesSlice';
+import { UserModel } from '../../models/UserModel';
+import { setUser } from '../../redux/UserSlice';
 
 const LoginPage: React.FC = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useAppDispatch();
 
     const generateSpecificID = (numberOfUsers:number) => {
         const paddingLength = 5;
@@ -19,12 +24,12 @@ const LoginPage: React.FC = () => {
     const signIn = async () => {
         try {
             const userCredential = await getDoc(doc(db,'students',email.trim()));
-            const user = userCredential.data();
+            const user = userCredential.data() as UserModel;
             console.log(user);
             console.log(email,password);
             
-            
             if(user!.password ===  password.trim()){
+                dispatch(setUser(user))
                 navigate("/");
             }
         } catch (error) {
@@ -54,14 +59,13 @@ const LoginPage: React.FC = () => {
             if(userDoc.exists()){
                 const userData = userDoc.data();
                 console.log(userData);
-                
             }
             else{
                 const querySnapshot = await getDocs(collection(db, 'students'));
                 const noofusers = querySnapshot.size;
 
                 const studentId = generateSpecificID(noofusers);
-                await addDoc(collection(db, "Guardian"),{GuardianId : userCredential.user.uid,studentId:studentId})
+                await addDoc(collection(db, "Guardian"),{GuardianId : userCredential.user.uid,registeredID:[studentId]})
                 await setDoc(doc(db, "students", studentId), {GuardianId : userCredential.user.uid,studentId:studentId});
                 navigate(`/Sign-up-form?studentId=${studentId}`);
 

@@ -1,18 +1,8 @@
-import React from 'react';
-import { db } from '../firebase_config';
-import { addDoc, collection } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
 import { CourseModel } from '../models/CourseModel';
 
-// Define the props type
-interface RazorPayProps {
-  course:CourseModel
-}
 
-const RazorPay: React.FC<RazorPayProps> = ({course}) => {
-  const navigate = useNavigate();
 
-  const buyNow = async () => {
+export const buyNow = async (course:CourseModel) => {
     var options = {
       key: "rzp_test_JHYaX11s6e4is0",
       key_secret: "w1ImdQ3gNSxBHonSUOYw7lZU",
@@ -46,16 +36,5 @@ const RazorPay: React.FC<RazorPayProps> = ({course}) => {
     console.log(pay);
   };
 
-  return (
-    <div>
-      <button
-        className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
-        onClick={buyNow}
-      >
-        Place Order
-      </button>
-    </div>
-  );
-};
 
-export default RazorPay;
+

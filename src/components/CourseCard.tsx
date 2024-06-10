@@ -1,6 +1,7 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { IoMdAdd } from "react-icons/io";
 import { CourseModel } from '../models/CourseModel';
+import { buyNow } from './RazorPay';
 
 interface CourseCardProps {
     courseDetails: CourseModel;
@@ -41,7 +42,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ courseDetails }) => {
                         <div>
                             <p className="text-xl font-bold">Price : <span className="text-green-500">₹ {courseDetails.price} / month</span></p>
                         </div>
-                        <button className="bg-violet-600 text-white font-bold py-2 px-4 rounded-lg flex items-center">
+                        <button className="bg-violet-600 text-white font-bold py-2 px-4 rounded-lg flex items-center" onClick={()=>{buyNow(courseDetails)}}>
                             <IoMdAdd />
                             Join Now
                         </button>

@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
-import uploadImage from '../../hooks/UploadImage';
 import { useLocation } from 'react-router-dom';
 import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../../firebase_config';
+import { databaseStorage, db } from '../../firebase_config';
+
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid';
+import { useAppDispatch } from '../../redux/Store';
+import { setUser } from '../../redux/UserSlice';
+import { UserModel } from '../../models/UserModel';
+
+const uploadImage = async (image: File, name: string, folder: string): Promise<string> => {
+    if (!image) return '';
+    const imageRef = ref(databaseStorage, `${folder}/${name + uuidv4()}`);
+    const snapshot = await uploadBytes(imageRef, image);
+    return await getDownloadURL(snapshot.ref);
+};
 
 const SignUpForm: React.FC = () => {
     const [image, setImage] = useState<File | null>(null);
     const [uploading,setUploading] = useState<boolean>(false);
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<UserModel>({
         name: '',
         fatherName: '',
         motherName: '',
@@ -24,6 +36,7 @@ const SignUpForm: React.FC = () => {
     });
 
     const location = useLocation();
+    const dispatch = useAppDispatch();
     const searchParams = new URLSearchParams(location.search);
     const studentId = searchParams.get('studentId');
 
@@ -31,21 +44,37 @@ const SignUpForm: React.FC = () => {
 
 
     const handleSubmit111 = async() =>{
-        setUploading(true)
-        setFormData({...formData,imageUrl:await uploadImage(image!,formData.name,'student-profile')});
-        console.log(studentId);
         
-        const courseRef = doc(db, 'students',studentId!);
-        await setDoc(courseRef,formData, { merge: true });
+        setUploading(true)
+        if(image){
+        console.log(image);
+
+            const uploadedImage = await uploadImage(image,formData.name,'student-profile')
+            setFormData({...formData,imageUrl:uploadedImage});
+            const courseRef = doc(db, 'students',studentId!);
+            await setDoc(courseRef,{...formData,imageUrl:uploadedImage}, { merge: true })  ;
+
+            await setDoc(doc(db, 'regesteredCourses',studentId!),{courses:[]})
+            await setDoc(doc(db, 'userOrders',studentId!),{orders:[]})
+
+            dispatch(setUser(formData));
 
 
+        }
+        else{
+            console.log(studentId);
+        }
+        
         setUploading(false);
 
     }
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
+            console.log(file);
+
             setImage(file);
+            
             const objectURL = URL.createObjectURL(file);
             console.log("Object URL:", objectURL);
             // setFormData({...formData,imageUrl:objectURL})
@@ -108,9 +137,9 @@ const SignUpForm: React.FC = () => {
             </div>
             <div>
             <input type="file" accept="image/*" onChange={handleImageChange} />
-            {formData.imageUrl !='' && (
+            {image && (
                 <div>
-                    <img src={formData.imageUrl} alt="Uploaded" />
+                    <img src={URL.createObjectURL(image)} alt="Uploaded" />
                 </div>
             )}
         </div>
