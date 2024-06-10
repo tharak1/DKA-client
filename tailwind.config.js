@@ -6,7 +6,12 @@ export default {
     'node_modules/flowbite-react/lib/esm/**/*.js'
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'form-pattern': "url('/src/assets/formbackground.svg')",
+        'signup-pattern': "url('/src/assets/signup.svg')"
+      },
+    },
   },
   plugins: [
     require('flowbite/plugin'),

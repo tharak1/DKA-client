@@ -10,40 +10,32 @@ import { UserModel } from '../../models/UserModel';
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [viewDropdown,setViewDropDown] = useState(false);
-  const [viewMenu,setViewMenu] = useState(false);
-  const [courses,setCourses] = useState<string[]>([]);
-  const user:UserModel = useSelector(GetUser);
+  const [viewDropdown, setViewDropdown] = useState(false);
+  const [viewMenu, setViewMenu] = useState(false);
+  const [courses, setCourses] = useState<string[]>([]);
+  const user: UserModel = useSelector(GetUser);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchCategories();
-  },[]);
+  }, []);
 
   const fetchCategories = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, "categories"));
-      const data = querySnapshot.docs.map((doc) => {
-        return doc.data().name;
-      });
-  
-      setCourses(data)
+      const data = querySnapshot.docs.map((doc) => doc.data().name);
+      setCourses(data);
     } catch (error) {
       console.error("Error fetching categories: ", error);
     }
   };
 
-
   const handleScroll = () => {
-    if (window.scrollY > 50) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
+    setScrolled(window.scrollY > 50);
   };
 
-  const toggleDropDown = () =>{
-    setViewDropDown(viewDropdown?false:true);
-  }
+  const toggleDropDown = () => {
+    setViewDropdown(!viewDropdown);
+  };
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -54,10 +46,10 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className={`z-10 fixed top-0 left-0 w-full flex justify-between p-6 transition-all duration-200 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
-      <div className="flex items-center"> {/* Container for DKA */}
+      <div className="flex items-center">
         <span className="text-2xl font-bold mr-6">DKA</span>
       </div>
-      <div className="flex items-center space-x-4 ml-auto"> {/* Container for links */}
+      <div className="flex items-center space-x-4 ml-auto">
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -68,76 +60,75 @@ const Navbar: React.FC = () => {
         </NavLink>
         <ScrollLink to="about" smooth={true} duration={500} className="flex items-center text-lg text-black cursor-pointer">ABOUT US</ScrollLink>
 
-        <div className='relative'>
-
-            <button onClick={toggleDropDown} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className=" focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Courses <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
+        <div className="relative">
+          <button
+            onClick={toggleDropDown}
+            className="focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Courses <svg className="w-2.5 h-2.5 ml-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
             </svg>
-            </button>
+          </button>
 
-            <div id="dropdown" className={`absolute z-10 ${viewDropdown?"":"hidden "}  bg-slate-200 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}>
-            <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-              {
-                courses.map((course,index)=>(
-                  <li key={index}>
-                    <Link  to={`/course?category=${course}`} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onClick={()=>{setViewDropDown(false)}}>{course}</Link>
-                  </li>
-                ))
-              }
+          <div className={`absolute z-10 ${viewDropdown ? "" : "hidden"} bg-slate-200 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}>
+            <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+              {courses.map((course, index) => (
+                <li key={index}>
+                  <Link
+                    to={`/course?category=${course}`}
+                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    onClick={() => setViewDropdown(false)}
+                  >
+                    {course}
+                  </Link>
+                </li>
+              ))}
             </ul>
-            </div>
-        </div>
-
-        
-        
-        <ScrollLink to="about" smooth={true} duration={500} className="flex items-center text-lg text-black cursor-pointer">CONTACT US</ScrollLink>
-      
-      
-      {user!=null?(
-      <div className="relative  flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <button
-        type="button"
-        className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-        onClick={() => { setViewMenu(!viewMenu); }}
-      >
-        <span className="sr-only">Open user menu</span>
-        <img className="w-8 h-8 rounded-full" src={user.imageUrl} alt="user photo" />
-      </button>
-
-      {viewMenu && (
-        <div className="absolute bottom-[-235px] right-0 z-50 mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 border-2">
-          <div className="px-4 py-3">
-            <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-            <span className="block text-sm text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
           </div>
-          <ul className="py-2" aria-labelledby="user-menu-button">
-            <li>
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My courses</a>
-            </li>
-            <li>
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Performance</a>
-            </li>
-            <li>
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My purchases</a>
-            </li>
-            <li>
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-            </li>
-          </ul>
         </div>
-      )}
-    </div>
-      ):(
-      <Link to="/login" className="text-black text-lg py-2 px-4 display flex items-center space-x-5">Join now <GoArrowUpRight /></Link>
-      )
-    }
-      
+
+        <ScrollLink to="contact" smooth={true} duration={500} className="flex items-center text-lg text-black cursor-pointer">CONTACT US</ScrollLink>
       </div>
 
+      {user ? (
+        <div className="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <button
+            type="button"
+            className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            onClick={() => setViewMenu(!viewMenu)}
+          >
+            <span className="sr-only">Open user menu</span>
+            <img className="w-8 h-8 rounded-full" src={user.imageUrl} alt="user photo" />
+          </button>
 
-      
+          {viewMenu && (
+            <div className="absolute bottom-[-235px] right-0 z-50 mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 border-2">
+              <div className="px-4 py-3">
+                <span className="block text-sm text-gray-900 dark:text-white">{user.name}</span>
+                <span className="block text-sm text-gray-500 truncate dark:text-gray-400">{user.name}</span>
+              </div>
+              <ul className="py-2">
+                <li>
+                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My courses</a>
+                </li>
+                <li>
+                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Performance</a>
+                </li>
+                <li>
+                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My purchases</a>
+                </li>
+                <li>
+                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
+      ) : (
+        <Link to="/login" className="text-black text-lg py-2 px-4 flex items-center space-x-5">Join now <GoArrowUpRight /></Link>
+      )}
     </nav>
   );
-}
+};
 
 export default Navbar;
