@@ -1,15 +1,16 @@
 import React from 'react';
-import { IoMdAdd } from "react-icons/io";
-import { CourseModel } from '../models/CourseModel';
-import { buyNow } from './RazorPay';
+import { CourseModel, MyCourseModal } from '../models/CourseModel';
+import RazorPay from './RazorPay';
 
 interface CourseCardProps {
     courseDetails: CourseModel;
+    isMycourse?:boolean;
+    userRegisteredCourseDetails?:MyCourseModal;
 }
 
 
 
-const CourseCard: React.FC<CourseCardProps> = ({ courseDetails }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ courseDetails ,isMycourse=false,userRegisteredCourseDetails}) => {
 
     
     let imageUrl: string;
@@ -34,19 +35,31 @@ const CourseCard: React.FC<CourseCardProps> = ({ courseDetails }) => {
                         <div className='w-full'>
                             <p className="text-gray-700 dark:text-white mt-2 ">{courseDetails.description}</p>
                         </div>
-                        <p className="mt-4"><strong>Classes availability :</strong>{courseDetails.offline && courseDetails.online ? "Online & Offline" : courseDetails.online ? "Online" : courseDetails.offline ? "Offline" : "online & offlline"}</p>
-                        <p className="mt-1"><strong>Class Timings :</strong> {courseDetails.sessions?.length! > 0 ? courseDetails.sessions?.map((session) => (<span>{session} &nbsp;</span>)) : "session 1 : 7am - 8am"}</p>
+                        <p className="mt-4"><strong>Classes Type :</strong> {userRegisteredCourseDetails?.courseType}</p>
+                        <p className="mt-1"><strong>Class Timings :</strong> {userRegisteredCourseDetails?.courseSession}</p>
                     </div>
 
-                    <div className="flex justify-between items-center mt-4 w-full">
-                        <div>
-                            <p className="text-xl font-bold">Price : <span className="text-green-500">₹ {courseDetails.price} / month</span></p>
-                        </div>
-                        <button className="bg-violet-600 text-white font-bold py-2 px-4 rounded-lg flex items-center" onClick={()=>{buyNow(courseDetails)}}>
-                            <IoMdAdd />
-                            Join Now
-                        </button>
-                    </div>
+                    {
+                        isMycourse?(
+                            <div className='flex flex-col justify-center'> 
+                                <div>
+                                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Join class</button>
+                                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">write exam</button>
+                                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">view marks</button>
+                                </div>
+                                <div>
+                                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Renew Course</button>
+                                </div>
+                            </div>
+                        ):(
+                            <div className="flex justify-between items-center mt-4 w-full">
+                                <div>
+                                    <p className="text-xl font-bold">Price : <span className="text-green-500">₹ {courseDetails.price} / month</span></p>
+                                </div>
+                                <RazorPay course={courseDetails}/>
+                            </div>
+                        )
+                    }
                 </div>
 
 

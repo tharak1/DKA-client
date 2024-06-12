@@ -1,3 +1,5 @@
+import { MyCourseModal } from "./CourseModel";
+
 interface UserModel{
     id:string;
     name: string;
@@ -12,7 +14,7 @@ interface UserModel{
     hearAbout: string;
     password: string;
     imageUrl:string;
-    registeredCourses:string[];
+    registeredCourses:MyCourseModal[];
     email:string;
     country:string;
 }

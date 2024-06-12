@@ -17,4 +17,11 @@ interface CourseModel{
     coursePerformance?:PerformanceModel[]
 }
 
-export type {CourseModel,PerformanceModel};
+interface MyCourseModal{
+    courseId: string;
+    courseType: "offline" | "online";
+    courseSession: string;
+    branch: string;
+}
+
+export type {CourseModel,PerformanceModel,MyCourseModal};

@@ -14,7 +14,7 @@ const Achievements: React.FC = () => {
       <h2 className="text-2xl font-bold mb-10">Our Achievements</h2>
       <div className="relative flex justify-center items-center h-[250px]">
         <div className="absolute -left-[450px] h-[220px] w-[650px] bg-cyan-500 opacity-60 mt-[260px]"></div>
-        <div className="absolute -right-[450px] h-[220px] w-[650px] bg-pink-500 opacity-60 mb-[60px]"></div>
+        <div className="absolute -right-[450px] h-[220px] w-[400px] bg-pink-500 opacity-60 mb-[60px]"></div>
         <div className="flex space-x-4">
           {achievements.map((achievement, index) => (
             <div

@@ -64,7 +64,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className={`z-10 fixed top-0 left-0 w-full flex justify-between p-6 transition-all duration-200 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
+    <nav className={`z-10 fixed top-0 left-0 w-full flex justify-between py-4 px-8 transition-all duration-200 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
       <div className="flex items-center">
         <span className="text-2xl font-bold mr-6">DKA</span>
       </div>
@@ -72,21 +72,22 @@ const Navbar: React.FC = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `flex items-center text-lg text-black ${isActive ? 'bg-gray-300' : ''}`
+            `flex  items-center font-poppins cursor-pointer  ${isActive ? 'font-bold text-black text-lg'  : 'text-base font-thin  text-gray-500'}`
           }
         >
           HOME
         </NavLink>
-        <ScrollLink to="about" smooth={true} duration={500} className="flex items-center text-lg text-black cursor-pointer">ABOUT US</ScrollLink>
+        <ScrollLink to="about" smooth={true} duration={500} className="flex items-center font-poppins text-base font-thin  text-gray-500 cursor-pointer" activeStyle={{fontWeight:"700",color:"black",fontSize:"1.125rem"}}>ABOUT US</ScrollLink>
 
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={toggleDropDown}
-            className="focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Courses <svg className="w-2.5 h-2.5 ml-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-            </svg>
+            className={`font-poppins flex justify-center items-center  ${
+              location.pathname === '/course' ? 'font-bold text-black text-lg' : 'text-base font-thin text-gray-500'} `}
+            >
+          COURSES 
+          <FaChevronDown style={{ marginLeft: '10px' }} />
+          
           </button>
 
           <div className={`absolute z-10 ${viewDropdown ? "" : "hidden"}  w-44 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 border-2`}>
@@ -106,7 +107,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        <ScrollLink to="contact" smooth={true} duration={500} className="flex items-center text-lg text-black cursor-pointer">CONTACT US</ScrollLink>
+        <ScrollLink to="contact" smooth={true} duration={500} className="flex items-center font-poppins text-base font-thin  text-gray-500 cursor-pointer" activeStyle={{fontWeight:"700",color:"black",fontSize:"1.125rem"}}>CONTACT US</ScrollLink>
       </div>
 
       {user ? (
@@ -119,7 +120,8 @@ const Navbar: React.FC = () => {
             <img className="w-10 h-10 rounded-full" src={user.imageUrl} alt="user photo" />
           </button>
           <div className='ml-2'>
-            <FaChevronDown />
+          <FaChevronDown style={{ marginLeft: '10px' }} />
+
           </div>
 
           {viewMenu && (
@@ -130,13 +132,13 @@ const Navbar: React.FC = () => {
               </div>
               <ul className="py-2">
                 <li>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My courses</a>
+                  <Link to="/my_courses" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My courses</Link>
                 </li>
                 <li>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Performance</a>
+                  <Link to="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Performance</Link>
                 </li>
                 <li>
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My purchases</a>
+                  <Link to="/my_purchases" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My purchases</Link>
                 </li>
                 <li>
                   <p className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"onClick={()=>{
