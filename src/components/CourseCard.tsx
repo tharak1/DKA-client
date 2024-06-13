@@ -1,6 +1,9 @@
 import React from 'react';
 import { CourseModel, MyCourseModal } from '../models/CourseModel';
 import RazorPay from './RazorPay';
+import { useSelector } from 'react-redux';
+import { GetUser } from '../redux/UserSlice';
+import { UserModel } from '../models/UserModel';
 
 interface CourseCardProps {
     courseDetails: CourseModel;
@@ -10,8 +13,8 @@ interface CourseCardProps {
 
 
 
-const CourseCard: React.FC<CourseCardProps> = ({ courseDetails ,isMycourse=false,userRegisteredCourseDetails}) => {
-
+const CourseCard: React.FC<CourseCardProps> = ({ courseDetails }) => {
+    const user = useSelector(GetUser) as UserModel;
     
     let imageUrl: string;
 
@@ -35,21 +38,17 @@ const CourseCard: React.FC<CourseCardProps> = ({ courseDetails ,isMycourse=false
                         <div className='w-full'>
                             <p className="text-gray-700 dark:text-white mt-2 ">{courseDetails.description}</p>
                         </div>
-                        <p className="mt-4"><strong>Classes Type :</strong> {userRegisteredCourseDetails?.courseType}</p>
-                        <p className="mt-1"><strong>Class Timings :</strong> {userRegisteredCourseDetails?.courseSession}</p>
+                        <p className="mt-4"><strong>Classes availability :</strong>{courseDetails.offline && courseDetails.online ? "Online & Offline" : courseDetails.online ? "Online" : courseDetails.offline ? "Offline" : "online & offlline"}</p>
+                        <p className="mt-1"><strong>Class Timings :</strong> {courseDetails.sessions?.length! > 0 ? courseDetails.sessions?.map((session) => (<span>{session} &nbsp;</span>)) : "session 1 : 7am - 8am"}</p>
                     </div>
 
                     {
-                        isMycourse?(
-                            <div className='flex flex-col justify-center'> 
+                        user.registeredCourses.some(course => course.courseId === courseDetails.id)?(
+                            <div className="flex justify-between items-center mt-4 w-full">
                                 <div>
-                                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Join class</button>
-                                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">write exam</button>
-                                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">view marks</button>
+                                    <p className="text-xl font-bold">Price : <span className="text-green-500">₹ {courseDetails.price} / month</span></p>
                                 </div>
-                                <div>
-                                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Renew Course</button>
-                                </div>
+                                <button>hi</button>
                             </div>
                         ):(
                             <div className="flex justify-between items-center mt-4 w-full">
@@ -58,7 +57,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ courseDetails ,isMycourse=false
                                 </div>
                                 <RazorPay course={courseDetails}/>
                             </div>
-                        )
+                        ) 
                     }
                 </div>
 

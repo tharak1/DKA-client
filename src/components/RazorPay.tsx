@@ -1,5 +1,5 @@
 import { CourseModel } from '../models/CourseModel';
-import { addDoc, arrayUnion, collection, doc, updateDoc} from 'firebase/firestore';
+import { addDoc, arrayUnion, collection, doc, getDoc, updateDoc} from 'firebase/firestore';
 import { db } from '../firebase_config';
 import React from 'react';
 import { GetUser, fetchUser } from '../redux/UserSlice';
@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { UserModel } from '../models/UserModel';
 import { formatDate } from '../hooks/DateFormater';
 import { useAppDispatch } from '../redux/Store';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface RazorPayProps{
   course:CourseModel
@@ -57,7 +57,10 @@ const RazorPay:React.FC<RazorPayProps> = ({course}) => {
             courseSession: "6:00 AM to 7:00 AM",
             branch: "hyd",
           }
-          await updateDoc(doc(db,'students',user.id),{registeredCourses:arrayUnion(up)})
+          await updateDoc(doc(db,'students',user.id),{registeredCourses:arrayUnion(up)});
+          const docSnap = await getDoc(doc(db,'performances',course.id!));
+          const performance = docSnap.data()!.performanceTemplate;
+          await updateDoc(doc(db,'performances',course.id!),{students:arrayUnion({studentId:user.id,studentName:user.name,...performance})})
           dispatch(fetchUser(user.id));
           naviagate('/my_courses');
         } catch (error) {
@@ -77,10 +80,10 @@ const RazorPay:React.FC<RazorPayProps> = ({course}) => {
   return (
     <div>
       <button
-        className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
+        className="mt-4 mb-8 w-full rounded-md bg-blue-700 hover:bg-blue-500 px-6 py-3 font-medium text-white"
         onClick={buyNow}
       >
-        Place Order
+        Join Now
       </button>
     </div>
   );

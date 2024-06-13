@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { GetUser } from '../../redux/UserSlice';
 import { UserModel } from '../../models/UserModel';
 import { CourseModel } from '../../models/CourseModel';
-import CourseCard from '../../components/CourseCard';
+import MyCourseCard from '../../components/MyCourseCard';
 
 const MyCoursesPage:React.FC = () => {
 
@@ -68,10 +68,11 @@ const MyCoursesPage:React.FC = () => {
                         <h2>no purchases</h2>
                     </div>
                 ):(
-                    <div className='w-full flex flex-col space-y-5'>
+                    <div className='w-full h-full grid grid-cols-3 gap-4'>
                         {
                             courses.map((obj,index)=>(
-                                <CourseCard courseDetails={obj} userRegisteredCourseDetails={user.registeredCourses[index]} isMycourse={true} key={obj.id}/>
+                                // <CourseCard courseDetails={obj} userRegisteredCourseDetails={user.registeredCourses[index]} isMycourse={true} key={obj.id}/>
+                                <MyCourseCard courseDetails={obj} userRegisteredCourseDetails={user.registeredCourses[index]}/>
                             ))
                         }
                     </div>
