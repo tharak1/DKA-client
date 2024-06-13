@@ -86,7 +86,7 @@ const Form: React.FC = () => {
       </div>
       <div className="py-20 text-center">
         <h2 className="text-white text-4xl font-bold">Fill The Form</h2>
-        <p className="mt-10 text-white text-2xl font-normal">
+        <p className="mt-10 text-black text-2xl font-normal">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quam necessitatibus, deserunt dolores velit expedita dolorem ea nulla nesciunt placeat?
         </p>
       </div>

@@ -27,12 +27,12 @@ const SignIn: React.FC = () => {
             <input
               type="email"
               placeholder="Email"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-200"
             />
             <input
               type="password"
               placeholder="Password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-200"
             />
             <a href="#" className="text-blue-500 hover:underline block mb-4 text-center">Forgot your Password?</a>
             <button className="w-1/3 bg-blue-500 text-white py-2 rounded-3xl font-semibold hover:bg-blue-600">
@@ -41,12 +41,12 @@ const SignIn: React.FC = () => {
           </form>
         </div>
       </div>
-      <div className="w-1/2 bg-signup-pattern bg-cover flex items-center justify-center">
-        <div className="text-center text-white px-8 ml-10">
+      <div className="w-[1200px] bg-signup-pattern bg-cover flex items-center justify-center">
+        <div className="text-center text-black px-8 ml-10">
           <h1 className="text-3xl font-bold mb-4">Hello, Friend!</h1>
           <p className="mb-6 ml-12">To get connected with us please login with your already registered details</p>
-          <Link to="/signup">
-            <button className="bg-blue-500 text-white py-2 px-4 rounded-3xl font-semibold hover:bg-gray-200 hover:text-black border border-white">
+          <Link to="/signups">
+            <button className=" bg-signup-pattern  text-white py-2 px-4 rounded-3xl font-semibold hover:bg-gray-200 hover:text-black border border-white">
               SIGN UP
             </button>
           </Link>
