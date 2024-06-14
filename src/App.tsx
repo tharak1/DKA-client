@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import PurchasedCourses from './screens/OtherPages/PurchasedCourses';
 import MyCoursesPage from './screens/OtherPages/MyCoursesPage';
+import MyPerformancePage from './screens/OtherPages/MyPerformancePage';
 
 // Lazy load components
 const Layout = React.lazy(() => import('./screens/LandingPage/Layout'));
@@ -25,7 +26,7 @@ const App: React.FC = () => {
           <Route path="/form" element={<Form />} />
           <Route path="/my_purchases" element={<PurchasedCourses />} />
           <Route path="/my_courses" element={<MyCoursesPage />} />
-
+          <Route path='/my_performances' element={<MyPerformancePage/>}/>
         </Routes>
       </Suspense>
     </Router>
