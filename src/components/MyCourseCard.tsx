@@ -3,12 +3,15 @@ import { CourseModel, MyCourseModal } from '../models/CourseModel';
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../firebase_config';
 import { QuestionPaper } from '../models/ExamModel';
+import { useNavigate } from 'react-router-dom';
 interface CourseCardProps {
     courseDetails: CourseModel;
     userRegisteredCourseDetails?:MyCourseModal;
 }
 
 const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCourseDetails}) => {
+
+    const navigate = useNavigate();
     const joinOnlineClass = async() =>{
         const onlineClass = await getDoc(doc(db,'onlineClass',courseDetails.courseName!));
         window.open(onlineClass.data()!.classLink, '_blank');
@@ -42,8 +45,10 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
         window.open(`http://localhost:5175/write_exam?id=${fetchedUser.id}`);
 
         console.log(fetchedUser.id);
-        
+    }
 
+    const handleViewMarks = () =>{
+        navigate(`/my_performances?course=${courseDetails.id}`)
     }
   return (
     <div className="max-w-sm bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
@@ -54,13 +59,12 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
         <p className="text-gray-600"><span className="font-semibold">Class Timings:</span><span className="font-semibold">{userRegisteredCourseDetails?.courseSession}</span></p>
         <div className="mt-2 grid grid-cols-3 gap-2">
             <button className="bg-blue-200 text-gray-800 py-2 px-2 rounded-xl text-sm font-semibold hover:bg-blue-300" onClick={writeExam}>Write Exam</button>
-            <button className="bg-blue-200 text-gray-800 py-2 px-2 rounded-xl text-sm font-semibold hover:bg-blue-300">View Marks</button>
+            <button className="bg-blue-200 text-gray-800 py-2 px-2 rounded-xl text-sm font-semibold hover:bg-blue-300" onClick={handleViewMarks}>View Marks</button>
             <button className="bg-blue-200 text-blue-800 py-2 px-2 rounded-xl text-sm font-semibold hover:bg-blue-300" onClick={joinOnlineClass}>Join Class</button>
         </div>
         <div className="mt-4">
             <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-xl hover:bg-blue-600">Renew Course </button>
         </div>
-
     </div>
 </div>
   )

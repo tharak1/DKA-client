@@ -19,6 +19,7 @@ interface CourseModel{
 
 interface MyCourseModal{
     courseId: string;
+    courseName:string;
     courseType: "offline" | "online";
     courseSession: string;
     branch: string;

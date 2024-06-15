@@ -6,11 +6,15 @@ import { useSelector } from 'react-redux'
 import { GetUser } from '../../redux/UserSlice'
 import { UserModel } from '../../models/UserModel'
 import { db } from '../../firebase_config'
+import { useLocation } from 'react-router-dom'
 
 const MyPerformancePage:React.FC = () => {
 const user = useSelector(GetUser) as UserModel;
 const [performances, setPerformances] = useState<any>([]);
 const [loading,setLoading] = useState<boolean>(false);
+const location = useLocation();
+const searchParams = new URLSearchParams(location.search);
+const course = searchParams.get('course');
 
 const getFilteredValue = async (docu: DocumentData) => {
   const foundObj = docu.students.find((obj:any) => obj.studentId === user.id);
@@ -19,25 +23,48 @@ const getFilteredValue = async (docu: DocumentData) => {
 
 const getPerformances = async () => {
   setLoading(true);
-  try {
-    const performancePromises = user.registeredCourses.map(async (obj) => {
-      const performanceDoc = await getDoc(doc(db, 'performances', obj.courseId));
-      return performanceDoc.exists() ? await getFilteredValue(performanceDoc.data() as DocumentData) : null;
-    });
-    const performances = await Promise.all(performancePromises);
-    const validPerformances = performances.filter((performance) => performance !== null);
-    setPerformances(validPerformances);
-    console.log(validPerformances);
-    setLoading(false);
-  } catch (error) {
-    console.error('Error fetching performances:', error);
-    setLoading(false);
-  }
+
+  
+    try {
+      if(course === "all"){
+      const performancePromises = user.registeredCourses.map(async (obj) => {
+        const performanceDoc = await getDoc(doc(db, 'performances', obj.courseId));
+        return performanceDoc.exists() ? await getFilteredValue(performanceDoc.data() as DocumentData) : null;
+      });
+      const performances = await Promise.all(performancePromises);
+      const validPerformances = performances.filter((performance) => performance !== null);
+      setPerformances(validPerformances);
+      console.log(validPerformances);
+      setLoading(false);
+    }
+      else{
+        const performanceDoc = await getDoc(doc(db, 'performances', course!));
+        console.log(performanceDoc.data());
+        
+        if (performanceDoc.exists()) {
+          const performanceData = await getFilteredValue(performanceDoc.data() as DocumentData);
+          setPerformances([performanceData]);
+          console.log([performanceData]);
+      setLoading(false);
+
+        }
+        else {
+          setPerformances([]);
+          console.log([]);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching performances:', error);
+      setLoading(false);
+    }
+  
+
+
 };
 
 useEffect(() => {
   getPerformances();
-}, []);
+}, [location.search,]);
 
   return (
     <>

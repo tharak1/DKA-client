@@ -52,7 +52,9 @@ const RazorPay:React.FC<RazorPayProps> = ({course}) => {
         try {
           await addDoc(collection(db, 'payments',), orderObj);
           const up = {
+
             courseId:course.id,
+            courseName:course.courseName,
             courseType: "offline",
             courseSession: "6:00 AM to 7:00 AM",
             branch: "hyd",
