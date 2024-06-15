@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import PurchasedCourses from './screens/OtherPages/PurchasedCourses';
 import MyCoursesPage from './screens/OtherPages/MyCoursesPage';
+import MyPerformancePage from './screens/OtherPages/MyPerformancePage';
 import Signup from './screens/OtherPages/Signups';
 // import Modal from './screens/OtherPages/PaymentModal';
 import PaymentModal from './screens/OtherPages/PaymentModal';
@@ -44,6 +45,7 @@ const App: React.FC = () => {
           <Route path="/form" element={<Form />} />
           <Route path="/my_purchases" element={<PurchasedCourses />} />
           <Route path="/my_courses" element={<MyCoursesPage />} />
+          <Route path='/my_performances' element={<MyPerformancePage/>}/>
           <Route path='/modal' element={<div><button onClick={openPaymentModal}>Open Payment Modal</button></div>}/>
           <Route path="/payment-before-modal" element={<div><button onClick={openPaymentBeforeModal}>Open Payment Before Modal</button></div>} />
         </Routes>

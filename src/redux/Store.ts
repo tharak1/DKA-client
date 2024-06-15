@@ -5,7 +5,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import userReducer  from "./UserSlice";
 
 const persistConfig = {
-    key:"root",
+    key:"clientRoot",
     version:1,
     storage,
 }
