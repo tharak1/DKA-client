@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import '../../App.css'; 
 
 const Reviews: React.FC = () => {
   const reviews = [

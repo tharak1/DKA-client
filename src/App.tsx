@@ -1,11 +1,10 @@
 import React, { Suspense, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
 import PurchasedCourses from './screens/OtherPages/PurchasedCourses';
 import MyCoursesPage from './screens/OtherPages/MyCoursesPage';
 import MyPerformancePage from './screens/OtherPages/MyPerformancePage';
 import Signup from './screens/OtherPages/Signups';
-import Modal from './screens/OtherPages/PaymentModal';
+// import Modal from './screens/OtherPages/PaymentModal';
 import PaymentModal from './screens/OtherPages/PaymentModal';
 
 // Lazy load components

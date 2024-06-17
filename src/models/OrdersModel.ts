@@ -14,6 +14,8 @@ interface Order {
     parentPhoneNo: string; 
     email: string;
     date: string;
+    endDate:string;
+
 }
 
 export type {Order};
