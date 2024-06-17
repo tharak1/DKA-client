@@ -64,7 +64,7 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
         const encodedUserData = encodeURIComponent(JSON.stringify(user));
 
         if(fetchedUser && isDateTimeInRange(fetchedUser.startDate,fetchedUser.startTime,fetchedUser.endDate,fetchedUser.endTime)){
-            window.open(`http://localhost:5175/write_exam?id=${fetchedUser.id}&user=${encodedUserData}`);
+            window.open(`https://dka-exam-portal.vercel.app/write_exam?id=${fetchedUser.id}&user=${encodedUserData}`);
         }
         else if(fetchedUser.id===''){
             setError("Time")
