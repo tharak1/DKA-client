@@ -7,7 +7,7 @@ import Signup from './screens/OtherPages/Signups';
 // import Modal from './screens/OtherPages/PaymentModal';
 import PaymentModal from './screens/OtherPages/PaymentModal';
 import PaymentBeforeModal from './screens/OtherPages/PaymentBeforeModal';
-
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 // Lazy load components
 const Layout = React.lazy(() => import('./screens/LandingPage/Layout'));
@@ -32,6 +32,7 @@ const App: React.FC = () => {
 
    return (
     <Router>
+      <SpeedInsights />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Layout />} />
