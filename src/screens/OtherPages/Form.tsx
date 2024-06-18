@@ -78,9 +78,8 @@ const Form: React.FC = () => {
       setImage(e.target.files[0]);
     }
   };
-
   return (
-    <div className="flex flex-col items-center h-[500px] bg-blue-500 bg-form-pattern bg-cover">
+    <div className="flex flex-col items-center h-[500px] bg-form-pattern bg-cover">
       <div className="w-full p-5">
         <h1 className="text-left text-black text-3xl font-bold">DKA</h1>
       </div>
@@ -145,20 +144,20 @@ const Form: React.FC = () => {
             <textarea className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" value={formData.address} onChange={(e) => setFormData({ ...formData, address: e.target.value })} />
           </div>
           <div className="col-span-2 flex items-center justify-between">
-          <div className="flex flex-col items-center justify-center">
-            <label className="block text-gray-700 mb-2">Profile Image</label>
-            <div className="relative w-32 h-40 rounded-md bg-gray-200 flex items-center justify-center mb-4 cursor-pointer" onClick={handleImageUploadClick}>
-              {image ? (
-                <img src={URL.createObjectURL(image)} alt="profile image" className="w-32 h-40 rounded-md" />
-              ) : (
-                <h2>Not selected</h2>
-              )}
+            <div className="flex flex-col items-center justify-center">
+              <label className="block text-gray-700 mb-2">Profile Image</label>
+              <div className="relative w-32 h-40 rounded-md bg-gray-200 flex items-center justify-center mb-4 cursor-pointer" onClick={handleImageUploadClick}>
+                {image ? (
+                  <img src={URL.createObjectURL(image)} alt="profile image" className="w-32 h-40 rounded-md" />
+                ) : (
+                  <h2>Not selected</h2>
+                )}
+              </div>
+              <input type="file" className="w-full h-full opacity-0 cursor-pointer" ref={fileInputRef} onChange={handleImageChange} />
+              <button type="button" className="bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-600" onClick={handleImageUploadClick}>
+                Select Image
+              </button>
             </div>
-            <input type="file" className="w-full h-full opacity-0 cursor-pointer" ref={fileInputRef} onChange={handleImageChange} />
-            <button type="button" className="bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-600" onClick={handleImageUploadClick}>
-              Select Image
-            </button>
-          </div>
             <div className="flex flex-col items-center">
               <label className="block text-gray-700">How did you hear about us?</label>
               <div className="flex justify-center space-x-4 mt-2">
@@ -177,41 +176,40 @@ const Form: React.FC = () => {
               </div>
             </div>
           </div>
-
           <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                <div className='relative'>
-                  <input type={visible ? "text" : "password"} name="password" id="password" placeholder="Password" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required onChange={(e)=>{setP1(e.target.value)}} />
-                  <button
-                    type="button"
-                    className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600"
-                    onClick={() => { setVisible(!visible) }}
-                  >
-                    {visible ? (
-                      <IoIosEye size={24} />
-                    ) : (
-                      <IoIosEyeOff size={24} />
-                    )}
-                  </button>
-                </div>
-              </div>
-              <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
-                <div className='relative'>
-                  <input type={confirmVisible ? "text" : "password"} name="confirmPassword" id="confirmPassword" placeholder="Confirm password" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required onChange={(e)=>{setP2(e.target.value)}} />
-                  <button
-                    type="button"
-                    className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600"
-                    onClick={() => { setConfirmVisible(!confirmVisible) }}
-                  >
-                    {confirmVisible ? (
-                      <IoIosEye size={24} />
-                    ) : (
-                      <IoIosEyeOff size={24}/>
-                    )}
-                  </button>
-                </div>
-              </div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-900 dark:text-white">Password</label>
+            <div className='relative'>
+              <input type={visible ? "text" : "password"} name="password" id="password" placeholder="Password" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required onChange={(e)=>{setP1(e.target.value)}} />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600"
+                onClick={() => { setVisible(!visible) }}
+              >
+                {visible ? (
+                  <IoIosEye size={24} />
+                ) : (
+                  <IoIosEyeOff size={24} />
+                )}
+              </button>
+            </div>
+          </div>
+          <div>
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
+            <div className='relative'>
+              <input type={confirmVisible ? "text" : "password"} name="confirmPassword" id="confirmPassword" placeholder="Confirm password" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required onChange={(e)=>{setP2(e.target.value)}} />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600"
+                onClick={() => { setConfirmVisible(!confirmVisible) }}
+              >
+                {confirmVisible ? (
+                  <IoIosEye size={24} />
+                ) : (
+                  <IoIosEyeOff size={24}/>
+                )}
+              </button>
+            </div>
+          </div>
           <div className="col-span-2 flex justify-center mt-6">
             <button type="submit" className="bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-600">
               {uploading ? 
@@ -226,6 +224,7 @@ const Form: React.FC = () => {
       </div>
     </div>
   );
-};
+  
+  };
 
 export default Form;
