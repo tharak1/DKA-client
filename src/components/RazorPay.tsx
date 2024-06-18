@@ -29,6 +29,8 @@ const RazorPay:React.FC<RazorPayProps> = ({course}) => {
       name: "sneek-shop",
       description: "for testing purpose",
       handler: async function (response: any) {
+        const oneMonthAgo = new Date();
+        oneMonthAgo.setMonth(oneMonthAgo.getMonth() + 1);
         console.log(response);
         const paymentId = response.razorpay_payment_id;
         const orderObj = {
@@ -45,7 +47,9 @@ const RazorPay:React.FC<RazorPayProps> = ({course}) => {
           parentName: user.fatherName,
           parentPhoneNo: user.contactNo,
           email: user.email,
-          date:formatDate(new Date)
+          date:formatDate(new Date),
+          endDate:formatDate(oneMonthAgo),
+          status:"Success"
         };
 
 
@@ -55,6 +59,10 @@ const RazorPay:React.FC<RazorPayProps> = ({course}) => {
 
             courseId:course.id,
             courseName:course.courseName,
+            boughtDate:formatDate(new Date),
+            endDate:formatDate(oneMonthAgo),
+            paymentId,
+            status:"success",
             courseType: "offline",
             courseSession: "6:00 AM to 7:00 AM",
             branch: "hyd",
@@ -65,6 +73,7 @@ const RazorPay:React.FC<RazorPayProps> = ({course}) => {
           await updateDoc(doc(db,'performances',course.id!),{students:arrayUnion({studentId:user.id,studentName:user.name,...performance})})
           dispatch(fetchUser(user.id));
           naviagate('/my_courses');
+          await updateDoc(doc(db,"regStuByCourse",course.id!),{students:arrayUnion(user.id)})
         } catch (error) {
           console.log(error);
         }

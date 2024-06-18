@@ -20,9 +20,13 @@ interface CourseModel{
 interface MyCourseModal{
     courseId: string;
     courseName:string;
+    boughtDate:string;
+    paymentId:string;
+    status?:string;
     courseType: "offline" | "online";
     courseSession: string;
     branch: string;
+    endDate:string;
 }
 
 export type {CourseModel,PerformanceModel,MyCourseModal};

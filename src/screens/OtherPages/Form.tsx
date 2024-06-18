@@ -63,8 +63,6 @@ const Form: React.FC = () => {
         setFormData({ ...formData, imageUrl: uploadedImage });
         const courseRef = doc(db, 'students', studentId!);
         await setDoc(courseRef, { ...formData, imageUrl: uploadedImage, id: studentId,password:p1 }, { merge: true });
-        await setDoc(doc(db, 'registeredCourses', studentId!), { courses: [] });
-        await setDoc(doc(db, 'userOrders', studentId!), { orders: [] });
       }
       setUploading(false);
       dispatch(fetchUser(studentId!));
@@ -79,7 +77,11 @@ const Form: React.FC = () => {
     }
   };
   return (
+<<<<<<< HEAD
     <div className="flex flex-col items-center h-[500px] bg-form-pattern bg-cover">
+=======
+    <div className="flex flex-col items-center h-screen bg-blue-500 bg-form-pattern bg-cover">
+>>>>>>> 892bfb5b60e0f8305e5caa62c627d6f85c2ddbc0
       <div className="w-full p-5">
         <h1 className="text-left text-black text-3xl font-bold">DKA</h1>
       </div>
