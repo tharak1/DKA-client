@@ -5,7 +5,6 @@ import React from 'react';
 import { GetUser, fetchUser } from '../redux/UserSlice';
 import { useSelector } from 'react-redux';
 import { UserModel } from '../models/UserModel';
-import { formatDate } from '../hooks/DateFormater';
 import { useAppDispatch } from '../redux/Store';
 import { useNavigate } from 'react-router-dom';
 
@@ -47,8 +46,8 @@ const RazorPay:React.FC<RazorPayProps> = ({course}) => {
           parentName: user.fatherName,
           parentPhoneNo: user.contactNo,
           email: user.email,
-          date:formatDate(new Date),
-          endDate:formatDate(oneMonthAgo),
+          date:new Date().toISOString().split('T')[0],
+          endDate:new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString().split('T')[0],
           status:"Success"
         };
 
@@ -56,24 +55,24 @@ const RazorPay:React.FC<RazorPayProps> = ({course}) => {
         try {
           await addDoc(collection(db, 'payments',), orderObj);
           const up = {
-
             courseId:course.id,
             courseName:course.courseName,
-            boughtDate:formatDate(new Date),
-            endDate:formatDate(oneMonthAgo),
+            boughtDate:new Date().toISOString().split('T')[0],
+            endDate:new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString().split('T')[0],
             paymentId,
             status:"success",
             courseType: "offline",
             courseSession: "6:00 AM to 7:00 AM",
             branch: "hyd",
           }
+
           await updateDoc(doc(db,'students',user.id),{registeredCourses:arrayUnion(up)});
           const docSnap = await getDoc(doc(db,'performances',course.id!));
           const performance = docSnap.data()!.performanceTemplate;
           await updateDoc(doc(db,'performances',course.id!),{students:arrayUnion({studentId:user.id,studentName:user.name,...performance})})
+          await updateDoc(doc(db,"regStuByCourse",course.id!),{students:arrayUnion(user.id)})
           dispatch(fetchUser(user.id));
           naviagate('/my_courses');
-          await updateDoc(doc(db,"regStuByCourse",course.id!),{students:arrayUnion(user.id)})
         } catch (error) {
           console.log(error);
         }
