@@ -10,9 +10,9 @@ import Footer from './Footer';
 
 const Layout: React.FC = () => {
   return (
-    <div>
+    <div className='bg-[#F7F8FB]'>
       <Navbar />
-      <main className="pt-20"> {/* Add padding-top to avoid overlap with fixed navbar */}
+      <main className=""> {/* Add padding-top to avoid overlap with fixed navbar */}
         <Home />
         <div className="py-10" id="about"> {/* Add padding-y between components */}
           <About />

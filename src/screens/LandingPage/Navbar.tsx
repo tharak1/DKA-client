@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
   };
 
   const handleScroll = () => {
-    setScrolled(window.scrollY > 50);
+    setScrolled(window.scrollY > 25);
   };
 
   const toggleDropDown = () => {

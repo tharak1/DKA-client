@@ -10,9 +10,10 @@ export default {
         'form-pattern': "url('/src/assets/formbackground.svg')",
         'signup-pattern': "url('/src/assets/signup.svg')",
         's':"url('/src/assets/Group 35.svg')",
+        'rainbow':"url('/src/assets/Group 1 (1).png')",
       },
       fontFamily: {
-        'poppins': ['Poppins', 'sans-serif'],
+        'poppins': ['Poppins'],
       }
     },
   },

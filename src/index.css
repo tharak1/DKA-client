@@ -28,7 +28,7 @@ html, body {
   transform: rotate(180deg);
 }
 
-.carousel-item {
+.carousel-item1 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,4 +50,27 @@ button.prev, button.next {
 
 button.prev:hover, button.next:hover {
   background-color: rgba(255, 255, 255, 1);
+}
+
+/* index.css */
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.carousel-wrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  will-change: transform;
+}
+
+.carousel-item {
+  flex: 0 0 calc(100% / 7);
+  margin: 0 5px;
+}
+
+
+.hover:grow:hover {
+  flex-grow: 2;
 }

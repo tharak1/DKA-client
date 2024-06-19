@@ -1,105 +1,66 @@
-
-import React, { useState } from 'react';
-
-
-const Achievements: React.FC = () => {
-  const achievements = [
-    { image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnfLd1aNF0_FX1BFjIGUuiHqED0HOoVGIFDsUowkvoag&s', text: 'Achievement 3' },
-    { image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3UUlrj-Ia7zK6G4_QFYBjG7x-farJlT30F72BlL3CRw&s', text: 'Achievement 4' },
-    { image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3UUlrj-Ia7zK6G4_QFYBjG7x-farJlT30F72BlL3CRw&s', text: 'Achievement 5' },
-  ];
-
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
-  return (
-    <div className="flex flex-col justify-center items-center ">
-      <h2 className="text-2xl font-bold mb-10">Our Achievements</h2>
-      <div className="relative flex justify-center items-center h-[250px]">
-        <div className="absolute -left-[450px] h-[220px] w-[900px] bg-cyan-500 opacity-60 mt-[260px]"></div>
-        <div className="absolute -right-[450px] h-[220px] w-[900px] bg-pink-500 opacity-60 mb-[60px]"></div>
-        <div className="flex space-x-4">
-          {achievements.map((achievement, index) => (
-            <div
-              key={index}
-              className="relative"
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              <img
-                src={achievement.image}
-                alt={`Achievement ${index + 1}`}
-                className={`transition-all duration-300 ${
-                  hoveredIndex === index
-                    ? 'w-58 h-38 transform scale-150 z-20'
-                    : 'w-58 h-52 z-10'
-                }`}
-              />
-              {hoveredIndex === index && (
-                <div className="absolute top-[140px] left-1/2 transform -translate-x-1/2 mt-2 text-center">
-                  <p className='pt-20'>{achievement.text}</p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="mt-[120px]"></div>
-      <CharityCarousel />
-    </div>
-  );
-}
-const CharityCarousel: React.FC = () => {
-  const charityItems = [
-    {
-      image: 'https://www.shutterstock.com/image-photo/abuja-nigeria-may-1-2023-260nw-2307221017.jpg', // replace with actual image URL
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... ',
-    },
-   {
-    image:'https://plus.unsplash.com/premium_photo-1682092585257-58d1c813d9b4?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHBvb3IlMjBjaGlsZHxlbnwwfHwwfHx8MA%3D%3D',
-    description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... '
-   },
-   {
-    image:'https://www.shutterstock.com/image-photo/nagpur-maharashtra-india-23-february-260nw-1247281663.jpg', // replace with actual image URL
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... ',
-  },
-    // Add more items as needed
-  ];
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + charityItems.length) % charityItems.length);
-  };
+import { useState } from "react";
+import { motion } from "framer-motion";
+const Achievements = () => {
+  const [positionIndexes, setPositionIndexes] = useState([0, 1, 2, 3, 4]);
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % charityItems.length);
+    setPositionIndexes((prevIndexes) => {
+      const updatedIndexes = prevIndexes.map(
+        (prevIndex) => (prevIndex + 1) % 5
+      );
+      return updatedIndexes;
+    });
   };
 
+  const handleBack = () => {
+    setPositionIndexes((prevIndexes) => {
+      const updatedIndexes = prevIndexes.map(
+        (prevIndex) => (prevIndex + 4) % 5
+      );
+
+      return updatedIndexes;
+    });
+  };
+
+  const images = ["https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"];
+
+  const positions = ["center", "left1", "left", "right", "right1"];
+
+  const imageVariants = {
+    center: { x: "0%", scale: 1, zIndex: 5 },
+    left1: { x: "-50%", scale: 0.7, zIndex: 3 },
+    left: { x: "-90%", scale: 0.5, zIndex: 2 },
+    right: { x: "90%", scale: 0.5, zIndex: 1 },
+    right1: { x: "50%", scale: 0.7, zIndex: 3 },
+  };
   return (
-    <div className="flex flex-col justify-center items-center mt-8">
-      <h2 className="text-2xl font-bold mb-4">Our Charity</h2>
-      <div className="relative flex justify-center items-center h-[400px] w-[1450px] bg-gray-100">
-        <div className="absolute left-0 p-2" onClick={handlePrev}>{'<'}</div>
-        <div className="absolute right-0 p-2" onClick={handleNext}>{'>'}</div>
-        <div className="flex justify-center absolute bottom-0 w-full">
-          <button className="p-2">{`<`}</button>
-          <button className="p-2">{`>`}</button>
-        </div>
-        <div className="flex justify-between items-center bg-white h-[380px] w-[1400px] p-4 rounded-lg shadow-lg relative">
-          <div className="w-full">
-            <p>{charityItems[currentIndex].description}</p>
-          </div>
-          <div className="w-[240px] h-[360px] absolute top-0 right-20 bottom-0 left-[1150px] z-0 mt-[10px] mb-[5px]">
-            {/* Cyan-colored container */}
-            <div className="absolute bg-cyan-300 h-full w-full rounded-lg opacity-60" />
-          </div>
-          <div className="w-full relative">
-            <img
-              src={charityItems[currentIndex].image}
-              alt="Charity Image"
-              className="ml-[250px] w-1/2 h-1/2 object-cover rounded-lg"
-            />
-          </div>
-        </div>
+    <div className="flex items-center flex-col justify-center">
+      {images.map((image, index) => (
+        <motion.img
+          key={index}
+          src={image}
+          alt={image}
+          className="rounded-[12px]"
+          initial="center"
+          animate={positions[positionIndexes[index]]}
+          variants={imageVariants}
+          transition={{ duration: 0.5 }}
+          style={{ width: "40%", position: "absolute" }}
+        />
+      ))}
+      <div className="flex flex-row gap-3">
+        <button
+          className="text-white mt-[400px] bg-indigo-400 rounded-md py-2 px-4"
+          onClick={handleBack}
+        >
+          Back
+        </button>
+        <button
+          className="text-white mt-[400px] bg-indigo-400 rounded-md py-2 px-4"
+          onClick={handleNext}
+        >
+          Next
+        </button>
       </div>
     </div>
   );
