@@ -117,31 +117,37 @@ const Courses: React.FC = () => {
   };
 
   return (
-    <div className='relative w-full overflow-hidden'>
-      <div className='flex flex-row space-x-4 w-full overflow-x-auto' ref={scrollContainerRef} style={{ overflowX: 'hidden' }}>
-        {courses.map((course, index) => (
-          <div
-            key={index}
-            className={`flex-shrink-0 relative h-80 w-40 rounded-[45px] bg-cover bg-center hover:w-96 transition-all duration-500 transform overflow-hidden shadow-lg ${
-              currentHoverIndex === index ? 'opacity-100 w-96' : 'opacity-50'
-            }`}
-            style={{ backgroundImage: `url(${course.image})` }}
-            onMouseEnter={() => handleCourseHover(index)}
-          >
-            <div className='absolute inset-0 bg-gradient-to-t from-black opacity-50 rounded-[45px]'></div>
-            <div className='absolute inset-0 flex items-end justify-center p-4'>
-            <span
-              className={`text-white m-2 text-xl font-bold transition-transform duration-500 ${
-                currentHoverIndex === index ? 'transform -rotate-90' : ''
+    <div className='w-full justify-center items-center flex flex-col'>
+    
+    <div className='w-full justify-center items-start flex '>
+      <div className='relative w-3/4 overflow-hidden bg-white'>
+        <div className='flex flex-row space-x-4 w-full overflow-x-auto' ref={scrollContainerRef} style={{ overflowX: 'hidden' }}>
+          {courses.map((course, index) => (
+            <div
+              key={index}
+              className={`flex-shrink-0 relative h-80 w-40 rounded-[45px] bg-cover bg-center hover:w-96 transition-all duration-500 transform overflow-hidden shadow-lg ${
+                currentHoverIndex === index ? 'opacity-100 w-96' : ''
               }`}
-              style={{ writingMode: 'vertical-lr', transformOrigin: 'bottom' }}
+              style={{ backgroundImage: `url(${course.image})` }}
+              onMouseEnter={() => handleCourseHover(index)}
             >
-              {course.courseName}
-            </span>
-          </div>
-          </div>
-        ))}
+              <div className='absolute inset-0 bg-gradient-to-t from-black opacity-20 rounded-[45px]'></div>
+              <div className='absolute inset-0 flex items-end justify-center p-4'>
+              <span
+                className={`text-white m-2 text-xl font-bold transition-transform duration-500 ${
+                  currentHoverIndex === index ? 'transform -rotate-90' : ''
+                }`}
+                style={{ writingMode: 'vertical-lr', transformOrigin: 'bottom' }}
+              >
+                {course.courseName}
+              </span>
+            </div>
+            </div>
+          ))}
+        </div>
       </div>
+    </div>
+  
 
       <div className='w-full flex justify-center items-center space-x-10 mt-5'>
         {showLeftButton && (

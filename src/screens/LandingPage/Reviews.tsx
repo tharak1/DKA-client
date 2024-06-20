@@ -53,17 +53,17 @@ const Reviews: React.FC = () => {
         
         {/* Right Section */}
         <div className="w-full md:w-1/2 pr-4 overflow-y-scroll scrollbar-cyan" style={{ maxHeight: '400px' }}>
-          <div className="space-y-4 relative">
+          {/* <div className="space-y-4 relative"> */}
 
             {reviews.map((review, index) => (
               <div
                 key={index}
-                className={`relative transition-transform duration-300 ${hoveredIndex === index ? 'z-[1]' : 'z-0'}`}
+                className={`transition-transform duration-300 ${hoveredIndex === index ? 'z-[10]' : 'z-0'}`}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
               >
                 {/* Color strip */}
-                <div className={`bg-${hoveredIndex === index ? 'purple' : 'gray'} h-full w-2 absolute right-0`}></div>
+                <div className={`bg-${hoveredIndex === index ? 'purple' : 'gray'} h-full w-2`}></div>
 
                 <div
                   className={`flex items-center border-2 border-black-300 rounded-lg p-4 md:p-6 transition-transform duration-300 ${
@@ -81,7 +81,7 @@ const Reviews: React.FC = () => {
               </div>
             ))}
 
-          </div>
+          {/* </div> */}
         </div>
       </div>
     </section>

@@ -64,7 +64,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className={`z-10 fixed top-0 left-0 w-full flex justify-between py-4 px-8 transition-all duration-200 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
+    <nav className={`z-20 fixed top-0 left-0 w-full flex justify-between py-4 px-8 transition-all duration-200 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
       <div className="flex items-center">
         <span className="text-2xl font-bold mr-6">DKA</span>
       </div>
