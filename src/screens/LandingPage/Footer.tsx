@@ -10,7 +10,7 @@ const Footer: React.FC<Props> = () => {
     <div className="flex flex-wrap justify-between space-y-4 p-10 m-1">
       {/* First part */}
       <div className="w-full md:w-auto md:flex-grow md:mr-8">
-        <h1 className="text-5xl font-bold bg-gradient-to-r from-red-500 via-green-500 to-gray-600 bg-clip-text text-transparent">Get Connected <br></br>To Us.</h1>
+        <h1 className="text-5xl font-bold bg-gradient-to-r from-pink-500  to-green-600 bg-clip-text text-transparent">Get Connected <br></br>To Us.</h1>
         <p className="text-gray-600 text-2xl mt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed libero <br></br>sit amet justo luctus auctor.Lorem ipsum<br></br> dolor sit amet, consectetur adipiscing elit. Duis sed libero <br></br>sit amet justo luctus auctor.</p>
       </div>
 
