@@ -7,7 +7,7 @@ const Signup: React.FC = () => {
   return (
     <div className="flex flex-col md:flex-row h-screen">
       {/* Left side with SVG background */}
-      <div className="w-full md:w-1/2 bg-s bg-cover bg-center flex items-center justify-center p-8 md:p-0">
+      <div className="w-full md:w-1/2 bg-s bg-cover bg-center flex items-center justify-center p-8 md:p-0 max-sm:bg-small-form">
         <div className="text-center text-black px-4 md:px-6 lg:px-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">Welcome Back!</h1>
           <p className="mb-6">To get connected with us please login with your already registered details</p>
