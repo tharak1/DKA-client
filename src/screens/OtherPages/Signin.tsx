@@ -39,7 +39,7 @@ const SignIn: React.FC = () => {
           </form>
         </div>
       </div>
-      <div className="w-full md:w-1/2 bg-signup-pattern bg-cover flex items-center justify-center p-8">
+      <div className="w-full md:w-1/2 bg-signup-pattern bg-cover flex items-center justify-center p-8 max-sm:bg-small-form max-sm:bg-cover">
   <div className="text-center text-black px-4 md:px-8 lg:px-12 ml-0 md:ml-10">
     <h1 className="text-2xl md:text-3xl font-bold mb-4">Hello, Friend!</h1>
     <p className="mb-6 text-sm md:text-base">To get connected with us please login with your already registered details</p>

@@ -11,6 +11,8 @@ export default {
         'signup-pattern': "url('/src/assets/signup.svg')",
         's':"url('/src/assets/Group 35.svg')",
         'rainbow':"url('/src/assets/Group 1 (1).png')",
+        'small-form':"url('/src/assets/Group 43.svg)",
+        
       },
       fontFamily: {
         'poppins': ['Poppins'],

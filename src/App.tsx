@@ -6,6 +6,8 @@ import MyPerformancePage from './screens/OtherPages/MyPerformancePage';
 import Signup from './screens/OtherPages/Signups';
 // import Modal from './screens/OtherPages/PaymentModal';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import CharityForm from './screens/OtherPages/CharityForm';
+import ReviewForm from './screens/OtherPages/ReviewForm';
 
 // Lazy load components
 const Layout = React.lazy(() => import('./screens/LandingPage/Layout'));
@@ -29,6 +31,10 @@ const App: React.FC = () => {
           <Route path="/signups" element={<Signup />} />
           
           <Route path="/form" element={<Form />} />
+          <Route path="/charityform" element={<CharityForm />} />
+          <Route path="/charityform" element={<CharityForm />} />
+          <Route path="/reviewform" element={<ReviewForm />} />
+          
           <Route path="/my_purchases" element={<PurchasedCourses />} />
           <Route path="/my_courses" element={<MyCoursesPage />} />
           <Route path='/my_performances' element={<MyPerformancePage/>}/>
