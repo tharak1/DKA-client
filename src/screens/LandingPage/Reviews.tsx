@@ -39,7 +39,7 @@ const Reviews: React.FC = () => {
   };
 
   return (
-    <section id="dummy" className="p-4 md:p-10">
+    <section id="dummy" className="p-4 md:p-10 ">
       <div className="max-w-7xl mx-auto flex flex-wrap">
         {/* Left Section */}
         <div className="w-full md:w-1/2 pr-4 mb-10 md:mb-0">

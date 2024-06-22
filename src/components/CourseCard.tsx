@@ -1,9 +1,10 @@
 import React from 'react';
 import { CourseModel, MyCourseModal } from '../models/CourseModel';
-import RazorPay from './RazorPay';
+// import RazorPay from './RazorPay';
 import { useSelector } from 'react-redux';
 import { GetUser } from '../redux/UserSlice';
 import { UserModel } from '../models/UserModel';
+import PaymentBeforeModal from '../screens/OtherPages/PaymentBeforeModal';
 
 interface CourseCardProps {
     courseDetails: CourseModel;
@@ -46,10 +47,10 @@ const CourseCard: React.FC<CourseCardProps> = ({ courseDetails }) => {
                             isUserRegistered ? (
                                 <button>Already Registered</button>
                             ) : (
-                                <RazorPay course={courseDetails} />
+                                <PaymentBeforeModal course={courseDetails} />
                             )
                         ) : (
-                            <RazorPay course={courseDetails} />
+                            <PaymentBeforeModal course={courseDetails} />
                         )}
                     </div>
                 </div>

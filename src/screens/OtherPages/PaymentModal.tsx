@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -32,7 +32,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
     <Transition show={isOpen} as={Fragment}>
       <Dialog as="div" className="fixed inset-0 overflow-y-auto" onClose={onClose}>
         <div className="flex min-h-full items-center justify-center p-4 text-center">
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 scale-95"
@@ -54,9 +54,9 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
                   </svg>
                 </button>
               </div>
-              <Dialog.Title as="h3" className="text-lg font-bold leading-6 text-black text-center">
+              <DialogTitle as="h3" className="text-lg font-bold leading-6 text-black text-center">
                 PAYMENT SUCCESSFUL
-              </Dialog.Title>
+              </DialogTitle>
               <div className="mt-6 flex">
                 <div className="w-1/3">
                   <img src={imageUrl} alt="Class" className="w-full h-48 object-cover rounded-lg" />
@@ -85,7 +85,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
                 </button>
               </div>
             </div>
-          </Transition.Child>
+          </TransitionChild>
         </div>
       </Dialog>
     </Transition>
