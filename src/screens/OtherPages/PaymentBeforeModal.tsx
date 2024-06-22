@@ -294,7 +294,7 @@ const PaymentBeforeModal: React.FC<PaymentModalProps> = ({ course }) => {
                   </div>
                 </div>
                 <div className="mt-6 flex justify-center">
-                  <RazorPay course={course} data={obj} />
+                  <RazorPay course={course} data={obj} AnotherFunction={onClose} />
                 </div>
               </div>
             </TransitionChild>

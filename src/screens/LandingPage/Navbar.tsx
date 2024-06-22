@@ -72,18 +72,18 @@ const Navbar: React.FC = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `flex  items-center font-poppins cursor-pointer  ${isActive ? 'font-bold text-black text-lg'  : 'text-base font-thin  text-gray-500'}`
+            `flex  items-center font-poppins cursor-pointer  ${isActive ? 'font-bold text-black text-lg'  : 'text-base font-thin  text-gray-500'} hover:text-black`
           }
         >
           HOME
         </NavLink>
-        <ScrollLink to="about" smooth={true} duration={500} className="flex items-center font-poppins text-base font-thin  text-gray-500 cursor-pointer" activeStyle={{fontWeight:"700",color:"black",fontSize:"1.125rem"}}>ABOUT US</ScrollLink>
+        <ScrollLink to="about" smooth={true} duration={500} className="flex items-center font-poppins text-base font-thin  text-gray-500 cursor-pointer hover:text-black" activeStyle={{fontWeight:"700",color:"black",fontSize:"1.125rem"}}>ABOUT US</ScrollLink>
 
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={toggleDropDown}
             className={`font-poppins flex justify-center items-center  ${
-              location.pathname === '/course' ? 'font-bold text-black text-lg' : 'text-base font-thin text-gray-500'} `}
+              location.pathname === '/course' ? 'font-bold text-black text-lg' : 'text-base font-thin text-gray-500'}  hover:text-black `}
             >
           COURSES 
           <FaChevronDown style={{ marginLeft: '10px' }} />
@@ -96,7 +96,7 @@ const Navbar: React.FC = () => {
                 <li key={index}>
                   <Link
                     to={`/course?category=${course}`}
-                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-black "
                     onClick={() => setViewDropdown(false)}
                   >
                     {course}
@@ -107,7 +107,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        <ScrollLink to="contact" smooth={true} duration={500} className="flex items-center font-poppins text-base font-thin  text-gray-500 cursor-pointer" activeStyle={{fontWeight:"700",color:"black",fontSize:"1.125rem"}}>CONTACT US</ScrollLink>
+        <ScrollLink to="contact" smooth={true} duration={500} className="flex items-center font-poppins text-base font-thin  text-gray-500 cursor-pointer hover:text-black" activeStyle={{fontWeight:"700",color:"black",fontSize:"1.125rem"}}>CONTACT US</ScrollLink>
       </div>
 
       {user ? (
@@ -151,7 +151,7 @@ const Navbar: React.FC = () => {
           )}
         </div>
       ) : (
-        <Link to="/login" className="text-black text-lg py-2 px-4 flex items-center space-x-5">Join now <GoArrowUpRight /></Link>
+        <Link to="/login" className="text-black text-lg py-2 px-4 flex items-center space-x-5 hover:text-black">Join now <GoArrowUpRight /></Link>
       )}
     </nav>
   );

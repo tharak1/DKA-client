@@ -16,7 +16,7 @@ const About: React.FC = () => {
       <section className="p-24 w-full">
         <div className="relative mt-10">
           <div className="border-t border-gray-500 w-full absolute top-1/2 left-0 transform -translate-y-1/2"></div>
-          <h3 className="relative text-xl md:text-2xl font-bold bg-white px-4 mx-auto w-max mt-5">
+          <h3 className="relative text-xl md:text-2xl font-bold bg-[#F7F8FB] px-4 mx-auto w-max mt-5">
             ABOUT DKA
           </h3>
         </div>

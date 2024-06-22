@@ -18,9 +18,10 @@ interface SomeData {
 interface RazorPayProps {
   course: CourseModel;
   data: SomeData;
+  AnotherFunction:()=>void;
 }
 
-const RazorPay: React.FC<RazorPayProps> = ({ course, data }) => {
+const RazorPay: React.FC<RazorPayProps> = ({ course, data, AnotherFunction }) => {
   const user = useSelector(GetUser) as UserModel;
   const [hasError, setHasError] = useState<boolean>(false);
   const dispatch = useAppDispatch();
@@ -34,6 +35,8 @@ const RazorPay: React.FC<RazorPayProps> = ({ course, data }) => {
   const [isOpen,setIsOpen] = useState<boolean>(false);
 
   const open = ()=>{
+    console.log("hiiiiiiiiiiiiiiiiiiiiiii");
+    AnotherFunction();
     setIsOpen(true)
   }
 
