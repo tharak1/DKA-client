@@ -7,17 +7,17 @@ html, body {
 
 
 @layer utilities {
-  .scrollbar-cyan::-webkit-scrollbar {
+  .scrollbar::-webkit-scrollbar {
     width: 12px;
   }
 
-  .scrollbar-cyan::-webkit-scrollbar-thumb {
-    background-color: cyan;
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: #34d399;
     border-radius: 10px;
   }
 
-  .scrollbar-cyan::-webkit-scrollbar-track {
-    background: #f1f1f1;
+  .scrollbar::-webkit-scrollbar-track {
+    background: #e5e5e5;
     border-radius: 10px;
   }
 }
