@@ -45,54 +45,52 @@ const Reviews: React.FC = () => {
   };
 
   return (
-    <section id="dummy" className="pl-4 py-4 md:p-10">
+    <section id="dummy" className="pl-4 py-4 md:p-10 border-y-2">
       <div className="max-w-7xl mx-auto flex flex-wrap">
         {/* Left Section */}
         <div className="w-full md:w-1/2 pr-4 mb-10 md:mb-0 md:mt-4">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center md:text-left">
+        <h1 className="text-4xl md:text-5xl/[3.7rem] font-bold mb-6 text-center md:text-left">
           <span className="font-poppins bg-gradient-to-r from-pink-500 to-green-500 bg-clip-text text-transparent">
-            what our <br /> Customers say
+            What our <br /> Customers say
           </span>
         </h1>
           <p className="text-xl md:text-2xl font-semibold text-center md:text-left md:w-2/3">
             Hear from our satisfied customers who have experienced our excellent services.
           </p>
-          <button className="bg-[#b9ddf5] text-black bg-gradient-to-t from-blue-100 to-red-100 text-lg font-bold py-4 px-5 mt-8 cursor-pointer block m-auto md:ml-20">Join now</button>
+          <button className="bg-[#b9ddf5] text-black bg-gradient-to-t from-[#F5E6F0] to-[#DDF2F9] text-lg font-bold py-4 px-5 mt-8 cursor-pointer block m-auto md:ml-20">Join now</button>
         </div>
         
         {/* Right Section */}
-        <div className="w-full md:w-1/2 pr-4 overflow-y-scroll scrollbar"style={{ maxHeight: '440px' }}>
+        <div className="w-full md:w-1/2 mx-auto">
+        <div className="pr-6 overflow-y-scroll scrollbar"style={{ maxHeight: '470px' }}>
         {reviews.map((review,index) => ( 
            <div
             key={index}
-            className={`relative mb-9 p-3 bg-white ml-[60px] border-l-8 border border-neutral-200  ${hoveredIndex === index ? 'transform -translate-x-12 border-l-8 border-l-pink-400': ''}`}
+            className={`flex flex-row mb-9 ml-[70px] ${hoveredIndex === index ? 'transform -transform duration-500 hover:translate-x-[-70px]': ''}`}
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
             > 
-            {/* <div
-              key={index}
-              className={`flex flex-row ${hoveredIndex === index ? 'transform -translate-x-12': ''}`}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
-            > 
-            <div className={`h-full w-3  ${hoveredIndex === index ? 'bg-pink-400' : 'bg-neutral-200'}`}></div> */} 
-
-            <div className="flex items-center">
-            <div>
-              <img
-                src={review.image}
-                alt={review.name}
-                className="w-20 h-20 rounded-full mr-5"
-              />
+            <div className={`w-4 ${hoveredIndex === index ? 'bg-[#CC6C92]': 'bg-[#CACACA]'}`}></div>
+            <div className="flex items-center p-3 border-t-2 border-b-2 border-r-2 border-[#CACACA]">
+              <div>
+                <img
+                  src={review.image}
+                  alt={review.name}
+                  className="h-20 rounded-full mr-5"
+                />
+              </div>
+              <div className="flex-1">
+                  <h3 className="relative text-xl font-bold mb-2">{review.name}
+                     <span className={`absolute top-0 right-0 mr-4 text-5xl font-normal ${hoveredIndex === index ? 'text-[#7FC673]': 'text-[#CACACA]'}`}>&rdquo;</span>
+                  </h3>
+                <p className="text-gray-600">{review.text}</p>
+              </div>
             </div>
-            <div className="flex-1">
-              <h3 className="text-xl font-bold mb-2">{review.name}</h3>
-              <p className="text-gray-600">{review.text}</p>
-            </div>
-          </div>
           </div>
         ))}
         </div>
+        </div>
+        
       </div>
     </section>
   );
