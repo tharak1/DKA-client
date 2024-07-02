@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { GetUser } from '../redux/UserSlice';
 import { UserModel } from '../models/UserModel';
 import PaymentBeforeModal from '../screens/OtherPages/PaymentBeforeModal';
-import LoginPage from '../screens/OtherPages/LoginPage';
 import { useNavigate } from 'react-router-dom';
 
 interface CourseCardProps {
