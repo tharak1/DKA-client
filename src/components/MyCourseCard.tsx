@@ -73,11 +73,6 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
             setError("No Exam")
         }
 
-
-
-
-        
-
         console.log(fetchedUser.id);
     }
 
@@ -103,7 +98,12 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
             )
             }</button>
             <button className="bg-blue-200 text-gray-800 py-2 px-2 rounded-xl text-sm font-semibold hover:bg-blue-300" onClick={handleViewMarks}>View Marks</button>
-            <button className="bg-blue-200 text-blue-800 py-2 px-2 rounded-xl text-sm font-semibold hover:bg-blue-300" onClick={joinOnlineClass}>Join Class</button>
+
+            {
+                userRegisteredCourseDetails?.courseType==="online" &&(
+                    <button className="bg-blue-200 text-blue-800 py-2 px-2 rounded-xl text-sm font-semibold hover:bg-blue-300" onClick={joinOnlineClass}>Join Class</button>
+                )
+            }
         </div>
         <div className="mt-4">
             <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-xl hover:bg-blue-600">Renew Course </button>

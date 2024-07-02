@@ -1,6 +1,5 @@
 import React from 'react';
 import { CourseModel, MyCourseModal } from '../models/CourseModel';
-// import RazorPay from './RazorPay';
 import { useSelector } from 'react-redux';
 import { GetUser } from '../redux/UserSlice';
 import { UserModel } from '../models/UserModel';
@@ -14,9 +13,24 @@ interface CourseCardProps {
 
 const CourseCard: React.FC<CourseCardProps> = ({ courseDetails }) => {
     const user = useSelector(GetUser) as UserModel | null;
-    
+
+    function calculateAge(birthDate: string) {
+        const currentDate = new Date();
+        const birth = new Date(birthDate);
+        let age = currentDate.getFullYear() - birth.getFullYear();
+        const monthDifference = currentDate.getMonth() - birth.getMonth();
+
+        // If birth month is greater than current month or birth date is greater than current date in the same month, subtract one year from the age
+        if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birth.getDate())) {
+            age--;
+        }
+
+        return age;
+    }
 
     const isUserRegistered = user?.registeredCourses.some(course => course.courseId === courseDetails.id);
+    const userAge = user ? calculateAge(user.dob) : null;
+    const ageLimitExceeded = userAge !== null && parseInt(courseDetails.ageLimit) && userAge < parseInt(courseDetails.ageLimit);
 
     return (
         <div className="flex flex-row w-full">
@@ -45,7 +59,11 @@ const CourseCard: React.FC<CourseCardProps> = ({ courseDetails }) => {
                         </div>
                         {user ? (
                             isUserRegistered ? (
-                                <button>Already Registered</button>
+                                ageLimitExceeded ? (
+                                    <button>Age limit</button>
+                                ) : (
+                                    <button>Already Registered</button>
+                                )
                             ) : (
                                 <PaymentBeforeModal course={courseDetails} />
                             )

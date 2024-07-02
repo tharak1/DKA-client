@@ -15,13 +15,6 @@ const Footer: React.FC<Props> = () => {
       </div>
 
       {/* Second part */}
-      <div className="w-full md:w-auto md:flex-grow md:mr-8">
-        <h2 className="text-2xl font-bold mb-2">Accounts</h2>
-        <div className="flex flex-col space-y-2">
-          <a href="#" className="text-gray-600 hover:text-gray-800 text-xl">Login</a>
-          <a href="#" className="text-gray-600 hover:text-gray-800 text-xl">Sign Up</a>
-        </div>
-      </div>
 
       {/* Third part */}
       <div className="w-full md:w-auto md:flex-grow md:mr-8">
@@ -37,11 +30,11 @@ const Footer: React.FC<Props> = () => {
         <div className="flex flex-col space-y-2 text-gray-600">
           <div className="flex items-center space-x-2">
             <FaWhatsapp />
-            <span className='text-xl'>+91 83740 68550</span>
+            <span className='text-xl'>+91 79898 33031</span>
           </div>
           <div className="flex items-center space-x-2">
             <FaEnvelope />
-            <span className='text-xl'>info.taycoon@gmail.com</span>
+            <span className='text-xl'>info.DKA@gmail.com</span>
           </div>
           <div className="flex items-center space-x-2">
             <FaLinkedin />

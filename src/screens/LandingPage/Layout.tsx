@@ -7,6 +7,7 @@ import Courses from './Courses';
 import Reviews from './Reviews';
 import Achievements from './Achievements';
 import Footer from './Footer';
+import CharityCarousel from './CharityCarousel';
 
 const Layout: React.FC = () => {
   return (
@@ -26,6 +27,9 @@ const Layout: React.FC = () => {
         </div>
         <div className="py-10 "> {/* Add padding-y between components */}
           <Achievements />
+        </div>
+        <div className="py-10 "> {/* Add padding-y between components */}
+          <CharityCarousel />
         </div>
         <div className="py-10"> 
           <Footer />

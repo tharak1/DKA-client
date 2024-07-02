@@ -101,6 +101,8 @@ const RazorPay: React.FC<RazorPayProps> = ({ course, data, AnotherFunction }) =>
 
             open();
 
+            navigate('/my_courses');
+
           } catch (error) {
             console.log(error);
           }
