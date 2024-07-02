@@ -33,7 +33,7 @@ const MyCoursesPage:React.FC = () => {
                 try {
                     const querySnapshot = await getDocs(q);
                     querySnapshot.forEach(doc => {
-                    courses.push({ id: doc.id, ...doc.data() });
+                    courses.push({ id: doc.id, ...doc.data() as CourseModel });
                     });
                 } catch (error) {
                     console.error("Error fetching courses: ", error);
