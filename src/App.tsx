@@ -32,7 +32,6 @@ const App: React.FC = () => {
           
           <Route path="/form" element={<Form />} />
           <Route path="/charityform" element={<CharityForm />} />
-          <Route path="/charityform" element={<CharityForm />} />
           <Route path="/reviewform" element={<ReviewForm />} />
           
           <Route path="/my_purchases" element={<PurchasedCourses />} />

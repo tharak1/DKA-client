@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CharityCarousel: React.FC = () => {
     const charityItems = [
@@ -25,20 +26,23 @@ const CharityCarousel: React.FC = () => {
     const handleNext = () => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % charityItems.length);
     };
+
+    const navigate = useNavigate();
   
     return (
       <div className="flex flex-col justify-center items-center mt-8">
         <h2 className="text-2xl font-bold mb-4">Our Charity</h2>
         <div className="relative flex justify-center items-center h-[400px] w-[1450px] bg-gray-100">
-          <div className="absolute left-0 p-2" onClick={handlePrev}>{'<'}</div>
-          <div className="absolute right-0 p-2" onClick={handleNext}>{'>'}</div>
+          <div className="absolute left-0 p-2 cursor-pointer" onClick={handlePrev}>{'<'}</div>
+          <div className="absolute right-0 p-2 cursor-pointer" onClick={handleNext}>{'>'}</div>
           <div className="flex justify-center absolute bottom-0 w-full">
-            <button className="p-2">{`<`}</button>
-            <button className="p-2">{`>`}</button>
+            <button className="p-2 hover:cursor-pointer">{`<`}</button>
+            <button className="p-2 hover:cursor-pointer">{`>`}</button>
           </div>
           <div className="flex justify-between items-center bg-white h-[380px] w-[1400px] p-4 rounded-lg shadow-lg relative">
-            <div className="w-full">
+            <div className="w-full flex-col">
               <p>{charityItems[currentIndex].description}</p>
+              <button className="bg-[#b9ddf5] text-black bg-gradient-to-t from-[#F5E6F0] to-[#DDF2F9] text-lg font-bold py-4 px-5 mt-8 cursor-pointer block m-auto md:ml-20" onClick={()=>{navigate("/charityform")}} >Donate now</button>
             </div>
             <div className="w-[240px] h-[360px] absolute top-0 right-20 bottom-0 left-[1150px] z-0 mt-[10px] mb-[5px]">
               {/* Cyan-colored container */}

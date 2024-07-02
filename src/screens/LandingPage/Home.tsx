@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <header id="home" className="w-full h-screen pt-20 bg-rainbow bg-no-repeat bg-auto  relative text-left bg-right">
       <div className="max-w-7xl mx-auto">
@@ -22,7 +24,7 @@ const Home: React.FC = () => {
           Mauris a nisl nec nisl ullamcorper efficitur.
         </p>
 
-        <button className="relative bg-gradient-to-r from-pink-500 to-green-500 text-white py-2 px-4 rounded z-5">
+        <button className="relative bg-gradient-to-r from-pink-500 to-green-500 text-white py-2 px-4 rounded z-5" onClick={()=>{navigate("/course?category=all")}} >
           Explore Now
           <span className="absolute left-0 bottom-0 w-full h-0.5 "></span>
         </button>

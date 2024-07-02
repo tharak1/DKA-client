@@ -14,8 +14,8 @@ interface CourseModel{
     price?:string;
     image?:string;
     showActions?:boolean;
-    coursePerformance?:PerformanceModel[];
-    isHovered?:boolean;
+    coursePerformance?:string[];
+    ageLimit:string
 }
 
 interface MyCourseModal{
