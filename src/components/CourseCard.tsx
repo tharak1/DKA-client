@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import { GetUser } from '../redux/UserSlice';
 import { UserModel } from '../models/UserModel';
 import PaymentBeforeModal from '../screens/OtherPages/PaymentBeforeModal';
+import LoginPage from '../screens/OtherPages/LoginPage';
+import { useNavigate } from 'react-router-dom';
 
 interface CourseCardProps {
     courseDetails: CourseModel;
@@ -13,6 +15,7 @@ interface CourseCardProps {
 
 const CourseCard: React.FC<CourseCardProps> = ({ courseDetails }) => {
     const user = useSelector(GetUser) as UserModel | null;
+    const navigate = useNavigate();
 
     function calculateAge(birthDate: string) {
         const currentDate = new Date();
@@ -68,7 +71,12 @@ const CourseCard: React.FC<CourseCardProps> = ({ courseDetails }) => {
                                 <PaymentBeforeModal course={courseDetails} />
                             )
                         ) : (
-                            <PaymentBeforeModal course={courseDetails} />
+                            <button
+                            className="mt-4 mb-8  rounded-md bg-blue-700 hover:bg-blue-500 px-6 py-3 font-medium text-white"
+                            onClick={()=>{navigate('/login')}}
+                          >
+                            Login 
+                          </button>
                         )}
                     </div>
                 </div>

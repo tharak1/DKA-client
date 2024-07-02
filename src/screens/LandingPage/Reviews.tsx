@@ -169,10 +169,12 @@ const Reviews: React.FC = () => {
           <p className="text-xl md:text-2xl font-semibold text-center md:text-left md:w-2/3">
             Hear from our satisfied customers who have experienced our excellent services.
           </p>
-          {user.registeredCourses.length > 0 ? (
+          { user !=null ?user.registeredCourses.length > 0  ? (
             <button className="bg-[#b9ddf5] text-black bg-gradient-to-t from-[#F5E6F0] to-[#DDF2F9] text-lg font-bold py-4 px-5 mt-8 cursor-pointer block m-auto md:ml-20" onClick={() => { navigate("/reviewform") }}>Give Review</button>
           ) : (
-            <button className="bg-[#b9ddf5] text-black bg-gradient-to-t from-[#F5E6F0] to-[#DDF2F9] text-lg font-bold py-4 px-5 mt-8 cursor-pointer block m-auto md:ml-20" onClick={() => { navigate("/course?category=all") }}>Join now</button>
+            <button className="bg-[#b9ddf5] text-black bg-gradient-to-t from-[#F5E6F0] to-[#DDF2F9] text-lg font-bold py-4 px-5 mt-8 cursor-pointer block m-auto md:ml-20" onClick={() => { navigate("/course?category=all") }}>Join course</button>
+          ): (
+            <button className="bg-[#b9ddf5] text-black bg-gradient-to-t from-[#F5E6F0] to-[#DDF2F9] text-lg font-bold py-4 px-5 mt-8 cursor-pointer block m-auto md:ml-20" onClick={() => { navigate("/login") }}>Join now</button>
           )}
         </div>
 
