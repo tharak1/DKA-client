@@ -6,12 +6,12 @@ const Home: React.FC = () => {
   return (
     <header id="home" className="w-full h-[120vh] pt-20 max-sm:pt-28 bg-rainbow bg-no-repeat bg-auto  relative text-left bg-right max-sm:px-4">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-5xl md:text-5xl font-bold mb-6">
+        <h1 className="text-3xl md:text-5xl font-bold mb-6">
           <span className="font-poppins  bg-gradient-to-r from-pink-500 to-green-500 bg-clip-text text-transparent">
             Divya Kala Academy
           </span>
         </h1>
-        <h2 className="text-3xl md:text-4xl font-semibold mb-8 whitespace-pre-line">
+        <h2 className="text-2xl md:text-4xl font-semibold mb-8 whitespace-pre-line">
           {`It's a Big World\nOut There, Go\nExplore.`}
         </h2>
         <p className="mb-6 text-lg font-semibold p-0">
