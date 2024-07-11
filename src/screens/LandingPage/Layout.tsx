@@ -15,7 +15,7 @@ const Layout: React.FC = () => {
       <Navbar />
       <main className=""> {/* Add padding-top to avoid overlap with fixed navbar */}
         <Home />
-        <div className="py-10" id="about"> {/* Add padding-y between components */}
+        <div className="py-10 max-sm:py-0" id="about"> {/* Add padding-y between components */}
           <About />
         </div>
         

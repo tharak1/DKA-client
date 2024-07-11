@@ -69,12 +69,13 @@ const Achievements = () => {
         {items.map((item, index) => (
           <motion.div
             key={index}
-            className="absolute flex flex-col items-center rounded-[12px] p-4 bg-white"
+            className="absolute flex flex-col items-center rounded-[12px] p-4 bg-white w-2/5 max-sm:w-full"
             initial="center"
             animate={positions[positionIndexes[index]]}
             variants={imageVariants}
             transition={{ duration: 0.5 }}
-            style={{ width: "40%",height:"500px" }}
+            // style={{ width: "40%",height:"500px" }}
+            
           >
             <img
               src={item.image}

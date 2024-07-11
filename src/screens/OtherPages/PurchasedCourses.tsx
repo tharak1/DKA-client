@@ -36,7 +36,7 @@ const PurchasedCourses:React.FC = () => {
     <>
         <Navbar/>
         <div className=' w-full h-screen bg-slate-100 gap-3'>
-            <div className='pt-20 px-20 h-full flex flex-col'>
+            <div className='pt-20 px-20 max-sm:px-4 h-full flex flex-col'>
                 <div className=' w-full flex flex-col items-start mb-4'>
                     <h1 className='text-2xl font-bold '>MY PURCHASES</h1>
                     <p>Here are your details about your purchases</p>
@@ -55,7 +55,7 @@ const PurchasedCourses:React.FC = () => {
                             <h2>no purchases</h2>
                         </div>
                     ):(
-                        <div className='w-full grid grid-cols-2 gap-4 '>
+                        <div className='w-full grid grid-cols-2 max-sm:grid-cols-1 gap-4 '>
                             {
                                 orders.map((obj)=>(
                                     <div className="flex flex-row h-full bg-white shadow-lg rounded-lg overflow-hidden" key={obj.orderId}>

@@ -13,8 +13,8 @@ const About: React.FC = () => {
 
   return (
     <div id="about">
-      <section className="p-24 w-full">
-        <div className="relative mt-10">
+      <section className="p-24 max-sm:p-5 w-full">
+        <div className="relative mt-10 max-sm:mt-0">
           <div className="border-t border-gray-500 w-full absolute top-1/2 left-0 transform -translate-y-1/2"></div>
           <h3 className="relative text-xl md:text-2xl font-bold bg-[#F7F8FB] px-4 mx-auto w-max mt-5">
             ABOUT DKA
@@ -29,7 +29,7 @@ const About: React.FC = () => {
           Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam.
         </p>
       </section>
-      <section className="px-10 py-20 bg-[#C7DDFF] w-full">
+      <section className="px-10 py-20  bg-[#C7DDFF] w-full">
         <div className="max-w-7xl mx-auto flex flex-wrap">
           <div className="w-full md:w-1/2 pr-4 mb-10 md:mb-0">
             <h2 className="text-2xl font-bold mb-4 text-black text-center">About DKA</h2>

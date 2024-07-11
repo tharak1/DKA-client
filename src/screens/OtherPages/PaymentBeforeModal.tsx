@@ -70,11 +70,11 @@ const PaymentBeforeModal: React.FC<PaymentModalProps> = ({ course }) => {
                 <DialogTitle as="h3" className="text-lg font-bold leading-6 text-black text-center">
                   Payment Details
                 </DialogTitle>
-                <div className="mt-6 flex">
-                  <div className="w-1/3">
-                    <img src={course.image} alt="Class" className="w-full h-48 object-cover rounded-lg" />
+                <div className="mt-6 flex max-sm:flex-col">
+                  <div className="w-1/3 max-sm:w-full max-sm:flex max-sm:justify-center max-sm:items-center">
+                    <img src={course.image} alt="Class" className="w-1/2 h-48  object-cover rounded-lg" />
                   </div>
-                  <div className="w-2/3 pl-8">
+                  <div className="w-2/3 max-sm:w-full pl-8">
                     <p>Student name: <strong>{user.name}</strong></p>
                     <p>Mobile Number: <strong>{user.contactNo}</strong></p>
                     <p>Mail ID: <strong>{user.email}</strong></p>

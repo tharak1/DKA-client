@@ -55,7 +55,7 @@ const MyCoursesPage:React.FC = () => {
     
         <Navbar/>
     
-        <div className='pt-20 px-20 w-full min-h-screen bg-slate-100 gap-3 overflow-auto'>
+        <div className='pt-20 px-20 max-sm:px-4 w-full min-h-screen bg-slate-100 gap-3 overflow-auto'>
             <div className=' w-full flex flex-col items-start mb-4'>
                 <h1 className='text-2xl font-bold '>MY COURSES</h1>
                 <p>Here are your details about the courses</p>
@@ -74,7 +74,7 @@ const MyCoursesPage:React.FC = () => {
                         <h2>no purchases</h2>
                     </div>
                 ):(
-                    <div className='w-full h-full grid grid-cols-3 gap-4'>
+                    <div className='w-full h-full grid grid-cols-3 max-sm:grid-cols-1 gap-4'>
                         {
                             courses.map((obj,index)=>(
                                 // <CourseCard courseDetails={obj} userRegisteredCourseDetails={user.registeredCourses[index]} isMycourse={true} key={obj.id}/>

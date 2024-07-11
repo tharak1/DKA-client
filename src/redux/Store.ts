@@ -3,6 +3,7 @@ import {persistReducer} from "redux-persist";
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import userReducer  from "./UserSlice";
+import drawerReducer from './DrawerSlice';
 
 const persistConfig = {
     key:"clientRoot",
@@ -11,7 +12,8 @@ const persistConfig = {
 }
 
 const reducer = combineReducers({
-    user:userReducer
+    user:userReducer,
+    drawer:drawerReducer
 });
 
 const persistedReducer = persistReducer(persistConfig,reducer);

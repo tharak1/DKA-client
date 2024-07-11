@@ -90,7 +90,7 @@ const Form: React.FC = () => {
         </div>
       <div className='absolute w-full flex justify-center items-start'>
 
-      <div className="mt-5 w-8/12 flex flex-col p-8 rounded-lg bg-white shadow-2xl">
+      <div className="mt-5 w-8/12 max-sm:w-full flex flex-col p-8 rounded-lg bg-white shadow-2xl">
         <form className="grid max-sm:grid-cols-1 grid-cols-2 gap-4 w-full" onSubmit={handleSubmit}>
 
           <div className='col-span-1'>

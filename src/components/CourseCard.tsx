@@ -34,11 +34,13 @@ const CourseCard: React.FC<CourseCardProps> = ({ courseDetails }) => {
     const ageLimitExceeded = userAge !== null && parseInt(courseDetails.ageLimit) && userAge < parseInt(courseDetails.ageLimit);
 
     return (
-        <div className="flex flex-row w-full">
-            <div className="bg-white rounded-lg shadow-md p-4 mb-6 flex w-full dark:bg-slate-700 dark:text-white">
-                <img src={courseDetails.image} alt={courseDetails.courseName} loading="lazy" className="w-48 h-48 object-cover rounded-lg" />
+        <div className="flex flex-row w-full ">
+            <div className="bg-white rounded-lg shadow-md p-4 mb-6 flex max-sm:flex-col w-full dark:bg-slate-700 dark:text-white">
+  <div className='max-sm:w-full max-sm:flex max-sm:flex-row max-sm:justify-center max-sm:items-center'>
+  <img src={courseDetails.image} alt={courseDetails.courseName} loading="lazy" className="w-48 h-48 object-cover rounded-lg" />
+  </div>
 
-                <div className="ml-6 flex flex-col justify-between dark:text-white w-full">
+                <div className="ml-6 max-sm:ml-0 flex flex-col justify-between dark:text-white w-full">
                     <div className='dark:text-white w-fit'>
                         <h2 className="text-2xl font-bold">{courseDetails.courseName}</h2>
                         <div className='w-full'>

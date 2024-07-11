@@ -70,7 +70,7 @@ useEffect(() => {
     <>
         <Navbar/>
     
-        <div className='pt-20 px-20 w-full min-h-screen bg-slate-100 gap-3 overflow-auto'>
+        <div className='pt-20 px-20 max-sm:px-4 w-full min-h-screen bg-slate-100 gap-3 overflow-auto'>
             <div className=' w-full flex flex-col items-start mb-4'>
                 <h1 className='text-2xl font-bold '>PERFORMANCE</h1>
                 <p className='font-poppins'>Attend , learn and Take tests . Check your potential</p>

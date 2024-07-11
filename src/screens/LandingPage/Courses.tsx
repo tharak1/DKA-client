@@ -120,7 +120,7 @@ const Courses: React.FC = () => {
     <div className='w-full justify-center items-center flex flex-col'>
     
     <div className='w-full justify-center items-start flex '>
-      <div className='relative w-3/4 overflow-hidden bg-white'>
+      <div className='relative w-3/4 max-sm:w-full overflow-hidden bg-white'>
         <div className='flex flex-row space-x-4 w-full overflow-x-auto' ref={scrollContainerRef} style={{ overflowX: 'hidden' }}>
           {courses.map((course, index) => (
             <div
