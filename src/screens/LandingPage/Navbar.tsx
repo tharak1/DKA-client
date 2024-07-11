@@ -443,10 +443,11 @@ const Navbar: React.FC = () => {
           )}
         </li>
         <li>
-          <Link to="/admin/students" className="flex items-center p-2 text-xl font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+        <ScrollLink to="footer" smooth={true}className="flex items-center p-2 text-xl font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <IoMdContact size={24} />
             <span className="flex-1 ml-3 whitespace-nowrap">Contact Us</span>
-          </Link>
+            </ScrollLink>
+
         </li>
       </ul>
     </div>
