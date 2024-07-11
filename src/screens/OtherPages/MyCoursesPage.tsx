@@ -3,20 +3,26 @@ import Navbar from '../LandingPage/Navbar'
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebase_config';
 import { useSelector } from 'react-redux';
-import { GetUser } from '../../redux/UserSlice';
+import { GetUser, fetchUser } from '../../redux/UserSlice';
 import { UserModel } from '../../models/UserModel';
 import { CourseModel } from '../../models/CourseModel';
 import MyCourseCard from '../../components/MyCourseCard';
+import { useAppDispatch } from '../../redux/Store';
 
 const MyCoursesPage:React.FC = () => {
 
     const user = useSelector(GetUser) as UserModel;
     const [courses,setCourses] = useState<CourseModel[]>([]);
     const [loading,setLoading] = useState<boolean>(false);
+    const dispatch = useAppDispatch();
+
 
     useEffect(()=>{
         fetchCoursesByCategory();
+        dispatch(fetchUser(user.id));
     },[]);
+
+    
 
     const fetchCoursesByCategory = async()=>{
         if(user.registeredCourses.length>0){

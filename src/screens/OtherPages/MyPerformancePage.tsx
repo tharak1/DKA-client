@@ -85,12 +85,15 @@ useEffect(() => {
                     </svg>
                 </div>
               ):(
-                performances.map((obj:any,index:number)=>(
-                  <PerformanceCard performance={obj} course={user.registeredCourses[index]} key={index}/>
-                ))
+                <div className='flex flex-col space-y-5 mb-3'>
+                  {
+                    performances.map((obj:any,index:number)=>(
+                      <PerformanceCard performance={obj} course={user.registeredCourses[index]} key={index}/>
+                    ))
+                  }
+                </div>
               )
             }
-
         </div>
 
     </>

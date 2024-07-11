@@ -182,27 +182,27 @@ const Reviews: React.FC = () => {
         <div className="w-full md:w-1/2 mx-auto">
           <div className="pr-6 overflow-y-scroll scrollbar" style={{ maxHeight: '470px' }}>
             {reviews.length > 0 ? (
-              reviews.map((review: any, index: any) => (
+              reviews.map((review: ReviewModel, index: any) => (
                 <div
                   key={index}
-                  className={`flex flex-row mb-9 ml-[70px] ${hoveredIndex === index ? 'transform -transform duration-500 hover:translate-x-[-70px]' : ''}`}
+                  className={`flex flex-row mb-9 ml-[70px]  ${hoveredIndex === index ? 'transform -transform duration-500 hover:translate-x-[-70px] ' : ''}`}
                   onMouseEnter={() => handleMouseEnter(index)}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <div className={`w-4 ${hoveredIndex === index ? 'bg-[#CC6C92]' : 'bg-[#CACACA]'}`}></div>
-                  <div className="flex items-center p-3 border-t-2 border-b-2 border-r-2 border-[#CACACA]">
-                    <div>
+                  <div className={`w-3 ${hoveredIndex === index ? 'bg-[#CC6C92]' : 'bg-[#CACACA]'}`}></div>
+                  <div className="flex items-center justify-center p-3 border-t-2 border-b-2 border-r-2 border-[#CACACA] w-full">
+                    <div >
                       <img
-                        src={review.image}
+                        src={review.profileImg}
                         alt={review.name}
-                        className="h-20 rounded-full mr-5"
+                        className="h-16 w-16 rounded-full mr-5"
                       />
                     </div>
                     <div className="flex-1">
                       <h3 className="relative text-xl font-bold mb-2">{review.name}
                         <span className={`absolute top-0 right-0 mr-4 text-5xl font-normal ${hoveredIndex === index ? 'text-[#7FC673]' : 'text-[#CACACA]'}`}>&rdquo;</span>
                       </h3>
-                      <p className="text-gray-600">{review.text}</p>
+                      <p className="text-gray-600">{review.description}</p>
                     </div>
                   </div>
                 </div>

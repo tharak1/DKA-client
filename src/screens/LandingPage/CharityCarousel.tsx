@@ -1,65 +1,41 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-const CharityCarousel: React.FC = () => {
-    const charityItems = [
-      {
-        image: 'https://www.shutterstock.com/image-photo/abuja-nigeria-may-1-2023-260nw-2307221017.jpg', // replace with actual image URL
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... ',
-      },
-     {
-      image:'https://plus.unsplash.com/premium_photo-1682092585257-58d1c813d9b4?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHBvb3IlMjBjaGlsZHxlbnwwfHwwfHx8MA%3D%3D',
-      description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... '
-     },
-     {
-      image:'https://www.shutterstock.com/image-photo/nagpur-maharashtra-india-23-february-260nw-1247281663.jpg', // replace with actual image URL
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... ',
-    },
-      // Add more items as needed
-    ];
-    const [currentIndex, setCurrentIndex] = useState(0);
-  
-    const handlePrev = () => {
-      setCurrentIndex((prevIndex) => (prevIndex - 1 + charityItems.length) % charityItems.length);
-    };
-  
-    const handleNext = () => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % charityItems.length);
-    };
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
-    const navigate = useNavigate();
-  
-    return (
-      <div className="flex flex-col justify-center items-center mt-8">
-        <h2 className="text-2xl font-bold mb-4">Our Charity</h2>
-        <div className="relative flex justify-center items-center h-[400px] w-[1450px] bg-gray-100">
-          <div className="absolute left-0 p-2 cursor-pointer" onClick={handlePrev}>{'<'}</div>
-          <div className="absolute right-0 p-2 cursor-pointer" onClick={handleNext}>{'>'}</div>
-          <div className="flex justify-center absolute bottom-0 w-full">
-            <button className="p-2 hover:cursor-pointer">{`<`}</button>
-            <button className="p-2 hover:cursor-pointer">{`>`}</button>
-          </div>
-          <div className="flex justify-between items-center bg-white h-[380px] w-[1400px] p-4 rounded-lg shadow-lg relative">
-            <div className="w-full flex-col">
-              <p>{charityItems[currentIndex].description}</p>
-              <button className="bg-[#b9ddf5] text-black bg-gradient-to-t from-[#F5E6F0] to-[#DDF2F9] text-lg font-bold py-4 px-5 mt-8 cursor-pointer block m-auto md:ml-20" onClick={()=>{navigate("/charityform")}} >Donate now</button>
+import { Pagination, Navigation } from 'swiper/modules';
+import { useNavigate } from 'react-router-dom';
+
+export default function CharityCarousel() {
+  const navigate = useNavigate();
+  return (
+    <>
+      <Swiper
+        pagination={{
+          type: 'fraction',
+        }}
+        navigation={true}
+        modules={[Pagination, Navigation]}
+        className='w-full h-96 max-sm:h-screen'
+
+      >
+        <SwiperSlide className='text-center flex flex-col justify-end items-end w-full h-full px-10 max-sm:px-12'>
+          <div className='w-full h-full flex justify-center items-center max-sm:flex-col-reverse max-sm:justify-start'>
+            <div className='w-1/2 h-full  p-20 flex flex-col justify-center items-center max-sm:p-0 max-sm:w-full max-sm:justify-start'>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore facere eligendi nobis totam. Quidem harum quos sint laudantium ab quasi quas temporibus fugit error rerum porro, iure quam odio nihil necessitatibus voluptas nostrum perspiciatis culpa! Consectetur voluptate harum rerum temporibus numquam sapiente magnam. Atque id nostrum eius nemo ab odio!</p>
+              <button className="bg-[#b9ddf5] text-black bg-gradient-to-t from-[#F5E6F0] to-[#DDF2F9] text-lg font-bold py-4 px-5 mt-5 cursor-pointer block " onClick={() => { navigate("/charityform") }}>Donate Now</button>
             </div>
-            <div className="w-[240px] h-[360px] absolute top-0 right-20 bottom-0 left-[1150px] z-0 mt-[10px] mb-[5px]">
-              {/* Cyan-colored container */}
-              <div className="absolute bg-cyan-300 h-full w-full rounded-lg opacity-60" />
-            </div>
-            <div className="w-full relative">
-              <img
-                src={charityItems[currentIndex].image}
-                alt="Charity Image"
-                className="ml-[250px] w-1/2 h-1/2 object-cover rounded-lg"
-              />
+            <div className='w-1/2 h-full flex justify-end relative max-sm:w-full'>
+              <div className='w-1/2 h-full bg-[#BFF7FF] max-sm:hidden'></div>
+              <div className='w-full h-full absolute px-24 py-14 max-sm:px-0 max-sm:py-0'>
+                <img src="https://www.dadabhagwan.org/media/1993/1-charity-benefits-of-charity.jpg" alt="" className='w-full h-full object-contain'/>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    );
-  };
+        </SwiperSlide>
 
-
-  export default CharityCarousel;
+      </Swiper>
+    </>
+  );
+}

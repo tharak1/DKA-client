@@ -26,7 +26,6 @@ const CourseCard: React.FC<CourseCardProps> = ({ courseDetails }) => {
         if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birth.getDate())) {
             age--;
         }
-
         return age;
     }
 

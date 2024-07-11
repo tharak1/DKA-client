@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { GetUser } from '../redux/UserSlice';
 import { UserModel } from '../models/UserModel';
+import NotificationModal from './NotificationModal';
 interface CourseCardProps {
     courseDetails: CourseModel;
     userRegisteredCourseDetails?:MyCourseModal;
@@ -24,20 +25,66 @@ function isDateTimeInRange(startDate: string, startTime: string, endDate: string
 
 
 const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCourseDetails}) => {
+
+
+
+
+    function isValidURL(url: string): boolean {
+        const regex = new RegExp(
+            '^(https?:\\/\\/)?' + // protocol
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
+            '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+            '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+            '(\\#[-a-z\\d_]*)?$','i' // fragment locator
+        );
+        return !!regex.test(url);
+    }
+
+
     const [qpLoading,setQpLoading] = useState<boolean>(false);
     const [error,setError] = useState<string>("");
+
+    const [isOpen,setIsOpen] = useState<boolean>(false);
+  
+    const [notification,setNotification] = useState({
+        heading:"",
+        body:""
+    })
+
+    const open = () =>{
+        setIsOpen(true);
+    }
+
+    const close = () =>{
+        setIsOpen(false);
+    }
 
     const navigate = useNavigate();
     const user = useSelector(GetUser) as UserModel;
     const joinOnlineClass = async() =>{
         const onlineClass = await getDoc(doc(db,'onlineClass',courseDetails.courseName!));
-        window.open(onlineClass.data()!.classLink, '_blank');
+
+        if(onlineClass.data()){
+            if(isValidURL(onlineClass.data()!.classLink)){
+                window.open(onlineClass.data()!.classLink, '_blank');
+            }
+            else{
+                open();
+                setNotification({heading:"Online Class",body:"There is no class at the moment"})
+            }
+        }
+        else{
+            open();
+            setNotification({heading:"Online Class",body:"There is no class at the moment"})
+        }
+        
     }
 
     const writeExam = async()=>{
         setQpLoading(true);
         const queryans = await getDocs(query(collection(db,"Question-Paper"),where("course","==",courseDetails.courseName)));
-        let fetchedUser: QuestionPaper= {
+        let fetchedQP: QuestionPaper= {
             uploaded:false,
             editing:false,
             id:"", 
@@ -57,28 +104,35 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
         };
  
         queryans.forEach((doc) => {
-            fetchedUser = doc.data() as QuestionPaper;
+            fetchedQP = doc.data() as QuestionPaper;
         });
         setQpLoading(false);
 
         const encodedUserData = encodeURIComponent(JSON.stringify(user));
 
-        if(fetchedUser && isDateTimeInRange(fetchedUser.startDate,fetchedUser.startTime,fetchedUser.endDate,fetchedUser.endTime)){
-            window.open(`https://dka-exam-portal.vercel.app/write_exam?id=${fetchedUser.id}&user=${encodedUserData}`);
+        if(fetchedQP && isDateTimeInRange(fetchedQP.startDate,fetchedQP.startTime,fetchedQP.endDate,fetchedQP.endTime)){
+            window.open(`https://dka-exam-portal.vercel.app/write_exam?id=${fetchedQP.id}&user=${encodedUserData}`);
         }
-        else if(fetchedUser.id===''){
-            setError("Time")
+        else if(fetchedQP.id===''){
+            setError("No exam")
+            setNotification({heading:"No exam",body:"There is no exam in right now"});
+            open();
         }
         else{
-            setError("No Exam")
+            setError("Time");
+            setNotification({heading:"Time Error",body:`Exam Starts on : ${fetchedQP.startDate} ${fetchedQP.startTime} - ends on : ${fetchedQP.endDate} ${fetchedQP.endTime}`});
+            open();
         }
 
-        console.log(fetchedUser.id);
+        console.log(fetchedQP.id);
     }
 
     const handleViewMarks = () =>{
         navigate(`/my_performances?course=${courseDetails.id}`)
     }
+
+
+    
   return (
     <div className="max-w-sm bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
     <img className="w-full h-64 object-cover object-center" src={courseDetails.image} alt="Kuchipudi Dance"/>
@@ -105,10 +159,15 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
                 )
             }
         </div>
-        <div className="mt-4">
-            <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-xl hover:bg-blue-600">Renew Course </button>
-        </div>
+        {
+            new Date() >= new Date(userRegisteredCourseDetails?.endDate!) &&(
+                <div className="mt-4">
+                    <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-xl hover:bg-blue-600">Renew Course </button>
+                </div>
+            )
+        }
     </div>
+    <NotificationModal heading={notification.heading} body={notification.body} isOpen={isOpen} onClose={close} type='none'/>
 </div>
   )
 }
