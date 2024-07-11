@@ -125,8 +125,8 @@ const Courses: React.FC = () => {
           {courses.map((course, index) => (
             <div
               key={index}
-              className={`flex-shrink-0 relative h-80 w-40 rounded-[45px] bg-cover bg-center hover:w-96 transition-all duration-500 transform overflow-hidden shadow-lg ${
-                currentHoverIndex === index ? 'opacity-100 w-96' : ''
+              className={`flex-shrink-0 relative h-64 w-40 rounded-[45px] bg-cover bg-center hover:w-96 transition-all duration-500 transform overflow-hidden shadow-lg ${
+                currentHoverIndex === index ? 'opacity-100 w-80' : ''
               }`}
               style={{ backgroundImage: `url(${course.image})` }}
               onMouseEnter={() => handleCourseHover(index)}
