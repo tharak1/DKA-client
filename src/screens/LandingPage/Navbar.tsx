@@ -237,6 +237,7 @@ import { IoMdHome } from "react-icons/io";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 import { IoMdContact } from "react-icons/io";
+import { IoMdClose } from "react-icons/io";
 
 const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -299,10 +300,16 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <nav className={`z-20 fixed top-0 left-0 w-full flex justify-between py-4 px-8 transition-all duration-200 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
+      <nav className={`z-20 fixed top-0 left-0 w-full flex justify-between py-4 px-8 max-sm:pl-2 max-sm:pr-8 transition-all duration-200 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
         <div className="flex items-center justify-evenly">
           <div className="mr-2 flex justify-center items-center sm:hidden" onClick={toggleDrawer}>
-            <IoMenu size={28} />
+            {
+              viewDrawer ? (
+                <IoMdClose size={28}/>
+              ):(
+                <IoMenu size={28} />
+              )
+            }
           </div>
           <span className="text-3xl font-bold mr-4">DKA</span>
         </div>
