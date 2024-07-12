@@ -65,7 +65,7 @@ const Achievements = () => {
 
       </div>
 
-      <div className="z-10 flex items-center flex-col justify-center">
+      <div className="z-10 flex items-center flex-col justify-center max-sm:p-5">
         {items.map((item, index) => (
           <motion.div
             key={index}
@@ -80,7 +80,7 @@ const Achievements = () => {
             <img
               src={item.image}
               alt={`achievement-${index}`}
-              className="rounded-t-[12px] w-full h-[400px]"
+              className="rounded-t-[12px] w-full h-[350px]"
             />
             <p className="mt-4 text-center">{item.text}</p>
           </motion.div>

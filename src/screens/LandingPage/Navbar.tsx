@@ -300,7 +300,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <nav className={`z-20 fixed top-0 left-0 w-full flex justify-between py-4 px-8 max-sm:pl-2 max-sm:pr-8 transition-all duration-200 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
+      <nav className={`z-50 fixed top-0 left-0 w-full flex justify-between py-4 px-8 max-sm:pl-2 max-sm:pr-8 transition-all duration-200 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
         <div className="flex items-center justify-evenly">
           <div className="mr-2 flex justify-center items-center sm:hidden" onClick={toggleDrawer}>
             {
@@ -404,7 +404,9 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu */}
       {viewDrawer && (
   <div className='bg-slate-200 w-full transition duration-150 ease-in-out'>
-    <div className='w-3/5 h-screen sm:hidden z-10 bg-white fixed transition duration-150 ease-in-out'>
+    <div       className={`w-8/12 h-screen sm:hidden z-40 bg-white fixed transform transition-transform duration-300 ${
+        viewDrawer ? 'translate-x-0' : '-translate-x-full'
+      }`}>
       <ul className="space-y-2 pb-5 mt-20">
         <li>
           <Link to="/" className="flex items-center p-2 text-xl font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -419,7 +421,7 @@ const Navbar: React.FC = () => {
           </ScrollLink>
         </li>
         <li>
-          <button onClick={toggleDropDown} className="w-full flex items-center p-2 text-xl font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <button onClick={() =>{navigate('/course?category=all'); toggleDrawer()}} className="w-full flex items-center p-2 text-xl font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <MdLibraryBooks size={24} />
             <span className="ml-3">Courses</span>
           </button>
