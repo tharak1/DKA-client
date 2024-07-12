@@ -61,15 +61,15 @@ const CourseCard: React.FC<CourseCardProps> = ({ courseDetails }) => {
                             <p className="text-xl font-bold">Price : <span className="text-green-500">₹ {courseDetails.price} / month</span></p>
                         </div>
                         {user ? (
+                            ageLimitExceeded ? (
+                                <button>Age limit</button>
+                            ):
                             isUserRegistered ? (
-                                ageLimitExceeded ? (
-                                    <button>Age limit</button>
-                                ) : (
-                                    <button>Already Registered</button>
-                                )
+                                <button>Already Registered</button>
                             ) : (
                                 <PaymentBeforeModal course={courseDetails} />
                             )
+
                         ) : (
                             <button
                             className="mt-4 mb-8  rounded-md bg-blue-700 hover:bg-blue-500 px-6 py-3 font-medium text-white"

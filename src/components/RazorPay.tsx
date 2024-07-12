@@ -53,7 +53,7 @@ const RazorPay: React.FC<RazorPayProps> = ({ course, data, AnotherFunction }) =>
         amount: parseInt((parseInt(course.price!) * 100).toString()),
         currency: "INR",
         order_receipt: 'order_rcptid_' + course.id,
-        name: "sneek-shop",
+        name: `DKA - ${course.courseName}`,
         description: "for testing purpose",
         handler: async function (response: any) {
           const oneMonthAgo = new Date();
