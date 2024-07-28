@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { GetUser } from '../redux/UserSlice';
 import { UserModel } from '../models/UserModel';
 import NotificationModal from './NotificationModal';
+import RazorPayRenew from './RenewRazorPay';
 interface CourseCardProps {
     courseDetails: CourseModel;
     userRegisteredCourseDetails?:MyCourseModal;
@@ -162,7 +163,9 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
         {
             new Date() >= new Date(userRegisteredCourseDetails?.endDate!) &&(
                 <div className="mt-4">
-                    <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-xl hover:bg-blue-600">Renew Course </button>
+                    
+
+                    <RazorPayRenew course={courseDetails}/>
                 </div>
             )
         }

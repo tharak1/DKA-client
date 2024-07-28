@@ -30,4 +30,18 @@ interface MyCourseModal{
     endDate:string;
 }
 
-export type {CourseModel,PerformanceModel,MyCourseModal};
+interface CharityUploadModel{
+    description: string;
+    date: string;
+    image: string;
+    id?: string;
+}
+
+interface AchievementsUploadModel{
+    description: string;
+    date: string;
+    image: string;
+    id?: string;
+}
+
+export type {CourseModel,PerformanceModel,MyCourseModal,CharityUploadModel,AchievementsUploadModel};

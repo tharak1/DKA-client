@@ -1,9 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MdArrowForwardIos } from "react-icons/md";
 import { MdOutlineArrowBackIos } from "react-icons/md";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase_config";
+import { AchievementsUploadModel } from "../../models/CourseModel";
 
 const Achievements = () => {
+
+  const [achievements,setAchievements] = useState<AchievementsUploadModel[]>([]);
+
+
+  useEffect(()=>{
+    fetchAchievements();
+  },[]);
+
+
+  const fetchAchievements = async() => {
+    const querySnapshot = await getDocs(collection(db,"achievementsUpload"));
+    const courses: AchievementsUploadModel[] = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+    })) as AchievementsUploadModel[];
+
+    setAchievements(courses);
+
+  }
+
   const [positionIndexes, setPositionIndexes] = useState([0, 1, 2, 3, 4]);
 
   const handleNext = () => {
@@ -27,28 +50,7 @@ const Achievements = () => {
 
 
   const positions = ["center", "left1", "left", "right", "right1"];
-  const items = [
-    {
-      image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      text: "Achievement 1"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1521747116042-5a810fda9664?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      text: "Achievement 2"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1521747116042-5a810fda9664?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      text: "Achievement 3"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      text: "Achievement 4"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      text: "Achievement 5"
-    },
-  ];
+
   const imageVariants = {
     center: { x: "0%", scale: 1, zIndex: 5 },
     left1: { x: "-50%", scale: 0.7, zIndex: 3 },
@@ -66,7 +68,7 @@ const Achievements = () => {
       </div>
 
       <div className="z-10 flex items-center flex-col justify-center max-sm:p-5">
-        {items.map((item, index) => (
+        {achievements.map((item, index) => (
           <motion.div
             key={index}
             className="absolute flex flex-col items-center rounded-[12px] p-4 bg-white w-2/5 max-sm:w-full"
@@ -82,7 +84,7 @@ const Achievements = () => {
               alt={`achievement-${index}`}
               className="rounded-t-[12px] w-full h-[350px]"
             />
-            <p className="mt-4 text-center">{item.text}</p>
+            <p className="mt-4 text-center">{item.description}</p>
           </motion.div>
         ))}
       </div>

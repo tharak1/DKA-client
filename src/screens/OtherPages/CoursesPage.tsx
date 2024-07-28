@@ -81,6 +81,9 @@ import { db } from '../../firebase_config';
 import { CourseModel } from '../../models/CourseModel';
 import Navbar from '../LandingPage/Navbar';
 import CourseCard from '../../components/CourseCard';
+import { useSelector } from 'react-redux';
+import { GetUser } from '../../redux/UserSlice';
+import { UserModel } from '../../models/UserModel';
 
 const CoursesPage: React.FC = () => {
     const location = useLocation();
@@ -94,14 +97,33 @@ const CoursesPage: React.FC = () => {
         fetchCoursesByCategory();
     }, [location.search]);
 
+    const user = useSelector(GetUser) as UserModel;
+
     const fetchCoursesByCategory = async () => {
         setLoading(true);
         let q;
 
         if (category === 'all') {
-            q = query(collection(db, "courses"));
+            if(user){
+                let country = user.country === 'India' ? 'India' : 'other';
+                q = query(
+                    collection(db, "courses"),
+                    where("courseCountry", "in", [country, "all"])
+                );
+            }else{
+                q = query(collection(db, "courses") );
+            }   
         } else {
-            q = query(collection(db, "courses"), where("category", "==", category));
+            if (user) {
+                let country = user.country === 'India' ? 'India' : 'other';
+                q = query(
+                    collection(db, "courses"),
+                    where("courseCountry", "in", [country, "all"]),
+                    where("category", "==", category)
+                );
+            } else {
+                q = query(collection(db, "courses"), where("category", "==", category));
+            }
         }
 
         const querySnapshot = await getDocs(q);

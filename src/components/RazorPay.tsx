@@ -1,5 +1,5 @@
 import { CourseModel } from '../models/CourseModel';
-import { addDoc, arrayUnion, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, arrayUnion, collection, doc, getDoc, increment, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase_config';
 import React, { useEffect, useState } from 'react';
 import { GetUser, fetchUser } from '../redux/UserSlice';
@@ -93,6 +93,7 @@ const RazorPay: React.FC<RazorPayProps> = ({ course, data, AnotherFunction }) =>
             };
 
             await updateDoc(doc(db, 'students', user.id), { registeredCourses: arrayUnion(up) });
+            await updateDoc(doc(db, 'courses', course.id!), { coursesSold: increment(1) });
             const docSnap = await getDoc(doc(db, 'performances', course.id!));
             const performance = docSnap.data()!.performanceTemplate;
             await updateDoc(doc(db, 'performances', course.id!), { students: arrayUnion({ studentId: user.id, studentName: user.name, ...performance }) });
