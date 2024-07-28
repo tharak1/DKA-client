@@ -22,11 +22,14 @@ const PaymentBeforeModal: React.FC<PaymentModalProps> = ({ course }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
 
+
+
   const onClose = () => {
     setIsOpen(false);
   };
   const open = () => {
     setIsOpen(true);
+
   };
 
 

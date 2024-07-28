@@ -17,6 +17,7 @@ interface UserModel{
     registeredCourses:MyCourseModal[];
     email:string;
     country:string;
+    feedback?:string;
 }
 
 interface GuardianModel{

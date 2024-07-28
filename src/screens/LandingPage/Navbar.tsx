@@ -390,6 +390,9 @@ const Navbar: React.FC = () => {
                     <Link to="/my_profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My profile</Link>
                   </li>
                   <li>
+                    <Link to="/give_feedback" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Post parent feedback</Link>
+                  </li>
+                  <li>
                     <p className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" onClick={() => {
                       dispatch(clearUser());
                       navigate('/login');
