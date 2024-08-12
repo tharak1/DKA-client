@@ -28,7 +28,7 @@ const Layout: React.FC = () => {
         <div className="sm:py-10 "> {/* Add padding-y between components */}
           <Achievements />
         </div>
-        <div className="sm:py-10 "> {/* Add padding-y between components */}
+        <div className="py-12 "> {/* Add padding-y between components */}
           <CharityCarousel />
         </div>
         <div className="sm:py-10" id = "footer"> 
