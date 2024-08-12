@@ -25,13 +25,13 @@ const Layout: React.FC = () => {
         <div className="py-2"> {/* Add padding-y between components */}
           <Reviews />
         </div>
-        <div className="py-10 "> {/* Add padding-y between components */}
+        <div className="sm:py-10 "> {/* Add padding-y between components */}
           <Achievements />
         </div>
-        <div className="py-10 "> {/* Add padding-y between components */}
+        <div className="sm:py-10 "> {/* Add padding-y between components */}
           <CharityCarousel />
         </div>
-        <div className="py-10" id = "footer"> 
+        <div className="sm:py-10" id = "footer"> 
           <Footer />
         </div>
       </main>

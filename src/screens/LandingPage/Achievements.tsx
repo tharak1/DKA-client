@@ -67,11 +67,11 @@ const Achievements = () => {
 
       </div>
 
-      <div className="z-10 flex items-center flex-col justify-center max-sm:p-5">
+      <div className="z-10 flex items-center flex-col justify-center max-sm:p-5 ">
         {achievements.map((item, index) => (
           <motion.div
             key={index}
-            className="absolute flex flex-col items-center rounded-[12px] p-4 bg-white w-2/5 max-sm:w-full"
+            className="absolute flex flex-col items-center rounded-[12px] p-4 bg-white w-2/5 max-sm:w-full "
             initial="center"
             animate={positions[positionIndexes[index]]}
             variants={imageVariants}
@@ -82,7 +82,7 @@ const Achievements = () => {
             <img
               src={item.image}
               alt={`achievement-${index}`}
-              className="rounded-t-[12px] w-full h-[350px]"
+              className="rounded-t-[12px] w-full h-[350px] max-sm:h-[325px] "
             />
             <p className="mt-4 text-center">{item.description}</p>
           </motion.div>

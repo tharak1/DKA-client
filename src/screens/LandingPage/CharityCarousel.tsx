@@ -49,7 +49,7 @@ export default function CharityCarousel() {
   charity.map((charity:CharityUploadModel)=>(
     <SwiperSlide className='text-center flex flex-col justify-end items-end w-full h-full px-10 max-sm:px-12' key={charity.id}>
     <div className='w-full h-full flex justify-center items-center max-sm:flex-col-reverse max-sm:justify-start'>
-      <div className='w-1/2 h-full  p-20 flex flex-col justify-center items-center max-sm:p-0 max-sm:w-full max-sm:justify-start'>
+      <div className='w-1/2 h-full  p-20 flex flex-col justify-center items-center  max-sm:p-0 max-sm:w-full max-sm:justify-start'>
         <p>{charity.description}</p>
         <button className="bg-[#b9ddf5] text-black bg-gradient-to-t from-[#F5E6F0] to-[#DDF2F9] text-lg font-bold py-4 px-5 mt-5 cursor-pointer block " onClick={() => { navigate("/charityform") }}>Donate Now</button>
       </div>

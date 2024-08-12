@@ -27,6 +27,7 @@ function isDateTimeInRange(startDate: string, startTime: string, endDate: string
 
 const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCourseDetails}) => {
 
+    const curUser = useSelector(GetUser) as UserModel;
 
 
 
@@ -111,8 +112,24 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
 
         const encodedUserData = encodeURIComponent(JSON.stringify(user));
 
-        if(fetchedQP && isDateTimeInRange(fetchedQP.startDate,fetchedQP.startTime,fetchedQP.endDate,fetchedQP.endTime)){
-            window.open(`https://dka-exam-portal.vercel.app/write_exam?id=${fetchedQP.id}&user=${encodedUserData}`);
+        const resultsTemp = await getDoc(doc(db,"Online-exam-results",fetchedQP.id!));
+
+        const studentsArr = resultsTemp.data()!.students;
+
+        const isStudentPresent = studentsArr.some((x: any) => x.studentId === curUser.id);
+
+
+
+
+
+        if(fetchedQP && isDateTimeInRange(fetchedQP.startDate,fetchedQP.startTime,fetchedQP.endDate,fetchedQP.endTime) && !isStudentPresent){
+            // window.open(`https://dka-exam-portal.vercel.app/write_exam?id=${fetchedQP.id}&user=${encodedUserData}`);
+            window.open(`http://localhost:5175/write_exam?id=${fetchedQP.id}&user=${encodedUserData}`);
+        }
+        else if(isStudentPresent ){
+            setError("Exam Attempted")
+            setNotification({heading:"Exam Already Given",body:"You already attemped the exam you can only attempt once. Contact admin for further information."});
+            open();
         }
         else if(fetchedQP.id===''){
             setError("No exam")
@@ -163,8 +180,6 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
         {
             new Date() >= new Date(userRegisteredCourseDetails?.endDate!) &&(
                 <div className="mt-4">
-                    
-
                     <RazorPayRenew course={courseDetails}/>
                 </div>
             )
