@@ -8,8 +8,22 @@ import Reviews from './Reviews';
 import Achievements from './Achievements';
 import Footer from './Footer';
 import CharityCarousel from './CharityCarousel';
+// import { useAppDispatch } from '../../redux/Store';
+// import { fetchUser, GetUser } from '../../redux/UserSlice';
+// import { useSelector } from 'react-redux';
 
 const Layout: React.FC = () => {
+  // const dispatch = useAppDispatch();
+
+  // const user = useSelector(GetUser) ;
+
+  // useEffect(()=>{
+  //   if(user){
+  //     dispatch(fetchUser(user.id))
+  //   }
+  // },[])
+
+
   return (
     <div className='bg-[#F7F8FB]'>
       <Navbar />

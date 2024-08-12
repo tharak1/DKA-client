@@ -248,7 +248,7 @@ const Navbar: React.FC = () => {
   const [viewDrawer, setViewDrawer] = useState(false);
 
   const [courses, setCourses] = useState<string[]>([]);
-  const user: UserModel = useSelector(GetUser);
+  const user = useSelector(GetUser) as UserModel;
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
