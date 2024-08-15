@@ -24,12 +24,12 @@ const Home: React.FC = () => {
           Mauris a nisl nec nisl ullamcorper efficitur.
         </p>
 
-<div className="max-sm:w-full max-sm:flex max-sm:justify-center max-sm:items-center max-sm:mt-10">
-<button className="relative bg-gradient-to-r from-pink-500 to-green-500 text-white py-2 px-4 rounded z-5 max-sm:text-xl" onClick={()=>{navigate("/course?category=all")}} >
-          Explore Now
-          <span className="absolute left-0 bottom-0 w-full h-0.5 "></span>
-        </button>
-</div>
+        <div className="max-sm:w-full max-sm:flex max-sm:justify-center max-sm:items-center max-sm:mt-10">
+          <button className="relative bg-gradient-to-r from-pink-500 to-green-500 text-white py-2 px-4 rounded z-5 max-sm:text-xl" onClick={()=>{navigate("/course?category=all")}} >
+            Explore Now
+            <span className="absolute left-0 bottom-0 w-full h-0.5 "></span>
+          </button>
+        </div>
 
 
       </div>

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
 import { GuardianModel } from '../models/UserModel';
 import { useSelector } from 'react-redux';
@@ -16,9 +16,9 @@ interface UsersModalProps {
 }
 
 const UsersModal:React.FC<UsersModalProps> = ({isOpen,onClose,guardian}) => {
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-    const Loading = useSelector(loading);
+    // const dispatch = useAppDispatch();
+    // const navigate = useNavigate();
+    // const Loading = useSelector(loading);
 
     const [newLoading,setNewLoading] = useState<boolean>(false);
 
@@ -29,14 +29,56 @@ const UsersModal:React.FC<UsersModalProps> = ({isOpen,onClose,guardian}) => {
         return prefix + numberString;
     };
 
-    const Loginevent = (id:string) =>{
-        dispatch(fetchUser(id));
-        if(Loading === 'succeeded'){
-            navigate('/');
-        }
-    }
+    // const Loginevent = async(id:string) =>{
+    //     await dispatch(fetchUser(id));
 
-    const addUser = async() =>{
+    //     if(Loading === 'succeeded'){
+    //         navigate('/');
+    //     }
+    //     else if(Loading === 'no_data'){
+    //         navigate(`/form?studentId=${id}`);
+    //     }
+
+    // }
+
+    // const addUser = async() =>{
+    //     setNewLoading(true);
+    //     const arr = guardian.registeredID;
+    //     const querySnapshot = await getDocs(collection(db, 'students'));
+    //     const noofusers = querySnapshot.size;
+
+    //     const studentId = generateSpecificID(noofusers);
+    //     arr.push(studentId);
+
+
+    //     await setDoc(doc(db, "Guardian",guardian.GuardianId),{registeredID:arr}, { merge: true });
+    //     await setDoc(doc(db, "students", studentId), {GuardianId : guardian.GuardianId,studentId:studentId});
+
+    //     setNewLoading(false);
+    //     navigate(`/form?studentId=${studentId}`);
+    // }
+
+
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const Loading = useSelector(loading);
+
+    const [currentStudentId, setCurrentStudentId] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (Loading === 'succeeded' && currentStudentId) {
+            navigate('/');
+        } else if (Loading === 'no_data' && currentStudentId) {
+            navigate(`/form?studentId=${currentStudentId}`);
+        }
+    }, [Loading, currentStudentId, navigate]);
+
+    const Loginevent = async (id: string) => {
+        setCurrentStudentId(id);
+        await dispatch(fetchUser(id));
+    };
+
+    const addUser = async () => {
         setNewLoading(true);
         const arr = guardian.registeredID;
         const querySnapshot = await getDocs(collection(db, 'students'));
@@ -45,13 +87,12 @@ const UsersModal:React.FC<UsersModalProps> = ({isOpen,onClose,guardian}) => {
         const studentId = generateSpecificID(noofusers);
         arr.push(studentId);
 
-
-        await setDoc(doc(db, "Guardian",guardian.GuardianId),{registeredID:arr}, { merge: true });
-        await setDoc(doc(db, "students", studentId), {GuardianId : guardian.GuardianId,studentId:studentId});
+        await setDoc(doc(db, "Guardian", guardian.GuardianId), { registeredID: arr }, { merge: true });
+        await setDoc(doc(db, "students", studentId), { GuardianId: guardian.GuardianId, studentId: studentId });
 
         setNewLoading(false);
-        navigate(`/form?studentId=${studentId}`);
-    }
+        Loginevent(studentId);
+    };
 
   return (
     <Transition appear show={isOpen} as={Fragment}>

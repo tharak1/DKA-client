@@ -19,16 +19,21 @@ import { IoMdClose } from "react-icons/io";
 const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const user = useSelector(GetUser) as UserModel;
+
   const [scrolled, setScrolled] = useState(false);
   const [viewDropdown, setViewDropdown] = useState(false);
   const [viewMenu, setViewMenu] = useState(false);
   const [viewDrawer, setViewDrawer] = useState(false);
-
   const [courses, setCourses] = useState<string[]>([]);
-  const user = useSelector(GetUser) as UserModel;
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+
+
+  console.log('====================================');
+  console.log(user);
+  console.log('====================================');
 
   useEffect(() => {
     fetchCategories();
@@ -228,11 +233,10 @@ const Navbar: React.FC = () => {
           )}
         </li>
         <li>
-        <ScrollLink to="footer" smooth={true}className="flex items-center p-2 text-xl font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <ScrollLink to="footer" smooth={true}className="flex items-center p-2 text-xl font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <IoMdContact size={24} />
             <span className="flex-1 ml-3 whitespace-nowrap">Contact Us</span>
-            </ScrollLink>
-
+          </ScrollLink>
         </li>
       </ul>
     </div>

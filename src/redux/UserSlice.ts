@@ -7,7 +7,7 @@ import { db } from '../firebase_config';
 
 interface UserState {
     User: UserModel | null;
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    status: 'idle' | 'loading' | 'succeeded' | 'failed'|'no_data';
     error: string | null;
 }
 
@@ -18,15 +18,52 @@ const initialState: UserState = {
 };
 
 export const fetchUser = createAsyncThunk(
+    // 'user/fetchUser',
+    // async(id:string)=>{
+    //     const user = (await getDoc(doc(db,'students',id))).data() as UserModel;
+    //     return user;
+    // }
+
     'user/fetchUser',
-    async(id:string)=>{
-        const user = (await getDoc(doc(db,'students',id))).data() as UserModel;
-        return user;
+    async (id: string) => {
+        const userDoc = await getDoc(doc(db, 'students', id));
+        const userData = userDoc.data();
+        
+        if (!userData) {
+            throw new Error("User not found");
+        }
+        
+        const user: UserModel = {
+            id: userData.id, 
+            name: userData.name,
+            fatherName: userData.fatherName,
+            motherName: userData.motherName,
+            dob: userData.dob,
+            gender: userData.gender,
+            address: userData.address,
+            contactNo: userData.contactNo,
+            schoolName: userData.schoolName,
+            class: userData.class,
+            hearAbout: userData.hearAbout,
+            password: userData.password,
+            imageUrl: userData.imageUrl,
+            registeredCourses: userData.registeredCourses,
+            email: userData.email,
+            country: userData.country,
+            feedback: userData.feedback
+        };
+
+        console.log('====================================');
+        console.log(userData);
+        console.log('====================================');
+
+        const hasData = Object.values(user).some(value => value !== undefined && value !== null && value !== '');
+        return hasData ? user : null;
     }
 )
 
 const userSlice = createSlice({
-    name: 'user',
+    name: 'user', 
     initialState,
     reducers: {
         setUser: (state, action: PayloadAction<UserModel>) => {
@@ -46,11 +83,19 @@ const userSlice = createSlice({
         .addCase(fetchUser.pending, (state) => {
             state.status = 'loading';
           })
-          .addCase(fetchUser.fulfilled, (state, action: PayloadAction<UserModel>) => {
-            state.User = action.payload;
-            state.status = 'succeeded';
-            state.error = null;
-          })
+          .addCase(fetchUser.fulfilled, (state, action: PayloadAction<UserModel | null>) => {
+            if (action.payload) {
+
+                state.User = action.payload;
+                state.status = 'succeeded';
+                state.error = null;
+            } else {
+
+                state.User = null;
+                state.status = 'no_data'; 
+                state.error = 'User not found or no data available';
+            }
+        })
           .addCase(fetchUser.rejected, (state, action) => {
             state.status = 'failed';
             state.error = action.payload as string;
