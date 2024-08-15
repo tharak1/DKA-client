@@ -25,7 +25,7 @@ const UsersModal:React.FC<UsersModalProps> = ({isOpen,onClose,guardian}) => {
     const generateSpecificID = (numberOfUsers:number) => {
         const paddingLength = 5;
         const prefix = "DKA";
-        const numberString = numberOfUsers.toString().padStart(paddingLength, '0');
+        const numberString = (numberOfUsers+1).toString().padStart(paddingLength, '0');
         return prefix + numberString;
     };
 

@@ -7,7 +7,7 @@ import drawerReducer from './DrawerSlice';
 
 const persistConfig = {
     key:"clientRoot",
-    version:1,
+    version:2,
     storage,
 }
 
