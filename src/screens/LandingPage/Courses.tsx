@@ -118,9 +118,10 @@ const Courses: React.FC = () => {
 
   return (
     <div className='w-full justify-center items-center flex flex-col'>
+      <h1 className="font-poppins text-4xl font-bold bg-gradient-to-r from-pink-500 to-green-500 bg-clip-text text-transparent">Our Courses</h1>
     
     <div className='w-full justify-center items-start flex '>
-      <div className='relative w-3/4 max-sm:w-full overflow-hidden bg-white'>
+      <div className='relative w-3/4 max-sm:w-full overflow-hidden bg-[#F7F8FB]'>
         <div className='max-sm:p-4 flex flex-row space-x-4 w-full overflow-x-auto' ref={scrollContainerRef} style={{ overflowX: 'hidden' }}>
           {courses.map((course, index) => (
             <div

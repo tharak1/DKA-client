@@ -32,7 +32,6 @@ const Layout: React.FC = () => {
         <div className="py-10 max-sm:py-0" id="about"> {/* Add padding-y between components */}
           <About />
         </div>
-        
         <div className="py-4" > {/* Add padding-y between components */}
           <Courses />
         </div>

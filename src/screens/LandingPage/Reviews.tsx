@@ -158,9 +158,9 @@ const Reviews: React.FC = () => {
 
   return (
     <section id="dummy" className="pl-4 py-4 md:p-10 border-y-2">
-      <div className="max-w-7xl mx-auto flex flex-wrap">
+      <div className="max-w-7xl max-sm:max-w-full mx-auto flex flex-wrap">
         {/* Left Section */}
-        <div className="w-full md:w-1/2 pr-4 mb-10 md:mb-0 md:mt-4">
+        <div className="w-full md:w-1/2 pr-4 mb-10 md:mb-0 md:mt-4 ">
           <h1 className="text-4xl md:text-5xl/[3.7rem] font-bold mb-6 text-center md:text-left">
             <span className="font-poppins bg-gradient-to-r from-pink-500 to-green-500 bg-clip-text text-transparent">
               What our <br /> Customers say
@@ -179,19 +179,42 @@ const Reviews: React.FC = () => {
         </div>
 
         {/* Right Section */}
-        <div className="w-full md:w-1/2 mx-auto">
-          <div className="pr-6 overflow-y-scroll scrollbar" style={{ maxHeight: '470px' }}>
+        <div className="w-full sm:w-1/2 max-sm:w-full mx-auto">
+          <div className="pr-6 overflow-y-scroll scrollbar max-sm:w-full" style={{ maxHeight: '470px' }}>
             {reviews.length > 0 ? (
               reviews.map((review: ReviewModel, index: any) => (
+                // <div
+                //   key={index}
+                //   className={`flex flex-row mb-9 ml-[70px]   ${hoveredIndex === index ? 'transform -transform duration-500 hover:translate-x-[-70px] ' : ''}`}
+                //   onMouseEnter={() => handleMouseEnter(index)}
+                //   onMouseLeave={handleMouseLeave}
+                // >
+                //   <div className={`w-3  ${hoveredIndex === index ? 'bg-[#CC6C92]' : 'bg-[#CACACA]'}`}></div>
+                //   <div className="max-sm:w-full flex items-center justify-center p-3 border-t-2 border-b-2 border-r-2 border-[#CACACA] w-full">
+                //     <div >
+                //       <img
+                //         src={review.profileImg}
+                //         alt={review.name}
+                //         className="h-16 w-16 rounded-full mr-5"
+                //       />
+                //     </div>
+                //     <div className="flex-1">
+                //       <h3 className="relative text-xl font-bold mb-2">{review.name}
+                //         <span className={`absolute top-0 right-0 mr-4 text-5xl font-normal ${hoveredIndex === index ? 'text-[#7FC673]' : 'text-[#CACACA]'}`}>&rdquo;</span>
+                //       </h3>
+                //       <p className="text-gray-600">{review.description}</p>
+                //     </div>
+                //   </div>
+                // </div>
                 <div
                   key={index}
-                  className={`flex flex-row mb-9 ml-[70px]  ${hoveredIndex === index ? 'transform -transform duration-500 hover:translate-x-[-70px] ' : ''}`}
+                  className={`flex flex-row mb-9 ml-[70px] max-sm:ml-0 ${hoveredIndex === index && 'transform duration-500 hover:translate-x-[-70px]'} max-sm:transform-none`}
                   onMouseEnter={() => handleMouseEnter(index)}
                   onMouseLeave={handleMouseLeave}
                 >
                   <div className={`w-3 ${hoveredIndex === index ? 'bg-[#CC6C92]' : 'bg-[#CACACA]'}`}></div>
-                  <div className="flex items-center justify-center p-3 border-t-2 border-b-2 border-r-2 border-[#CACACA] w-full">
-                    <div >
+                  <div className="max-sm:w-full flex items-center justify-center p-3 border-t-2 border-b-2 border-r-2 border-[#CACACA] w-full">
+                    <div>
                       <img
                         src={review.profileImg}
                         alt={review.name}
@@ -199,13 +222,15 @@ const Reviews: React.FC = () => {
                       />
                     </div>
                     <div className="flex-1">
-                      <h3 className="relative text-xl font-bold mb-2">{review.name}
+                      <h3 className="relative text-xl font-bold mb-2">
+                        {review.name}
                         <span className={`absolute top-0 right-0 mr-4 text-5xl font-normal ${hoveredIndex === index ? 'text-[#7FC673]' : 'text-[#CACACA]'}`}>&rdquo;</span>
                       </h3>
                       <p className="text-gray-600">{review.description}</p>
                     </div>
                   </div>
                 </div>
+
               ))
             ) : (
               <div className="text-center text-xl font-semibold text-gray-600">

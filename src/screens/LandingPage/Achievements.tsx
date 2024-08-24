@@ -59,7 +59,11 @@ const Achievements = () => {
     right1: { x: "50%", scale: 0.7, zIndex: 3 },
   };
   return (
+    <>
+          <h1 className="font-poppins text-4xl font-bold bg-gradient-to-r from-pink-500 to-green-500 bg-clip-text text-transparent w-full text-center text-wrap p-4">Our Achivements</h1>
+
     <div className="relative h-[600px] justify-center items-center flex">
+      
       <div className="absolute top-0 right-0 bg-[#FB7FB0] w-1/2 h-1/2">
 
       </div>
@@ -71,7 +75,7 @@ const Achievements = () => {
         {achievements.map((item, index) => (
           <motion.div
             key={index}
-            className="absolute flex flex-col items-center rounded-[12px] p-4 bg-white w-2/5 max-sm:w-full "
+            className="absolute flex flex-col items-center rounded-[12px] p-4 max-sm:p-2 bg-white w-2/5 max-sm:w-10/12 "
             initial="center"
             animate={positions[positionIndexes[index]]}
             variants={imageVariants}
@@ -82,7 +86,7 @@ const Achievements = () => {
             <img
               src={item.image}
               alt={`achievement-${index}`}
-              className="rounded-t-[12px] w-full h-[350px] max-sm:h-[325px] "
+              className="rounded-t-[12px] object-contain max-h-[350px] max-sm:max-h-[325px]"
             />
             <p className="mt-4 text-center">{item.description}</p>
           </motion.div>
@@ -103,6 +107,8 @@ const Achievements = () => {
           </button>
         </div>
     </div>
+
+    </>
   );
 };
 

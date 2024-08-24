@@ -7,7 +7,7 @@ interface Props {
 
 const Footer: React.FC<Props> = () => {
   return (
-    <div className="flex flex-wrap justify-between space-y-4 p-10 m-1">
+    <div className="flex flex-wrap justify-between space-y-4 p-10 max-sm:p-4 m-1">
       {/* First part */}
       <div className="w-full md:w-auto md:flex-grow md:mr-8">
         <h1 className="text-5xl font-bold bg-gradient-to-r from-pink-500  to-green-600 bg-clip-text text-transparent">Get Connected <br></br>To Us.</h1>
