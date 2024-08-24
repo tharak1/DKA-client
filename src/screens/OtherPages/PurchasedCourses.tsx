@@ -36,7 +36,7 @@ const PurchasedCourses:React.FC = () => {
     <>
         <Navbar/>
         <div className=' w-full bg-slate-100 gap-3'>
-            <div className='pt-20 px-20 max-sm:px-4 flex flex-col'>
+            <div className='pt-20 px-20 max-sm:px-4 flex flex-col h-screen overflow-auto'>
                 <div className=' w-full flex flex-col items-start mb-4'>
                     <h1 className='text-2xl font-bold '>MY PURCHASES</h1>
                     <p>Here are your details about your purchases</p>
@@ -59,8 +59,8 @@ const PurchasedCourses:React.FC = () => {
                             {
                                 orders.map((obj)=>(
                                     <div className="flex flex-row h-full bg-white shadow-lg rounded-lg overflow-hidden" key={obj.orderId}>
-                                        <div className="w-1/2 p-6">
-                                            <img className='h-full w-full object-cover rounded-lg' src={obj.courseImageUrl} alt="Kuchipudi Dance"/>
+                                        <div className="w-1/2 h-full flex justify-center items-center p-6">
+                                            <img className='h-full max-sm:h-1/2 w-full object-fit rounded-lg' src={obj.courseImageUrl} alt="Kuchipudi Dance"/>
                                         </div>
                                         <div className="p-6 w-full">
                                             <h2 className="text-xl font-bold mb-2">{obj.courseName}</h2>
@@ -81,7 +81,6 @@ const PurchasedCourses:React.FC = () => {
                                                 <span className="text-sm font-semibold">Payment ID: </span>
                                                 <span className="text-sm font-thin">{obj.paymentId}</span>
                                             </div>
-
                                         </div>
                                     </div>
                                 ))
@@ -89,8 +88,6 @@ const PurchasedCourses:React.FC = () => {
                         </div>
                     )
                 }
-
-
             </div>
         </div>
     </>

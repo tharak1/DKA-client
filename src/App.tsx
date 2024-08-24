@@ -100,10 +100,11 @@ const App: React.FC = () => {
           <Route path="/signups" element={<Signup />} />
           <Route path="/form" element={<Form />} />
           <Route path="/charityform" element={<CharityForm />} />
+          <Route path="/course" element={<CoursesPage />} />
+
 
           {user ? (
             <>
-              <Route path="/course" element={<CoursesPage />} />
               <Route path="/reviewform" element={<ReviewForm />} />
               <Route path="/my_purchases" element={<PurchasedCourses />} />
               <Route path="/my_courses" element={<MyCoursesPage />} />

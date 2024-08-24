@@ -124,7 +124,7 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
 
         if(fetchedQP && isDateTimeInRange(fetchedQP.startDate,fetchedQP.startTime,fetchedQP.endDate,fetchedQP.endTime) && !isStudentPresent){
             // window.open(`https://dka-exam-portal.vercel.app/write_exam?id=${fetchedQP.id}&user=${encodedUserData}`);
-            window.open(`http://localhost:5175/write_exam?id=${fetchedQP.id}&user=${encodedUserData}`);
+            window.open(`http://localhost:5174/write_exam?id=${fetchedQP.id}&user=${encodedUserData}`);
         }
         else if(isStudentPresent ){
             setError("Exam Attempted")
