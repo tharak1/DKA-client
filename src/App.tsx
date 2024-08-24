@@ -102,20 +102,20 @@ const App: React.FC = () => {
           <Route path="/charityform" element={<CharityForm />} />
           <Route path="/course" element={<CoursesPage />} />
 
-
-          {user ? (
-            <>
-              <Route path="/reviewform" element={<ReviewForm />} />
-              <Route path="/my_purchases" element={<PurchasedCourses />} />
-              <Route path="/my_courses" element={<MyCoursesPage />} />
-              <Route path='/my_performances' element={<MyPerformancePage />} />
-              <Route path='/my_profile' element={<ProfilePage />} />
-              <Route path='/give_feedback' element={<GiveFeedback />} />
-            </>
-          ) : (
-            // Redirect any route to "/" if user is not logged in
-            <Route path="*" element={<Navigate to="/" replace />} />
-          )}
+          {
+            user ? (
+              <>
+                <Route path="/reviewform" element={<ReviewForm />} />
+                <Route path="/my_purchases" element={<PurchasedCourses />} />
+                <Route path="/my_courses" element={<MyCoursesPage />} />
+                <Route path='/my_performances' element={<MyPerformancePage />} />
+                <Route path='/my_profile' element={<ProfilePage />} />
+                <Route path='/give_feedback' element={<GiveFeedback />} />
+              </>
+            ) : (
+              <Route path="*" element={<Navigate to="/" replace />} />
+            )
+          }
         </Routes>
       </Suspense>
     </Router>
