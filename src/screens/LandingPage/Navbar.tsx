@@ -19,15 +19,7 @@ import { IoMdClose } from "react-icons/io";
 const Navbar: React.FC = () => {
 
 
-  useEffect(() => {
-    setTimeout(() => {
-      // Simulate some DOM access
-      const element = document.getElementById('some-element');
-      if (element) {
-        const rect = element.getBoundingClientRect();
-      }
-    }, 1000); // 1 second delay
-  }, []);
+
 
 
   const dispatch = useAppDispatch();
