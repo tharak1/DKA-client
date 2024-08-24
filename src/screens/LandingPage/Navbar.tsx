@@ -15,13 +15,9 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 import { IoMdContact } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
+import DKA from "../../assets/DKA.jpg";
 
 const Navbar: React.FC = () => {
-
-
-
-
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useSelector(GetUser) as UserModel;
@@ -98,7 +94,9 @@ const Navbar: React.FC = () => {
               )
             }
           </div>
-          <span className="text-3xl font-bold mr-4">DKA</span>
+          <span className="text-3xl font-bold mr-4">
+            <img src={DKA} alt="" className='h-14 w-20' />
+          </span>
         </div>
         <div className="flex items-center space-x-4 ml-auto max-sm:hidden">
           <NavLink
