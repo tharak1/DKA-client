@@ -137,7 +137,7 @@ const Navbar: React.FC = () => {
             </div>
           </div>
 
-          <ScrollLink to="contact" smooth={true} duration={500} className="flex items-center font-poppins text-base font-thin text-gray-500 cursor-pointer hover:text-black" activeClass="font-bold text-black text-lg">
+          <ScrollLink to="footer" smooth={true} duration={500} className="flex items-center font-poppins text-base font-thin text-gray-500 cursor-pointer hover:text-black" activeClass="font-bold text-black text-lg">
             CONTACT US
           </ScrollLink>
         </div>
