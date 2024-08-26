@@ -29,8 +29,6 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
 
     const curUser = useSelector(GetUser) as UserModel;
 
-
-
     function isValidURL(url: string): boolean {
         const regex = new RegExp(
             '^(https?:\\/\\/)?' + // protocol
@@ -42,7 +40,6 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
         );
         return !!regex.test(url);
     }
-
 
     const [qpLoading,setQpLoading] = useState<boolean>(false);
     const [error,setError] = useState<string>("");
@@ -80,7 +77,6 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
             open();
             setNotification({heading:"Online Class",body:"There is no class at the moment"})
         }
-        
     }
 
     const writeExam = async()=>{
@@ -117,10 +113,6 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
         const studentsArr = resultsTemp.data()!.students;
 
         const isStudentPresent = studentsArr.some((x: any) => x.studentId === curUser.id);
-
-
-
-
 
         if(fetchedQP && isDateTimeInRange(fetchedQP.startDate,fetchedQP.startTime,fetchedQP.endDate,fetchedQP.endTime) && !isStudentPresent){
             window.open(`https://dka-exam-portal.vercel.app/write_exam?id=${fetchedQP.id}&user=${encodedUserData}`);
