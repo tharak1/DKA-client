@@ -15,7 +15,7 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 import { IoMdContact } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
-import DKA from "../../assets/DKA.jpg";
+import DKA from "../../assets/DKA.png";
 // HIIIIIII
 const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();
