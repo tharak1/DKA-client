@@ -226,7 +226,7 @@ const Courses: React.FC = () => {
   const getCourses = async () => {
     const coursesSnapshot = await getDocs(collection(db, "courses"));
     const coursesData = coursesSnapshot.docs.map((doc) => doc.data() as CourseModel);
-    setCourses([...coursesData, ...coursesData, ...coursesData, ...coursesData, ...coursesData, ...coursesData]);
+    setCourses([...coursesData]);
   };
 
   const handleScroll = () => {
