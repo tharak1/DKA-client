@@ -192,11 +192,14 @@ const Courses: React.FC = () => {
   const [currentHoverIndex, setCurrentHoverIndex] = useState<number>(-1);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const [showLeftButton, setShowLeftButton] = useState(false);
-  const [showRightButton, setShowRightButton] = useState(false);
+  const [_showLeftButton, setShowLeftButton] = useState(false);
+  const [_showRightButton, setShowRightButton] = useState(false);
 
   useEffect(() => {
     getCourses();
+    startAutoHoverEffect();
+    handleScroll();
+
     if (scrollContainerRef.current) {
       scrollContainerRef.current.addEventListener('scroll', handleScroll);
     }
@@ -209,13 +212,10 @@ const Courses: React.FC = () => {
       }
     };
   }, []);
-
-
-  
-
   useEffect(() => {
-    handleScroll();
     startAutoHoverEffect();
+    handleScroll();
+
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
@@ -335,7 +335,7 @@ const Courses: React.FC = () => {
                   onMouseEnter={() => handleCourseHover(index)}
                 >
                   <div className='absolute inset-0 bg-gradient-to-t from-black opacity-20 rounded-[45px]'></div>
-                  <div className='absolute inset-0 flex items-end justify-end p-4 '>
+                  <div className='absolute inset-0 flex items-end justify-end p-4 text-end'>
                     <span
                       className={`text-white m-2 text-xl font-bold transition-transform duration-500 ${
                         currentHoverIndex === index ? 'transform -rotate-90' : ''
@@ -353,23 +353,23 @@ const Courses: React.FC = () => {
       </div>
 
       <div className='w-full flex justify-center items-center space-x-10 mt-5'>
-        {showLeftButton && (
+        
           <button
             className='hover:bg-gray-200 px-2 py-2 rounded-full transition-opacity duration-300 hover:opacity-100'
             onClick={handleScrollLeft}
           >
             <MdOutlineArrowBackIos size={20} />
           </button>
-        )}
+        
 
-        {showRightButton && (
+        
           <button
             className='hover:bg-gray-200 px-2 py-2 rounded-full transition-opacity duration-300 hover:opacity-100'
             onClick={handleScrollRight}
           >
             <MdArrowForwardIos size={20} />
           </button>
-        )}
+        
       </div>
     </div>
   );
