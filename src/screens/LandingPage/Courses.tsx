@@ -525,14 +525,14 @@ const Courses: React.FC = () => {
               {courses.map((course, index) => (
                 <div
                   key={index}
-                  className={`flex-shrink-0 relative h-64 w-40 max-sm:w-full rounded-[45px] bg-cover bg-center hover:w-96 transition-all duration-500 transform overflow-hidden shadow-lg ${
+                  className={`flex-shrink-0 relative h-64 w-40 max-sm:w-full rounded-[45px] bg-cover bg-center hover:w-96 transition-all duration-500 transform overflow-hidden shadow-lg text-end ${
                     currentHoverIndex === index ? 'opacity-100 w-80 max-sm:w-full ' : ''
                   }`}
                   style={{ backgroundImage: `url(${course.image!})` }}
                   onMouseEnter={() => handleCourseHover(index)}
                 >
                   <div className='absolute inset-0 bg-gradient-to-t from-black opacity-20 rounded-[45px]'></div>
-                  <div className='absolute inset-0 flex items-end justify-center p-4 '>
+                  <div className='absolute inset-0 flex items-end justify-end p-4'>
                     <span
                       className={`text-white m-2 text-xl font-bold transition-transform duration-500 ${
                         currentHoverIndex === index ? 'transform -rotate-90' : ''
