@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const Home: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <header id="home" className="w-full h-screen max-sm:h-[85vh] pt-20 max-sm:pt-28 bg-rainbow bg-no-repeat bg-auto max-sm:bg-cover bg-right relative text-left  max-sm:px-4">
+    <header id="home" className="w-full h-screen max-sm:h-[85vh] pt-20 max-sm:pt-28 bg-rainbow bg-no-repeat bg-auto max-sm:bg-cover bg-right relative text-left  max-sm:px-4 max-sm:bg-s-rainbow">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl md:text-5xl font-bold mb-6">
           <span className="font-poppins  bg-gradient-to-r from-pink-500 to-green-500 bg-clip-text text-transparent">
