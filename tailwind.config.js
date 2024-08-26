@@ -10,7 +10,8 @@ export default {
         'form-pattern': "url('/src/assets/formbackground.svg')",
         'signup-pattern': "url('/src/assets/signup.svg')",
         's':"url('/src/assets/Group 35.svg')",
-        'rainbow':"url('/src/assets/Group 1 (1).png')",
+        'rainbow':"url('/src/assets/rainbow.svg')",
+
         'small-form':"url('/src/assets/Group 43.svg')",
         'anotherOne':"url('/src/assets/anotherSignUp.svg')",
 
@@ -26,3 +27,4 @@ export default {
   darkMode:'class'
 }
 
+// 'rainbow':"url('/src/assets/Group 1 (1).png')",
