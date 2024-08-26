@@ -166,7 +166,7 @@ const Reviews: React.FC = () => {
               What our <br /> Customers say
             </span>
           </h1>
-          <p className="text-xl md:text-2xl font-semibold text-center md:text-left md:w-2/3">
+          <p className="text-xl md:text-2xl font-semibold text-center md:text-left md:w-2/3 max-sm:font-normal">
             Hear from our satisfied customers who have experienced our excellent services.
           </p>
           { user !=null ?user.registeredCourses.length > 0  ? (

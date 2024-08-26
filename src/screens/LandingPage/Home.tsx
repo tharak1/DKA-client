@@ -11,10 +11,10 @@ const Home: React.FC = () => {
             Divya Kala Academy
           </span>
         </h1>
-        <h2 className="text-2xl md:text-4xl font-semibold mb-8 whitespace-pre-line">
+        <h2 className="text-2xl md:text-4xl font-semibold mb-8 whitespace-pre-line max-sm:font-normal max-sm:text-lg ">
           {`It's a Big World\nOut There, Go\nExplore.`}
         </h2>
-        <p className="mb-6 text-base font-semibold p-0">
+        <p className="mb-6 text-base font-semibold p-0 max-sm:font-normal">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br />
           Proin vel ultricies nulla, a fermentum ex. <br />
           Integer vitae orci sit amet erat vehicula euismod. <br />
