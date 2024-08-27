@@ -62,6 +62,42 @@ const CoursesPage: React.FC = () => {
         setCourses(courses);
         setLoading(false);
     }
+
+    const [searchInput, setSearchInput] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('');
+
+    const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchInput(e.target.value);
+      }
+    
+      const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedCategory(e.target.value);
+      }
+    
+      const filteredCourses = courses.filter((course: CourseModel) => {
+        return (
+          (selectedCategory === '' || course.category === selectedCategory) &&
+          (searchInput === '' || course.courseName!.toLowerCase().includes(searchInput.toLowerCase()))
+        );
+      });
+
+      const [categories, setCategories] = useState<string[]>([]);
+
+      useEffect(() => {
+        fetchCategories();
+      }, []);
+    
+      const fetchCategories = async () => {
+        try {
+          const querySnapshot = await getDocs(collection(db, "categories"));
+          const data = querySnapshot.docs.map((doc) => doc.data().name);
+          setCategories(data);
+        } catch (error) {
+          console.error("Error fetching categories: ", error);
+        }
+      };
+
+
     
 
     return (
@@ -72,6 +108,64 @@ const CoursesPage: React.FC = () => {
                     <h1 className='text-2xl font-bold'>{category === 'all' ? "Cultural Activities" :category}</h1>
                     <p>Here are your details about the {category === 'all' ? "Cultural Activities" :category}</p>
                 </div>
+
+                <div className='col-span-1 max-sm:row-span-2 mb-5 flex flex-row max-sm:flex-col max-sm:p-3'>
+                    <form className="col-span-1 ">
+                    <div className="flex">
+                        <label htmlFor="search-category" className="sr-only">Select Category</label>
+                        <select
+                        id="search-category"
+                        className=" inline-flex items-center py-2.5 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-2 focus:outline-none"
+                        value={selectedCategory}
+                        onChange={handleCategoryChange}
+                        >
+                            {category === "all"?                       
+                                <>
+                                <option value="">All categories</option>
+                                {categories.map((obj: string) => (
+                                    <option value={obj} key={obj}>{obj}</option>
+                                ))}
+                            </>:<option value="">{category}</option>
+                            }
+                        </select>
+                        
+                        <div className={`relative w-96`}>
+                        <input
+                            type="search"
+                            id="search-dropdown"
+                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-r-lg border border-gray-300 placeholder-gray-400 focus:placeholder-gray-600"
+                            placeholder="Search courses..."
+                            value={searchInput}
+                            onChange={handleSearchInputChange}
+                            required
+                        />
+                        <button
+                            type="submit"
+                            className="absolute top-0 right-0 bottom-0 p-3 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                        >
+                            <svg
+                            className="w-4 h-4"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 20 20"
+                            >
+                            <path
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                            />
+                            </svg>
+                            <span className="sr-only">Search</span>
+                        </button>
+                        </div>
+                        
+                    </div>
+                    </form>
+                </div>
+
                 {loading ? (
                     <div className='flex w-full justify-center items-center'>
                         <svg aria-hidden="true" className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +179,7 @@ const CoursesPage: React.FC = () => {
                     </div>
                 ) : (
                     <div className='w-full flex flex-col space-y-5'>
-                        {courses.map((obj) => (
+                        {filteredCourses.map((obj) => (
                             <CourseCard courseDetails={obj} key={obj.id} />
                         ))}
                     </div>

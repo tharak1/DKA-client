@@ -14,7 +14,7 @@ const Home: React.FC = () => {
         <h2 className="text-2xl md:text-4xl font-semibold mb-8 sm:mb-14  whitespace-pre-line">
           {`It's a Big World\nOut There, Go\nExplore.`}
         </h2>
-        <p className="mb-6 sm:mb-12 text-base sm:text-lg font-semibold p-0">
+        <p className="mb-6 sm:mb-12 text-base sm:text-lg font-semibold max-sm:font-normal p-0">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br />
           Proin vel ultricies nulla, a fermentum ex. <br />
           Integer vitae orci sit amet erat vehicula euismod. <br />
