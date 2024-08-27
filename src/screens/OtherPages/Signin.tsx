@@ -138,6 +138,7 @@ const SignIn: React.FC = () => {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-200"
               onChange={(e) => setPassword(e.target.value)}
             />
+            <p className='text-red-500'>{error}</p>
             <a href="#" className="text-blue-500 hover:underline block mb-4 text-center">Forgot your Password?</a>
             <button onClick={signIn} className="px-4 py-2 bg-blue-500 text-white  rounded-3xl font-semibold hover:bg-blue-600 ">
               {
