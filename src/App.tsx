@@ -78,7 +78,7 @@ const Layout = React.lazy(() => import('./screens/LandingPage/Layout'));
 const CoursesPage = React.lazy(() => import('./screens/OtherPages/CoursesPage'));
 const SignIn = React.lazy(() => import('./screens/OtherPages/Signin'));
 const Form = React.lazy(() => import('./screens/OtherPages/Form'));
-const LoginPage = React.lazy(() => import('./screens/OtherPages/LoginPage'));
+// const LoginPage = React.lazy(() => import('./screens/OtherPages/LoginPage'));
 const SignUpPage = React.lazy(() => import('./screens/OtherPages/SignUpPage'));
 
 
@@ -94,7 +94,7 @@ const App: React.FC = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Layout />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<SignIn />} />
           <Route path="/join-now" element={<SignIn />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signups" element={<Signup />} />
