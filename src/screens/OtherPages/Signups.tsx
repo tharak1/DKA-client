@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate,  } from 'react-router-dom';
 import { auth, db, googleProvider } from '../../firebase_config';
 import { addDoc, collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
 import UsersModal from '../../components/UsersModal';
