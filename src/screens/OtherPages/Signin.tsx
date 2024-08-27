@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { FaFacebook, FaGoogle } from "react-icons/fa";
-import { CiLinkedin } from "react-icons/ci";
+import { FaGoogle } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { auth, db, googleProvider } from '../../firebase_config';
 import { signInWithPopup } from 'firebase/auth';
@@ -34,7 +33,9 @@ const SignIn: React.FC = () => {
     const numberString = (numberOfUsers + 1).toString().padStart(paddingLength, '0');
     return prefix + numberString;
   };
-  const signIn = async () => {
+  const signIn = async (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
     setLoading(true);
 
     // Check if email or password is empty
@@ -112,20 +113,14 @@ const SignIn: React.FC = () => {
     <div className="flex h-screen flex-col md:flex-row">
       <div className="w-full md:w-1/2 max-sm:mt-10 bg-white flex items-center justify-center">
         <div className="text-center px-8 md:px-16 lg:px-24">
-          <h1 className="text-3xl font-bold mb-4">Create Account</h1>
+          <h1 className="text-3xl font-bold mb-4">Login to your Account</h1>
           <div className="flex justify-center space-x-4 mb-6">
-            <button className="bg-gray-200 p-3 rounded-full">
-              <FaFacebook />
-            </button>
             <button className="bg-gray-200 p-3 rounded-full">
               <FaGoogle onClick={signInWithGoogle} />
             </button>
-            <button className="bg-gray-200 p-3 rounded-full">
-              <CiLinkedin />
-            </button>
           </div>
           <p className="mb-6">or use your DKA account:</p>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={signIn}>
             <input
               // type="email"
               placeholder="DKA ID"
@@ -139,8 +134,8 @@ const SignIn: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <p className='text-red-500'>{error}</p>
-            <a href="#" className="text-blue-500 hover:underline block mb-4 text-center">Forgot your Password?</a>
-            <button onClick={signIn} className="px-4 py-2 bg-blue-500 text-white  rounded-3xl font-semibold hover:bg-blue-600 ">
+
+            <button type='submit' className="px-4 py-2 bg-blue-500 text-white  rounded-3xl font-semibold hover:bg-blue-600 ">
               {
                 loading ?
                   <svg aria-hidden="true" className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
