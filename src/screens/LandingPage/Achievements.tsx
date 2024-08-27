@@ -64,10 +64,10 @@ const Achievements = () => {
 
     <div className="relative h-[600px] justify-center items-center flex">
       
-      <div className="absolute top-0 right-0 bg-[#FB7FB0] w-1/2 h-1/2">
+      <div className="absolute top-0 right-0 bg-[#FB7FB0] w-1/2 h-1/2 max-sm:hidden">
 
       </div>
-      <div className="absolute bottom-0 left-0 bg-[#5FDEF1] w-1/2 h-1/2">
+      <div className="absolute bottom-0 left-0 bg-[#5FDEF1] w-1/2 h-1/2 max-sm:hidden ">
 
       </div>
 

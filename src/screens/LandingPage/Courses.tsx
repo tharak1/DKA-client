@@ -186,6 +186,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase_config';
 import { MdArrowForwardIos } from "react-icons/md";
 import { MdOutlineArrowBackIos } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 const Courses: React.FC = () => {
   const [courses, setCourses] = useState<CourseModel[]>([]);
@@ -311,9 +312,12 @@ const Courses: React.FC = () => {
     startAutoHoverEffect(); // Restart auto hover timer
   };
 
+  const navigate = useNavigate();
+
   return (
-    <div className='w-full justify-center items-center flex flex-col'>
+    <div className='w-full justify-center items-center flex flex-col' onClick={()=>{navigate("/course?category=all")}}>
       <h1 className="font-poppins text-4xl font-bold bg-gradient-to-r from-pink-500 to-green-500 bg-clip-text text-transparent">Our Courses</h1>
+      
     
       <div className='w-full justify-center items-start flex '>
         <div className='relative w-3/4 max-sm:w-full overflow-hidden bg-[#F7F8FB]'>
