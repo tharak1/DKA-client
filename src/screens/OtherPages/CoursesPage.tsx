@@ -98,7 +98,7 @@ const CoursesPage: React.FC = () => {
       };
 
 
-    
+     
 
     return (
         <>
