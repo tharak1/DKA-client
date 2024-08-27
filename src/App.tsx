@@ -72,6 +72,7 @@ import GiveFeedback from './screens/OtherPages/GiveFeedback';
 import { useSelector } from 'react-redux';
 import { GetUser } from './redux/UserSlice';
 import { UserModel } from './models/UserModel';
+import ResultsPage from './screens/OtherPages/ResultsPage';
 
 // Lazy load components
 const Layout = React.lazy(() => import('./screens/LandingPage/Layout'));
@@ -101,6 +102,8 @@ const App: React.FC = () => {
           <Route path="/form" element={<Form />} />
           <Route path="/charityform" element={<CharityForm />} />
           <Route path="/course" element={<CoursesPage />} />
+          <Route path="/results" element={<ResultsPage />} />
+          
 
           {
             user ? (
