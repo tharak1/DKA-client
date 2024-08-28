@@ -17,12 +17,12 @@ const Footer: React.FC<Props> = () => {
       {/* Second part */}
 
       {/* Third part */}
-      <div className="w-full md:w-auto md:flex-grow md:mr-8">
+      {/* <div className="w-full md:w-auto md:flex-grow md:mr-8">
         <h2 className="text-2xl font-bold mb-2">Company</h2>
         <p className="text-gray-600 text-xl max-sm:text-lg">About</p>
         <p className="text-gray-600 text-xl max-sm:text-lg">Privacy </p>
         <p className="text-gray-600 text-xl max-sm:text-lg">Policy Terms</p>
-      </div>
+      </div> */}
 
       {/* Fourth part */}
       <div className="w-full md:w-auto md:flex-grow">
