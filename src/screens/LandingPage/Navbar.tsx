@@ -33,7 +33,11 @@ const Navbar: React.FC = () => {
 
 
   useEffect(() => {
+    if(!user){
+      navigate('/');
+    }
     fetchCategories();
+
   }, []);
 
   const fetchCategories = async () => {

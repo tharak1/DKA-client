@@ -31,10 +31,10 @@ const Achievements = () => {
 
   const imageVariants: Record<string, { x: string; scale: number; zIndex: number; opacity: number }> = {
     center: { x: "0%", scale: 1, zIndex: 5, opacity: 1 },
-    left1: { x: "-40%", scale: 0.8, zIndex: 4, opacity: 0.7 },
-    left: { x: "-80%", scale: 0.6, zIndex: 3, opacity: 0.5 },
-    right: { x: "80%", scale: 0.6, zIndex: 3, opacity: 0.5 },
-    right1: { x: "40%", scale: 0.8, zIndex: 4, opacity: 0.7 },
+    left1: { x: "-40%", scale: 0.8, zIndex: 4, opacity: 1 },
+    left: { x: "-80%", scale: 0.6, zIndex: 3, opacity: 1 },
+    right: { x: "80%", scale: 0.6, zIndex: 3, opacity: 1 },
+    right1: { x: "40%", scale: 0.8, zIndex: 4, opacity: 1 },
   };
 
   const handleNext = () => {
