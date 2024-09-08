@@ -315,7 +315,7 @@ const Courses: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='w-full justify-center items-center flex flex-col' onClick={()=>{navigate("/course?category=all")}}>
+    <div className='w-full justify-center items-center flex flex-col' >
       <h1 className="font-poppins text-4xl font-bold bg-gradient-to-r from-pink-500 to-green-500 bg-clip-text text-transparent">Our Courses</h1>
       
     
@@ -330,6 +330,7 @@ const Courses: React.FC = () => {
               {courses.map((course, index) => (
 
                 <div
+                onClick={()=>{navigate("/course?category=all")}}
                   key={index}
                   className={`flex-shrink-0 relative h-64 w-40 max-sm:w-full rounded-[45px] bg-cover bg-center hover:w-96 transition-all duration-500 transform overflow-hidden shadow-lg ${
                     currentHoverIndex === index ? 'opacity-100 w-80 max-sm:w-full ' : ''

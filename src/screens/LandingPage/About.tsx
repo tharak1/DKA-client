@@ -22,19 +22,16 @@ const About: React.FC = () => {
         </div>
 
         <p className="mt-10 px-5 max-sm:px-0 md:px-20 text-xl max-sm:text-sm font-poppins">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. <br />
-          Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. <br />
-          Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. <br />
-          Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. <br />
-          Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam.
+        Our Academy has been started for more than 10 yrs of academics and cultural activities. The academy is running successfully with a vision to impact quality, cultural and value based education to children to improve them in building their future by motivating them to participate in various activities like stage performances, Competition among children, with good teaching facility to reach their aims and goals successfully for a bright future.
+        DKA is focussing towards progress of the students not only in academies. But also in the extra-curricular activities to build there mental and Physical strength which a almost necessary in the present circumstances. our various activities like music, dance, Abacus, academies, Guitar, Piano, etc to name a few has been running successfully from the past few years where the Students. Overall development is made by our excellent faculty focussing on their future careers.
         </p>
       </section>
       <section className="px-10 max-sm:px-5 py-20 max-sm:py-5 max-sm:text-sm  bg-[#C7DDFF] w-full">
         <div className="max-w-7xl mx-auto flex flex-wrap">
-          <div className="w-full md:w-1/2 pr-4 mb-10 md:mb-0">
+          {/* <div className="w-full md:w-1/2 pr-4 mb-10 md:mb-0">
             <p className="mb-4 text-black font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <p className="text-black font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          </div>
+          </div> */}
           <div className="w-full md:w-1/2 grid grid-cols-2 grid-rows-3 gap-4">
             <div className="p-4 flex flex-col items-center justify-center text-center" ref={refStudents}>
               {inViewStudents && <CountUp className="text-5xl font-bold" end={550} duration={3} />}
