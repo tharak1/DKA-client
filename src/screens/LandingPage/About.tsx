@@ -1,6 +1,13 @@
-import React from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
+import { db } from '../../firebase_config';
+
+interface text {
+  quote:string;
+  aboutUs:string;
+}
 
 const About: React.FC = () => {
   // Set up the IntersectionObserver hooks
@@ -10,6 +17,31 @@ const About: React.FC = () => {
   const [refExperience, inViewExperience] = useInView({ triggerOnce: true });
   const [refPassPercentage, inViewPassPercentage] = useInView({ triggerOnce: true });
   const [refNationals, inViewNationals] = useInView({ triggerOnce: true });
+
+
+  const [data,setData] = useState<text>({
+    quote:'',
+    aboutUs:''
+});
+
+useEffect(()=>{
+    getData();
+},[]);
+
+const getData = async()=>{
+    try {
+        const querySnapshot = await getDocs(collection(db, 'aboutUs'));
+        if (!querySnapshot.empty) {
+          const docData = querySnapshot.docs[0]; // Assuming you only have one document
+
+          setData(docData.data() as text); // Set the data in state
+        }
+      } catch (error) {
+        console.error("Error fetching aboutUs data:", error);
+      } finally {
+
+      }
+}
 
   return (
     <div id="about">
@@ -22,8 +54,7 @@ const About: React.FC = () => {
         </div>
 
         <p className="mt-10 px-5 max-sm:px-0 md:px-20 text-xl max-sm:text-sm font-poppins">
-        Divya kala academy has been started for more than 10 yrs of academics and cultural activities. The academy is running successfully with a vision to impact quality, cultural and value based education to children to improve them in building their future by motivating them to participate in various activities like stage performances, Competition among children, with good teaching facility to reach their aims and goals successfully for a bright future.
-        DKA is focussing towards progress of the students not only in academies. But also in the extra-curricular activities to build there mental and Physical strength which a almost necessary in the present circumstances. our various activities like music, dance, Abacus, academies, Guitar, Piano, etc to name a few has been running successfully from the past few years where the Students. Overall development is made by our excellent faculty focussing on their future careers.
+{data.aboutUs}
         </p>
       </section>
       <section className="px-10 max-sm:px-5 py-20 max-sm:py-5 max-sm:text-sm  bg-[#C7DDFF] w-full">

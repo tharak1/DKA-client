@@ -1,8 +1,41 @@
-import React from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { db } from '../../firebase_config';
+
+interface text {
+  quote:string;
+  aboutUs:string;
+}
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+
+
+  const [data,setData] = useState<text>({
+    quote:'',
+    aboutUs:''
+});
+
+useEffect(()=>{
+    getData();
+},[]);
+
+const getData = async()=>{
+    try {
+        const querySnapshot = await getDocs(collection(db, 'aboutUs'));
+        if (!querySnapshot.empty) {
+          const docData = querySnapshot.docs[0]; // Assuming you only have one document
+
+          setData(docData.data() as text); // Set the data in state
+        }
+      } catch (error) {
+        console.error("Error fetching aboutUs data:", error);
+      } finally {
+
+      }
+}
+
   return (
     <header id="home" className="w-full h-screen max-sm:h-[85vh] pt-20 max-sm:pt-28 bg-rainbow bg-no-repeat bg-auto max-sm:bg-cover bg-right relative text-left  max-sm:px-4 max-sm:bg-s-rainbow">
       <div className="max-w-7xl mx-auto">
@@ -14,8 +47,8 @@ const Home: React.FC = () => {
         <h2 className="text-2xl md:text-4xl font-semibold mb-8 sm:mb-14  whitespace-pre-line">
           {`It's a Big World\nOut There, Go\nExplore.`}
         </h2>
-        <p className="mb-6 sm:mb-12 text-base sm:text-lg font-semibold max-sm:font-normal p-0">
-          
+        <p className="mb-6 sm:mb-12 text-base sm:text-lg font-semibold max-sm:font-normal p-0 w-1/2 max-sm:w-full">
+          {data.quote}
         </p>
 
         <div className="max-sm:w-full max-sm:flex max-sm:justify-center max-sm:items-center max-sm:mt-10">
