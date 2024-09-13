@@ -53,11 +53,11 @@ export default function CharityCarousel() {
     <div className='w-full h-full flex justify-center items-center max-sm:flex-col-reverse max-sm:justify-start'>
       <div className='w-1/2 h-full  p-20 flex flex-col justify-center items-center  max-sm:p-0 max-sm:w-full max-sm:justify-start max-sm:mt-10'>
         <p>{charity.description}</p>
-        <button className="bg-[#b9ddf5] text-black bg-gradient-to-t from-[#F5E6F0] to-[#DDF2F9] text-lg font-bold py-4 px-5 mt-5 cursor-pointer block " onClick={() => { navigate("/charityform") }}>Donate Now</button>
+        <button className="bg-[#b9ddf5] text-black bg-gradient-to-t from-[#F5E6F0] to-[#DDF2F9] text-lg font-bold py-4 px-5 max-sm:py-2  mt-5 cursor-pointer block " onClick={() => { navigate("/charityform") }}>Donate Now</button>
       </div>
-      <div className='w-1/2 h-full flex justify-end relative max-sm:w-full'>
+      <div className='w-1/2 h-full flex justify-end relative max-sm:w-full max-sm:h-1/2'>
         <div className='w-1/2 h-full bg-[#BFF7FF] max-sm:hidden'></div>
-        <div className='w-full max-sm:h-9/12 h-full absolute px-24 py-14 max-sm:px-0 max-sm:py-0'>
+        <div className='w-full max-sm:h-9/12 h-full absolute px-24 py-14  max-sm:px-0 max-sm:py-0'>
           <img src={charity.image} alt="" className='w-full h-full object-contain'/>
         </div>
       </div>
