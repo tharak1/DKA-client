@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase_config';
 
 interface text {
+  smallQuote:string;
   quote:string;
   aboutUs:string;
+  statsText:string;
 }
 
 const Home: React.FC = () => {
@@ -13,8 +15,10 @@ const Home: React.FC = () => {
 
 
   const [data,setData] = useState<text>({
+    smallQuote:'',
     quote:'',
-    aboutUs:''
+    aboutUs:'',
+    statsText:''
 });
 
 useEffect(()=>{
@@ -45,7 +49,7 @@ const getData = async()=>{
           </span>
         </h1>
         <h2 className="text-2xl md:text-4xl font-semibold mb-8 sm:mb-14  whitespace-pre-line">
-          {`It's a Big World\nOut There, Go\nExplore.`}
+          {data.smallQuote}
         </h2>
         <p className="mb-6 sm:mb-12 text-base sm:text-lg font-semibold max-sm:font-normal p-0 w-1/2 max-sm:w-full">
           {data.quote}

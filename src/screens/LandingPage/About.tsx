@@ -5,8 +5,10 @@ import { useInView } from 'react-intersection-observer';
 import { db } from '../../firebase_config';
 
 interface text {
+  smallQuote:string;
   quote:string;
   aboutUs:string;
+  statsText:string;
 }
 
 const About: React.FC = () => {
@@ -20,8 +22,10 @@ const About: React.FC = () => {
 
 
   const [data,setData] = useState<text>({
+    smallQuote:'',
     quote:'',
-    aboutUs:''
+    aboutUs:'',
+    statsText:''
 });
 
 useEffect(()=>{
@@ -61,8 +65,7 @@ const getData = async()=>{
         <div className="max-w-7xl mx-auto flex flex-wrap justify-center">
           
           <div className="w-full md:w-1/2 pr-4 mb-10 md:mb-0">
-            <p className="mb-4 text-black font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p className="text-black font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p className="mb-4 text-black font-bold">{data.statsText}</p>
           </div>
 
           <div className="w-full md:w-1/2 grid grid-cols-2 grid-rows-3 gap-4">
