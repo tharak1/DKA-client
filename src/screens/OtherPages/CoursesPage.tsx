@@ -53,15 +53,36 @@ const CoursesPage: React.FC = () => {
             }
         }
 
+        // const querySnapshot = await getDocs(q);
+        // const courses: CourseModel[] = querySnapshot.docs.map((doc) => ({
+        //     id: doc.id,
+        //     ...doc.data(),
+        // })) as CourseModel[];
+
+        // courses.sort((a: CourseModel, b: CourseModel) => a.courseName!.localeCompare(b.courseName!));
+
+        // setCourses(courses);
+        // console.log(courses);
+
         const querySnapshot = await getDocs(q);
         const courses: CourseModel[] = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
         })) as CourseModel[];
 
-        setCourses(courses);
-        setLoading(false);
+        // Ensure courseName is always a string and case-insensitive sorting
+        const sortedCourses = courses.sort((a: CourseModel, b: CourseModel) => 
+            a.courseName!.toLowerCase().localeCompare(b.courseName!.toLowerCase())
+          );
+
+        console.log(sortedCourses);
+
+
+        setCourses(courses);    
+        setLoading(false);    
     }
+
+
 
     const [searchInput, setSearchInput] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -74,12 +95,23 @@ const CoursesPage: React.FC = () => {
         setSelectedCategory(e.target.value);
       }
     
-      const filteredCourses = courses.filter((course: CourseModel) => {
-        return (
-          (selectedCategory === '' || course.category === selectedCategory) &&
-          (searchInput === '' || course.courseName!.toLowerCase().includes(searchInput.toLowerCase()))
-        );
-      });
+    //   const filteredCourses = courses.filter((course: CourseModel) => {
+    //     return (
+    //       (selectedCategory === '' || course.category === selectedCategory) &&
+    //       (searchInput === '' || course.courseName!.toLowerCase().includes(searchInput.toLowerCase()))
+    //     );
+    //   });\
+
+
+
+    let filteredCourses = courses
+  .filter((course: CourseModel) => {
+    return (
+      (selectedCategory === '' || course.category === selectedCategory) &&
+      (searchInput === '' || course.courseName!.toLowerCase().includes(searchInput.toLowerCase()))
+    );
+  })
+
 
       const [categories, setCategories] = useState<string[]>([]);
 

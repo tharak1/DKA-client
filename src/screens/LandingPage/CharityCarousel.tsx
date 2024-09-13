@@ -57,7 +57,7 @@ export default function CharityCarousel() {
       </div>
       <div className='w-1/2 h-full flex justify-end relative max-sm:w-full'>
         <div className='w-1/2 h-full bg-[#BFF7FF] max-sm:hidden'></div>
-        <div className='w-full h-full absolute px-24 py-14 max-sm:px-0 max-sm:py-0'>
+        <div className='w-full max-sm:h-9/12 h-full absolute px-24 py-14 max-sm:px-0 max-sm:py-0'>
           <img src={charity.image} alt="" className='w-full h-full object-contain'/>
         </div>
       </div>
