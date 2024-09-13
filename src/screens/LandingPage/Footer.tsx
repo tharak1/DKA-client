@@ -11,7 +11,7 @@ const Footer: React.FC<Props> = () => {
       {/* First part */}
       <div className="w-full md:w-auto md:flex-grow md:mr-8">
         <h1 className="text-5xl font-bold bg-gradient-to-r from-pink-500  to-green-600 bg-clip-text text-transparent">Get Connected <br></br>To Us.</h1>
-        <p className="text-gray-600 text-2xl mt-5 max-sm:font-normal max-sm:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed libero <br></br>sit amet justo luctus auctor.Lorem ipsum<br></br> dolor sit amet, consectetur adipiscing elit. Duis sed libero <br></br>sit amet justo luctus auctor.</p>
+        {/* <p className="text-gray-600 text-2xl mt-5 max-sm:font-normal max-sm:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed libero <br></br>sit amet justo luctus auctor.Lorem ipsum<br></br> dolor sit amet, consectetur adipiscing elit. Duis sed libero <br></br>sit amet justo luctus auctor.</p> */}
       </div>
 
       {/* Second part */}
@@ -30,7 +30,7 @@ const Footer: React.FC<Props> = () => {
         <div className="flex flex-col space-y-2 text-gray-600">
           <div className="flex items-center space-x-2">
             <FaWhatsapp />
-            <span className='text-xl max-sm:text-lg'>+91 79898 33031</span>
+            <span className='text-xl max-sm:text-lg'>+91 90101 95454</span>
           </div>
           <div className="flex items-center space-x-2">
             <FaEnvelope />
@@ -40,10 +40,23 @@ const Footer: React.FC<Props> = () => {
             <FaLinkedin />
             <span className='text-xl max-sm:text-lg'>Linkedin</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <FaInstagram />
-            <span className='text-xl max-sm:text-lg'>Instagram</span>
-          </div>
+          {/* <a href="https://www.instagram.com/divya_kala_academy?igsh=MW1wcmRhMmJuanZpbA==">
+            <div className="flex items-center space-x-2">
+              <FaInstagram />
+              <span className='text-xl max-sm:text-lg'>Instagram</span>
+            </div>
+          </a> */}
+          <a 
+  href="https://www.instagram.com/divya_kala_academy?igsh=MW1wcmRhMmJuanZpbA==" 
+  target="_blank" 
+  rel="noopener noreferrer"
+>
+  <div className="flex items-center space-x-2">
+    <FaInstagram />
+    <span className='text-xl max-sm:text-lg'>Instagram</span>
+  </div>
+</a>
+
           <div className="flex items-center space-x-2">
             <FaTwitter />
             <span className='text-xl max-sm:text-lg'>Twitter</span>
