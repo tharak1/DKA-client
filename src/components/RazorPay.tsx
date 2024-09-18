@@ -126,7 +126,7 @@ const RazorPay: React.FC<RazorPayProps> = ({ course, data, AnotherFunction }) =>
   };
 
   const handlePayment = () => {
-    if (!data.selectedSession || !data.selectedClassType || !data.selectedBranchType) {
+    if ( !data.selectedClassType || !data.selectedBranchType) {
       setHasError(true);
     } else {
       setHasError(false);
