@@ -107,7 +107,7 @@ const PaymentBeforeModal: React.FC<PaymentModalProps> = ({ course }) => {
                       <p>Class Session:</p>
                       {course.sessions!.map((obj1) => (
                         <div key={obj1} className="flex items-center">
-                          <input
+                          {/* <input
                             type="radio"
                             name={`sessions-${course.id}`}
                             id={`session-${obj1}`}
@@ -115,7 +115,7 @@ const PaymentBeforeModal: React.FC<PaymentModalProps> = ({ course }) => {
                             checked={obj.selectedSession === obj1}
                             onChange={() => setObj({ ...obj, selectedSession: obj1 })}
                             className="mr-2"
-                          />
+                          /> */}
                           <label htmlFor={`session-${obj}`} className="dark:text-white">{obj1}</label>
                         </div>
                       ))}

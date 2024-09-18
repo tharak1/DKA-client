@@ -33,11 +33,7 @@ const Navbar: React.FC = () => {
 
 
   useEffect(() => {
-    if(!user){
-      navigate('/');
-    }
     fetchCategories();
-
   }, []);
 
   const fetchCategories = async () => {
@@ -124,13 +120,13 @@ const Navbar: React.FC = () => {
               <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                 {courses.map((course, index) => (
                   <li key={index}>
-                    <Link
-                      to={`/course?category=${course}`}
+                    <a
+                      href={`/course?category=${course}`}
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-black "
                       onClick={() => setViewDropdown(false)}
                     >
                       {course}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -223,8 +219,8 @@ const Navbar: React.FC = () => {
             <ul className='mt-2 space-y-2 pl-8'>
               {courses.map((course, index) => (
                 <li key={index}>
-                  <a
-                    href={`/course?category=${course}`}
+                  <Link
+                    to={`/course?category=${course}`}
                     className="block p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                     onClick={() => {
                       setViewDropdown(false);
@@ -232,7 +228,7 @@ const Navbar: React.FC = () => {
                     }}
                   >
                     {course}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

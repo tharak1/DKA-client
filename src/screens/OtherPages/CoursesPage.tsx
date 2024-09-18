@@ -25,12 +25,14 @@ const CoursesPage: React.FC = () => {
 
     const user = useSelector(GetUser) as UserModel;
 
+    console.log(user);
+    
     const fetchCoursesByCategory = async () => {
         setLoading(true);
         let q;
 
         if (category === 'all') {
-            if(user){
+            if(user && user.country){
                 let country = user.country === 'India' ? 'India' : 'other';
                 q = query(
                     collection(db, "courses"),
@@ -40,7 +42,7 @@ const CoursesPage: React.FC = () => {
                 q = query(collection(db, "courses") );
             }   
         } else {
-            if (user) {
+            if (user && user.country) {
                 let country = user.country === 'India' ? 'India' : 'other';
                 q = query(
                     collection(db, "courses"),
@@ -49,20 +51,8 @@ const CoursesPage: React.FC = () => {
                 );
             } else {
                 q = query(collection(db, "courses"), where("category", "==", category));
-
             }
         }
-
-        // const querySnapshot = await getDocs(q);
-        // const courses: CourseModel[] = querySnapshot.docs.map((doc) => ({
-        //     id: doc.id,
-        //     ...doc.data(),
-        // })) as CourseModel[];
-
-        // courses.sort((a: CourseModel, b: CourseModel) => a.courseName!.localeCompare(b.courseName!));
-
-        // setCourses(courses);
-        // console.log(courses);
 
         const querySnapshot = await getDocs(q);
         const courses: CourseModel[] = querySnapshot.docs.map((doc) => ({
@@ -70,13 +60,11 @@ const CoursesPage: React.FC = () => {
             ...doc.data(),
         })) as CourseModel[];
 
-        // Ensure courseName is always a string and case-insensitive sorting
         const sortedCourses = courses.sort((a: CourseModel, b: CourseModel) => 
             a.courseName!.toLowerCase().localeCompare(b.courseName!.toLowerCase())
-          );
+        );
 
         console.log(sortedCourses);
-
 
         setCourses(courses);    
         setLoading(false);    
@@ -89,21 +77,12 @@ const CoursesPage: React.FC = () => {
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchInput(e.target.value);
-      }
+    }
     
-      const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedCategory(e.target.value);
-      }
+    const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategory(e.target.value);
+    }
     
-    //   const filteredCourses = courses.filter((course: CourseModel) => {
-    //     return (
-    //       (selectedCategory === '' || course.category === selectedCategory) &&
-    //       (searchInput === '' || course.courseName!.toLowerCase().includes(searchInput.toLowerCase()))
-    //     );
-    //   });\
-
-
-
     let filteredCourses = courses
   .filter((course: CourseModel) => {
     return (
@@ -113,21 +92,21 @@ const CoursesPage: React.FC = () => {
   })
 
 
-      const [categories, setCategories] = useState<string[]>([]);
+    const [categories, setCategories] = useState<string[]>([]);
 
-      useEffect(() => {
-        fetchCategories();
-      }, []);
-    
-      const fetchCategories = async () => {
-        try {
-          const querySnapshot = await getDocs(collection(db, "categories"));
-          const data = querySnapshot.docs.map((doc) => doc.data().name);
-          setCategories(data);
-        } catch (error) {
-          console.error("Error fetching categories: ", error);
-        }
-      };
+    useEffect(() => {
+    fetchCategories();
+    }, []);
+
+    const fetchCategories = async () => {
+    try {
+        const querySnapshot = await getDocs(collection(db, "categories"));
+        const data = querySnapshot.docs.map((doc) => doc.data().name);
+        setCategories(data);
+    } catch (error) {
+        console.error("Error fetching categories: ", error);
+    }
+    };
 
 
      
