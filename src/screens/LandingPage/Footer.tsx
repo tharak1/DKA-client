@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaWhatsapp, FaEnvelope, FaLinkedin, FaInstagram, FaTwitter, FaFacebook } from 'react-icons/fa';
+import { FaWhatsapp, FaEnvelope,  FaInstagram } from 'react-icons/fa';
 
 interface Props {
   // Add any props you need here
@@ -8,63 +8,46 @@ interface Props {
 const Footer: React.FC<Props> = () => {
   return (
     <div className="flex flex-row flex-wrap justify-end space-y-4 p-10 max-sm:p-4 m-1 bg-footer bg-cover">
-      {/* First part */}
+     
       <div className="w-full md:w-auto md:flex-grow md:mr-8">
         <h1 className="text-5xl font-bold bg-gradient-to-r from-pink-500  to-green-600 bg-clip-text text-transparent">Get Connected <br></br>With Us.</h1>
-        {/* <p className="text-gray-600 text-2xl mt-5 max-sm:font-normal max-sm:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed libero <br></br>sit amet justo luctus auctor.Lorem ipsum<br></br> dolor sit amet, consectetur adipiscing elit. Duis sed libero <br></br>sit amet justo luctus auctor.</p> */}
+      
       </div>
 
-      {/* Second part */}
-
-      {/* Third part */}
-      {/* <div className="w-full md:w-auto md:flex-grow md:mr-8">
-        <h2 className="text-2xl font-bold mb-2">Company</h2>
-        <p className="text-gray-600 text-xl max-sm:text-lg">About</p>
-        <p className="text-gray-600 text-xl max-sm:text-lg">Privacy </p>
-        <p className="text-gray-600 text-xl max-sm:text-lg">Policy Terms</p>
-      </div> */}
+      
+ 
 
       {/* Fourth part */}
-      <div className="w-full md:w-auto md:flex-grow text-end">
-        <h3 className="text-2xl font-bold mb-2">Contact</h3>
-        <div className="flex flex-col space-y-2 text-gray-600">
-          <div className="flex items-center justify-end space-x-2">
+      <div className="w-full md:w-auto md:flex-grow text-end pr-[100px]">
+        <h3 className="text-2xl font-bold mb-2 pr-[120px] max-sm:pr-[109px]">Contact</h3>
+        <div className="flex flex-col space-y- text-gray-600">
+          <div className="flex items-center justify-end space-x-1">
             <FaWhatsapp />
-            <span className='text-xl max-sm:text-lg'>+91 90101 95454</span>
+            <span className='text-xl pr-[35px] max-sm:text-lg max-sm:pr-[41px]'>+91 90101 95454</span>
           </div>
-          <div className="flex items-center justify-end space-x-2">
+          <div className="flex items-center justify-end space-x-1">
             <FaEnvelope />
-            <span className='text-xl max-sm:text-lg'>info.DKA@gmail.com</span>
+            <span className='text-xl pr-[2px] max-sm:text-lg max-sm:pr-[13px]'>info.DKA@gmail.com</span>
           </div>
-          <div className="flex items-center justify-end space-x-2">
-            <FaLinkedin />
-            <span className='text-xl max-sm:text-lg'>Linkedin</span>
-          </div>
+         
           {/* <a href="https://www.instagram.com/divya_kala_academy?igsh=MW1wcmRhMmJuanZpbA==">
             <div className="flex items-center space-x-2">
               <FaInstagram />
               <span className='text-xl max-sm:text-lg'>Instagram</span>
             </div>
           </a> */}
-          <a 
-  href="https://www.instagram.com/divya_kala_academy?igsh=MW1wcmRhMmJuanZpbA==" 
-  target="_blank" 
-  rel="noopener noreferrer"
->
-  <div className="flex items-center justify-end space-x-2">
-    <FaInstagram />
-    <span className='text-xl max-sm:text-lg'>Instagram</span>
-  </div>
-</a>
+          <a
+            href="https://www.instagram.com/divya_kala_academy?igsh=MW1wcmRhMmJuanZpbA=="
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="flex items-center justify-end space-x-2">
+              <FaInstagram />
+              <span className='text-xl pr-[98px] max-sm:text-lg'>Instagram</span>
+            </div>
+          </a>
 
-          <div className="flex items-center justify-end space-x-2">
-            <FaTwitter />
-            <span className='text-xl max-sm:text-lg'>Twitter</span>
-          </div>
-          <div className="flex items-center justify-end space-x-2">
-            <FaFacebook />
-            <span className='text-xl max-sm:text-lg'>Facebook</span>
-          </div>
+          
         </div>
       </div>
     </div>
