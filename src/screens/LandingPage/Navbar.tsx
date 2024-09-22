@@ -165,6 +165,9 @@ const Navbar: React.FC = () => {
                     <Link to="/my_performances?course=all" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Performance</Link>
                   </li>
                   <li>
+                    <Link to="/exams" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Exams</Link>
+                  </li>
+                  <li>
                     <Link to="/results" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Results</Link>
                   </li>
                   <li>

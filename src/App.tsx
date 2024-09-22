@@ -167,6 +167,7 @@ const Form = React.lazy(() => import('./screens/OtherPages/Form'));
 import { useSelector } from 'react-redux';
 import { GetUser } from './redux/UserSlice';
 import { UserModel } from './models/UserModel';
+import ExamsPage from './screens/OtherPages/ExamsPage';
 
 const App: React.FC = () => {
   const user = useSelector(GetUser) as UserModel | null;
@@ -200,6 +201,8 @@ const App: React.FC = () => {
         <Route path="/my_performances" element={<MyPerformancePage />} />
         <Route path="/my_profile" element={<ProfilePage />} />
         <Route path="/give_feedback" element={<GiveFeedback />} />
+        <Route path="/exams" element={<ExamsPage />} />
+
       </>
     ) : (
       // Redirect to /login if user is not authenticated and tries to access these routes
