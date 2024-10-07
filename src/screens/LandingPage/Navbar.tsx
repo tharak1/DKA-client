@@ -208,7 +208,7 @@ const Navbar: React.FC = () => {
           </Link>
         </li>
         <li>
-          <ScrollLink to="about" smooth={true} className="flex items-center p-2 text-xl font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <ScrollLink to="about" smooth={true} className="flex items-center p-2 text-xl font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" onClick={() => toggleDrawer()}>
             <IoMdInformationCircleOutline size={24} />
             <span className="ml-3">About Us</span>
           </ScrollLink>
@@ -238,7 +238,7 @@ const Navbar: React.FC = () => {
           )}
         </li>
         <li>
-          <ScrollLink to="footer" smooth={true}className="flex items-center p-2 text-xl font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <ScrollLink to="footer" smooth={true}className="flex items-center p-2 text-xl font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" onClick={() => toggleDrawer()}>
             <IoMdContact size={24} />
             <span className="flex-1 ml-3 whitespace-nowrap">Contact Us</span>
           </ScrollLink>
