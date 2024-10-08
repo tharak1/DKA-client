@@ -47,8 +47,8 @@ const WriteExamCard:React.FC<WriteExamCardPrpos> = ({qp}) => {
     
             if (isDateTimeInRange(qp.startDate, qp.startTime, qp.endDate, qp.endTime)) {
                 // window.open(`https://dka-exam-portal.vercel.app/write_exam?id=${qp.id}&user=${encodedUserData}`);
-                // window.location.href = `https://dka-exam-portal.vercel.app/write_exam?id=${qp.id}&user=${encodedUserData}`;
-                window.location.href = `http://localhost:5175/write_exam?id=${qp.id}&user=${encodedUserData}`;
+                window.location.href = `https://dka-exam-portal.vercel.app/write_exam?id=${qp.id}&user=${encodedUserData}`;
+                // window.location.href = `http://localhost:5175/write_exam?id=${qp.id}&user=${encodedUserData}`;
 
 
             } else {
