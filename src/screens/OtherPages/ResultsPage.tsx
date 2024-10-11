@@ -94,6 +94,8 @@ const getData = () =>{
 
   getResultsForStudent(user.id).then(results => {
     setExamDetails(results);
+    // setExamDetails([...results, ...results]);
+
     // console.log(results);
   }).catch(error => {
     console.error("Error fetching results: ", error);
@@ -128,7 +130,7 @@ const getData = () =>{
               : 
               examDetails.length === 0 ? 
                 <div className='flex w-full h-full justify-center items-center text-center col-span-3 max-sm:col-span-1'>
-                    <h2>No courses available</h2>
+                    <h2>No Results available</h2>
                 </div>
               :     
               examDetails.map((obj:ExamDetails) => (
@@ -139,7 +141,18 @@ const getData = () =>{
                   <h2 className="text-xl font-semibold mb-2">{obj.course} - ({obj.examType === "create question paper"?"MCQ":"Written"})</h2>
                   <p className="text-gray-600">Start Date / time : {obj.startDate} / {obj.startTime}</p>
                   <p className="text-gray-600">End Date / time : {obj.endDate} / {obj.endTime}</p>
-                  <p className="text-gray-600">Marks Obtained : {obj.students[0].marksObtained} / {obj.totalMarks}</p>
+
+                  {
+                    obj.examType === "create question paper" ?  
+                    <p className="text-gray-600">Marks Obtained : {obj.students[0].marksObtained} / {obj.totalMarks}</p>
+                    :
+                    (obj.students[0] as UploadQuestionPaperPerformance).evaluated !== undefined && (
+                    
+                      (obj.students[0] as UploadQuestionPaperPerformance).evaluated ?
+                        <p className="text-gray-600">Marks Obtained : {obj.students[0].marksObtained} / {obj.totalMarks}</p>
+                        :
+                        <p className="text-red-600"> Not Evaluated </p>
+                  )}
                 </div>
               ))
             }
