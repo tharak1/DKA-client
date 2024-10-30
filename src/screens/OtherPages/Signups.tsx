@@ -8,6 +8,7 @@ import { addDoc, collection, doc, getDoc, getDocs, setDoc } from 'firebase/fires
 import UsersModal from '../../components/UsersModal';
 import { GuardianModel } from '../../models/UserModel';
 import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+
 const Signup: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -115,9 +116,9 @@ const Signup: React.FC = () => {
       {/* Left side with SVG background */}
       <div className="w-full md:w-1/2 bg-anotherOne bg-cover bg-center flex items-center justify-center p-8 md:p-0 max-sm:bg-small-form">
         <div className="text-center text-black px-4 md:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Welcome Back!</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">Hello, Friend!</h1>
           <p className="mb-6">To get connected with us please login with your already registered details</p>
-          <Link to="/join-now">
+          <Link to="/login">
             <button className="bg-signup-pattern text-white py-2 px-4 rounded-3xl font-semibold hover:bg-gray-200 hover:text-black border border-white">
               SIGN IN
             </button>

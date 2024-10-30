@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
-import { GetUser } from '../../redux/UserSlice';
+import { fetchUser, GetUser } from '../../redux/UserSlice';
 import { UserModel } from '../../models/UserModel';
 import { QuestionPaper } from '../../models/ExamModel';
 import { db } from '../../firebase_config';
 import Navbar from '../LandingPage/Navbar';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import WriteExamCard from '../../components/WriteExamCard';
-
-
-
-
-
-
+import { useAppDispatch } from '../../redux/Store';
+import { MyCourseModal } from '../../models/CourseModel';
 
 const ExamsPage:React.FC = () => {
     const curUser = useSelector(GetUser) as UserModel;
@@ -22,6 +18,22 @@ const ExamsPage:React.FC = () => {
     const [AQP,setAQP] = useState<QuestionPaper[]>([]);
     const [selectedIndex, setSelectedIndex] = React.useState(0);
 
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+      dispatch(fetchUser(curUser.id));
+    }, []);
+
+    function isDateTimeInRange(startDate: string, startTime: string, endDate: string, endTime: string): boolean {
+        // Parse dates and times
+        const startDateTime = new Date(`${startDate}T${startTime}`);
+        const endDateTime = new Date(`${endDate}T${endTime}`);
+        const dateTime = new Date();
+    
+        // Check if dateTime is within the range of startDateTime and endDateTime
+        return dateTime > startDateTime && dateTime < endDateTime;
+    }
+
     const getQp = async () => {
         setQpLoading(true);
     
@@ -29,32 +41,36 @@ const ExamsPage:React.FC = () => {
 
         let notAttemptedExams: QuestionPaper[] = [];
         let attemptedExams: QuestionPaper[] = [];
+
+        const regcoursesId = curUser.registeredCourses.map(course => course.courseId);
         
         for (const doc1 of queryans.docs) {
             const fetchedQP = doc1.data() as QuestionPaper;
-        
-            const isStudentSelected = fetchedQP.for === "Select Students" 
-                ? fetchedQP.selectedStudents?.includes(curUser.id) 
-                : true; 
 
-            const resultsDoc = await getDoc(doc(db, "Online-exam-results", fetchedQP.id!));
-            const resultsData = resultsDoc.data();
-        
-            if (resultsData) {
-                const studentsArr = resultsData.students;
-        
-                const isStudentPresent = studentsArr.some((x: any) => x.studentId === curUser.id);
-        
-                if (isStudentPresent) {
-                    attemptedExams.push(fetchedQP);
-                } else if (isStudentSelected) {
+            if( regcoursesId.includes( fetchedQP.courseId! ) || ( isDateTimeInRange(fetchedQP.startDate, fetchedQP.startTime, fetchedQP.endDate, fetchedQP.endTime) || curUser.registeredCourses.find((c:MyCourseModal) => c.courseName === fetchedQP.course!)?.onlineExamExempt === true) ){
+                const isStudentSelected = fetchedQP.for === "Select Students" 
+                    ? fetchedQP.selectedStudents?.includes(curUser.id) 
+                    : true; 
 
-                    notAttemptedExams.push(fetchedQP);
-                }
-            } else {
+                const resultsDoc = await getDoc(doc(db, "Online-exam-results", fetchedQP.id!));
+                const resultsData = resultsDoc.data();
+            
+                if (resultsData) {
+                    const studentsArr = resultsData.students;
+            
+                    const isStudentPresent = studentsArr.some((x: any) => x.studentId === curUser.id);
+            
+                    if (isStudentPresent) {
+                        attemptedExams.push(fetchedQP);
+                    } else if (isStudentSelected) {
 
-                if (isStudentSelected) {
-                    notAttemptedExams.push(fetchedQP);
+                        notAttemptedExams.push(fetchedQP);
+                    }
+                } else {
+
+                    if (isStudentSelected) {
+                        notAttemptedExams.push(fetchedQP);
+                    }
                 }
             }
         }

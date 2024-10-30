@@ -28,6 +28,7 @@ interface MyCourseModal{
     courseSession: string;
     branch: string;
     endDate:string;
+    onlineExamExempt?:boolean;
 }
 
 interface CharityUploadModel{

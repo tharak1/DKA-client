@@ -9,9 +9,16 @@ interface text {
   quote:string;
   aboutUs:string;
   statsText:string;
+  StudentsParticipatedInNationals:string;
+  PassPercentage:string;
+  YearsOfExperience:string;
 }
 
-const About: React.FC = () => {
+interface AboutProps{
+  data:text;
+}
+
+const About: React.FC<AboutProps> = ({data}) => {
   // Set up the IntersectionObserver hooks
   const [refStudents, inViewStudents] = useInView({ triggerOnce: true });
   const [refTutors, inViewTutors] = useInView({ triggerOnce: true });
@@ -20,32 +27,38 @@ const About: React.FC = () => {
   const [refPassPercentage, inViewPassPercentage] = useInView({ triggerOnce: true });
   const [refNationals, inViewNationals] = useInView({ triggerOnce: true });
 
+  useEffect(() => {
+    getInfo();
+  },[]);
 
-  const [data,setData] = useState<text>({
-    smallQuote:'',
-    quote:'',
-    aboutUs:'',
-    statsText:''
-});
+  const [info,setInfo] = useState({
+      noOfStudents:0,
+      payments:0,
+      foreignStudents:0,
+      tutors:0
+  })
 
-useEffect(()=>{
-    getData();
-},[]);
+  const getInfo = async () => {
 
-const getData = async()=>{
-    try {
-        const querySnapshot = await getDocs(collection(db, 'aboutUs'));
-        if (!querySnapshot.empty) {
-          const docData = querySnapshot.docs[0]; // Assuming you only have one document
+      const querySnapshot1 = await getDocs(collection(db, 'students'));
 
-          setData(docData.data() as text); // Set the data in state
-        }
-      } catch (error) {
-        console.error("Error fetching aboutUs data:", error);
-      } finally {
+      const querySnapshot2 = await getDocs(collection(db, 'payments'));
 
-      }
-}
+      const querySnapshot3 = await getDocs(collection(db, 'employees'));
+
+
+      const foreignStudentsCount = querySnapshot1.docs.filter(doc => doc.data().country !== 'India').length;
+
+      setInfo({
+          noOfStudents: querySnapshot1.size,
+          payments: querySnapshot2.size,
+          foreignStudents: foreignStudentsCount,
+          tutors:querySnapshot3.size
+      });
+  };
+
+
+
 
   return (
     <div id="about">
@@ -70,27 +83,27 @@ const getData = async()=>{
 
           <div className="w-full md:w-1/2 grid grid-cols-2 grid-rows-3 gap-4">
             <div className="p-4 flex flex-col items-center justify-center text-center" ref={refStudents}>
-              {inViewStudents && <CountUp className="text-5xl font-bold" end={550} duration={3} />}
+              {inViewStudents && <CountUp className="text-5xl font-bold" end={info.noOfStudents} duration={3} />}
               <p>Students</p>
             </div>
             <div className="p-4 flex flex-col items-center justify-center text-center" ref={refTutors}>
-              {inViewTutors && <CountUp className="text-5xl font-bold" end={50} duration={3} />}
+              {inViewTutors && <CountUp className="text-5xl font-bold" end={info.tutors} duration={3} />}
               <p>Tutors</p>
             </div>
             <div className="p-4 flex flex-col items-center justify-center text-center" ref={refIntlStudents}>
-              {inViewIntlStudents && <CountUp className="text-5xl font-bold" end={110} duration={3} />}
+              {inViewIntlStudents && <CountUp className="text-5xl font-bold" end={info.foreignStudents} duration={3} />}
               <p>International Students</p>
             </div>
             <div className="p-4 flex flex-col items-center justify-center text-center" ref={refExperience}>
-              {inViewExperience && <CountUp className="text-5xl font-bold" end={10} duration={3} />}
+              {inViewExperience && <CountUp className="text-5xl font-bold" end={parseInt(data.YearsOfExperience)} duration={3} />}
               <p>Years Of Experience</p>
             </div>
             <div className="p-4 flex flex-col items-center justify-center text-center" ref={refPassPercentage}>
-              {inViewPassPercentage && <CountUp className="text-5xl font-bold" end={98} suffix="%" duration={3} />}
+              {inViewPassPercentage && <CountUp className="text-5xl font-bold" end={parseInt(data.PassPercentage)} suffix="%" duration={3} />}
               <p>Pass Percentage</p>
             </div>
             <div className="p-4 flex flex-col items-center justify-center text-center" ref={refNationals}>
-              {inViewNationals && <CountUp className="text-5xl font-bold" end={155} duration={3} />}
+              {inViewNationals && <CountUp className="text-5xl font-bold" end={parseInt(data.StudentsParticipatedInNationals)} duration={3} />}
               <p>Students participated in Nationals</p>
             </div>
           </div>

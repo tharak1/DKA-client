@@ -91,7 +91,7 @@ const Navbar: React.FC = () => {
             }
           </div>
           <span className="text-3xl font-bold mr-4">
-            <img src={DKA} alt="" className='h-14 w-20' />
+            <img src={DKA} alt="" loading='lazy' className='h-14 w-20' />
           </span>
         </div>
         <div className="flex items-center space-x-4 ml-auto max-sm:hidden">
@@ -145,7 +145,7 @@ const Navbar: React.FC = () => {
               className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
             >
               <span className="sr-only">Open user menu</span>
-              <img className="w-10 h-10 rounded-full max-sm:h-12 max-sm:w-12" src={user.imageUrl} alt="user photo" />
+              <img className="w-10 h-10 rounded-full max-sm:h-12 max-sm:w-12" src={user.imageUrl} loading='lazy' alt="user photo" />
             </button>
             <div className='ml-5'>
               <FaChevronDown />

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { GetUser } from '../redux/UserSlice';
 import { UserModel } from '../models/UserModel';
 import NotificationModal from './NotificationModal';
+import { MyCourseModal } from '../models/CourseModel';
 
 interface WriteExamCardPrpos{
     qp : QuestionPaper;
@@ -30,35 +31,46 @@ const WriteExamCard:React.FC<WriteExamCardPrpos> = ({qp}) => {
         setIsOpen(false);
     }
 
-    function isDateTimeInRange(startDate: string, startTime: string, endDate: string, endTime: string): boolean {
-        // Parse dates and times
-        const startDateTime = new Date(`${startDate}T${startTime}`);
-        const endDateTime = new Date(`${endDate}T${endTime}`);
-        const dateTime = new Date();
+    // function isDateTimeInRange(startDate: string, startTime: string, endDate: string, endTime: string): boolean {
+    //     // Parse dates and times
+    //     const startDateTime = new Date(`${startDate}T${startTime}`);
+    //     const endDateTime = new Date(`${endDate}T${endTime}`);
+    //     const dateTime = new Date();
     
-        // Check if dateTime is within the range of startDateTime and endDateTime
-        return dateTime > startDateTime && dateTime < endDateTime;
-    }
+    //     // Check if dateTime is within the range of startDateTime and endDateTime
+    //     return dateTime > startDateTime && dateTime < endDateTime;
+    // }
 
     const writeExam = () => {
         setQpLoading(true)        
 
             const encodedUserData = encodeURIComponent(JSON.stringify(curUser));
-    
-            if (isDateTimeInRange(qp.startDate, qp.startTime, qp.endDate, qp.endTime)) {
-                // window.open(`https://dka-exam-portal.vercel.app/write_exam?id=${qp.id}&user=${encodedUserData}`);
-                window.location.href = `https://dka-exam-portal.vercel.app/write_exam?id=${qp.id}&user=${encodedUserData}`;
-                // window.location.href = `http://localhost:5175/write_exam?id=${qp.id}&user=${encodedUserData}`;
+
+            if(new Date() <= new Date(curUser.registeredCourses.find((c:MyCourseModal) => c.courseName === qp.course!)?.endDate!)){
+                // if (isDateTimeInRange(qp.startDate, qp.startTime, qp.endDate, qp.endTime)) {
+                    // window.open(`https://dka-exam-portal.vercel.app/write_exam?id=${qp.id}&user=${encodedUserData}`);
+                    window.location.href = `https://dka-exam-portal.vercel.app/write_exam?id=${qp.id}&user=${encodedUserData}`;
+                    // window.location.href = `http://localhost:5175/write_exam?id=${qp.id}&user=${encodedUserData}`;
 
 
-            } else {
-                setError("Time");
+                // } else {
+                //     setError("Time");
+                //     setNotification({
+                //         heading: "Time Error",
+                //         body: `Exam starts on: ${qp.startDate} ${qp.startTime} - Ends on: ${qp.endDate} ${qp.endTime}`
+                //     });
+                //     open();
+                // }
+            }else{
+                setError("Requires Renewal");
                 setNotification({
-                    heading: "Time Error",
-                    body: `Exam starts on: ${qp.startDate} ${qp.startTime} - Ends on: ${qp.endDate} ${qp.endTime}`
+                    heading: "Course has expired",
+                    body: `The course has ended. To continue, please renew the course.`
                 });
                 open();
             }
+    
+
         setQpLoading(false);
     }
 

@@ -60,7 +60,7 @@ const PurchasedCourses:React.FC = () => {
                                 orders.map((obj)=>(
                                     <div className="flex flex-row h-full bg-white shadow-lg rounded-lg overflow-hidden" key={obj.orderId}>
                                         <div className="w-1/2 h-full flex justify-center items-center p-6">
-                                            <img className='h-full max-sm:h-1/2 w-full object-fit rounded-lg' src={obj.courseImageUrl} alt="Kuchipudi Dance"/>
+                                            <img className='h-full max-sm:h-1/2 w-full object-fit rounded-lg' src={obj.courseImageUrl} loading='lazy' alt="Kuchipudi Dance"/>
                                         </div>
                                         <div className="p-6 w-full">
                                             <h2 className="text-xl font-bold mb-2">{obj.courseName}</h2>

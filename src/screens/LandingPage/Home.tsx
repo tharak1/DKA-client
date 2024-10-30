@@ -1,44 +1,22 @@
-import { collection, getDocs } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../firebase_config';
 
 interface text {
   smallQuote:string;
   quote:string;
   aboutUs:string;
   statsText:string;
+  StudentsParticipatedInNationals:string;
+  PassPercentage:string;
+  YearsOfExperience:string;
 }
 
-const Home: React.FC = () => {
+interface HomeProps{
+  data:text;
+}
+
+const Home: React.FC<HomeProps> = ({data}) => {
   const navigate = useNavigate();
-
-
-  const [data,setData] = useState<text>({
-    smallQuote:'',
-    quote:'',
-    aboutUs:'',
-    statsText:''
-});
-
-useEffect(()=>{
-    getData();
-},[]);
-
-const getData = async()=>{
-    try {
-        const querySnapshot = await getDocs(collection(db, 'aboutUs'));
-        if (!querySnapshot.empty) {
-          const docData = querySnapshot.docs[0]; // Assuming you only have one document
-
-          setData(docData.data() as text); // Set the data in state
-        }
-      } catch (error) {
-        console.error("Error fetching aboutUs data:", error);
-      } finally {
-
-      }
-}
 
   return (
     <header id="home" className="w-full h-screen max-sm:h-[85vh] pt-20 max-sm:pt-28 bg-rainbow bg-no-repeat bg-auto max-sm:bg-cover bg-right relative text-left  max-sm:px-4 max-sm:bg-s-rainbow">

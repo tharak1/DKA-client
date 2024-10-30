@@ -190,7 +190,7 @@ const App: React.FC = () => {
     
     {/* Make the /course route accessible without authentication */}
     <Route path="/course" element={<CoursesPage />} />
-    <Route path="/results" element={<ResultsPage />} />
+    <Route path="/results" element={<ResultsPage />} /> 
 
     {/* Authenticated routes */}
     {user ? (

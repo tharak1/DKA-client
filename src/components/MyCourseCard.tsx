@@ -57,19 +57,28 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
     const joinOnlineClass = async() =>{
         const onlineClass = await getDoc(doc(db,'onlineClass',courseDetails.courseName!));
 
-        if(onlineClass.data()){
-            if(isValidURL(onlineClass.data()!.classLink)){
-                window.open(onlineClass.data()!.classLink, '_blank');
+        if(new Date() <= new Date(userRegisteredCourseDetails?.endDate!)){
+
+            if(onlineClass.data()){
+                if(isValidURL(onlineClass.data()!.classLink)){
+                    window.open(onlineClass.data()!.classLink, '_blank');
+                }
+                else{
+                    open();
+                    setNotification({heading:"Online Class",body:"There is no class at the moment"})
+                }
             }
             else{
                 open();
                 setNotification({heading:"Online Class",body:"There is no class at the moment"})
             }
-        }
-        else{
+
+        }else{
             open();
-            setNotification({heading:"Online Class",body:"There is no class at the moment"})
+            setNotification({heading:"Requires Renewal",body:"The course has ended. To continue, please renew the course."})
         }
+
+
     }
 
 
@@ -82,11 +91,11 @@ const MyCourseCard:React.FC<CourseCardProps> = ({courseDetails,userRegisteredCou
     
   return (
     <div className="max-w-sm bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
-    <img className="w-full h-64 object-cover object-center" src={courseDetails.image} alt="Kuchipudi Dance"/>
+    <img className="w-full h-64 object-cover object-center" loading='lazy' src={courseDetails.image} alt="Kuchipudi Dance"/>
     <div className="p-4">
         <h2 className="text-2xl font-bold text-gray-800 mb-2">{courseDetails.courseName}</h2>
         <p className="text-gray-600"><span className="font-semibold">Classes mode:</span> {userRegisteredCourseDetails?.courseType}</p>
-        <p className="text-gray-600"><span className="font-semibold">Class Timings:</span><span className="font-semibold">{userRegisteredCourseDetails?.courseSession}</span></p>
+        {/* <p className="text-gray-600"><span className="font-semibold">Class Timings:</span><span className="font-semibold">{userRegisteredCourseDetails?.courseSession}</span></p> */}
         <div className="mt-2 grid grid-cols-2 justify-around gap-3">
 
             <button className="bg-blue-200 text-gray-800 py-2 px-2 rounded-xl text-sm font-semibold hover:bg-blue-300" onClick={handleViewMarks}>View Marks</button>
