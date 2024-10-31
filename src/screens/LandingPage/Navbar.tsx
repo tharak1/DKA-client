@@ -1,7 +1,6 @@
 import { collection, getDocs } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { Link as ScrollLink } from 'react-scroll';
 import { db } from '../../firebase_config';
 import { GoArrowUpRight } from "react-icons/go";
 import { useSelector } from 'react-redux';
@@ -30,6 +29,8 @@ const Navbar: React.FC = () => {
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+
 
 
   useEffect(() => {
@@ -65,6 +66,9 @@ const Navbar: React.FC = () => {
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
       setViewMenu(false);
     }
+    if (drawerRef.current && !drawerRef.current.contains(event.target as Node)) {
+      setViewDrawer(false);
+    }
   };
 
   useEffect(() => {
@@ -76,6 +80,29 @@ const Navbar: React.FC = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const handleClick = () => {
+    if (location.pathname !== '/') {
+      navigate('/');
+    }
+    toggleDrawer();
+    // Delay scroll to allow navigation to complete
+    setTimeout(() => {
+      document.getElementById('about')!.scrollIntoView({ behavior: 'smooth' });
+    }, 200);
+  };
+
+  const handleClickContactUs = () => {
+    if (location.pathname !== '/') {
+      navigate('/');
+    }
+    toggleDrawer();
+    setTimeout(() => {
+      document.getElementById('footer')!.scrollIntoView({ behavior: 'smooth' });
+    }, 500);
+  };
+
+  
 
   return (
     <>
@@ -103,9 +130,16 @@ const Navbar: React.FC = () => {
           >
             HOME
           </NavLink>
-          <ScrollLink to="about" smooth={true} duration={500} className="flex items-center font-poppins text-base font-thin text-gray-500 cursor-pointer hover:text-black" activeClass="font-bold text-black text-lg">
+          {/* <ScrollLink to="about" smooth={true} duration={500} className="flex items-center font-poppins text-base font-thin text-gray-500 cursor-pointer hover:text-black" activeClass="font-bold text-black text-lg">
             ABOUT US
-          </ScrollLink>
+          </ScrollLink> */}
+
+          <div
+            onClick={handleClick}
+            className="flex items-center font-poppins text-base font-thin text-gray-500 cursor-pointer hover:text-black" 
+          >
+            <span className="ml-3">ABOUT US</span>
+          </div>
 
           <div className="relative" ref={dropdownRef}>
             <button
@@ -133,9 +167,12 @@ const Navbar: React.FC = () => {
             </div>
           </div>
 
-          <ScrollLink to="footer" smooth={true} duration={500} className="flex items-center font-poppins text-base font-thin text-gray-500 cursor-pointer hover:text-black" activeClass="font-bold text-black text-lg">
+          <div
+            onClick={handleClickContactUs}
+            className="flex items-center font-poppins text-base font-thin text-gray-500 cursor-pointer hover:text-black" 
+          >
             CONTACT US
-          </ScrollLink>
+          </div>
         </div>
 
         {user ? (
@@ -200,7 +237,7 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu */}
       {viewDrawer && (
   <div className='bg-slate-200 w-full transition duration-150 ease-in-out'>
-    <div       className={`w-8/12 h-screen sm:hidden z-40 bg-white fixed transform transition-transform duration-300 ${
+    <div  ref={drawerRef}     className={`w-8/12 h-screen sm:hidden z-40 bg-white fixed transform transition-transform duration-300 ${
         viewDrawer ? 'translate-x-0' : '-translate-x-full'
       }`}>
       <ul className="space-y-2 pb-5 mt-20">
@@ -211,10 +248,13 @@ const Navbar: React.FC = () => {
           </Link>
         </li>
         <li>
-          <ScrollLink to="about" smooth={true} className="flex items-center p-2 text-xl font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" onClick={() => toggleDrawer()}>
-            <IoMdInformationCircleOutline size={24} />
-            <span className="ml-3">About Us</span>
-          </ScrollLink>
+          <div
+            onClick={handleClick}
+            className="flex items-center p-2 text-xl font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+          >
+              <IoMdInformationCircleOutline size={24} />
+              <span className="ml-3">About Us</span>
+          </div>
         </li>
         <li>
           <button onClick={() =>{navigate('/course?category=all'); toggleDrawer()}} className="w-full flex items-center p-2 text-xl font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -241,10 +281,13 @@ const Navbar: React.FC = () => {
           )}
         </li>
         <li>
-          <ScrollLink to="footer" smooth={true}className="flex items-center p-2 text-xl font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" onClick={() => toggleDrawer()}>
+          <div
+            onClick={handleClickContactUs}
+            className="flex items-center p-2 text-xl font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+          >
             <IoMdContact size={24} />
-            <span className="flex-1 ml-3 whitespace-nowrap">Contact Us</span>
-          </ScrollLink>
+            <span className="ml-3">Contact Us</span>
+          </div>
         </li>
       </ul>
     </div>
