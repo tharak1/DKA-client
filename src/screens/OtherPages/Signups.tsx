@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-import { FaFacebook, FaGoogle } from "react-icons/fa";
-import { CiLinkedin } from "react-icons/ci";
+import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate,  } from 'react-router-dom';
 import { auth, db, googleProvider } from '../../firebase_config';
 import { addDoc, collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
@@ -138,13 +137,7 @@ const Signup: React.FC = () => {
           <h1 className="text-2xl md:text-3xl font-bold mb-4">Create Account</h1>
           <div className="flex justify-center space-x-2 md:space-x-4 mb-6">
             <button className="bg-gray-200 p-3 rounded-full">
-              <FaFacebook />
-            </button>
-            <button className="bg-gray-200 p-3 rounded-full">
               <FaGoogle onClick={signInWithGoogle} />
-            </button>
-            <button className="bg-gray-200 p-3 rounded-full">
-              <CiLinkedin />
             </button>
           </div>
           <p className="mb-6">or use your email for registration:</p>
