@@ -34,9 +34,10 @@ const Signup: React.FC = () => {
   };
   const signUp = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true);
 
     if(email !== "" || password !== ""){
+    setLoading(true);
+
 
     try {
       // Sign up the user
