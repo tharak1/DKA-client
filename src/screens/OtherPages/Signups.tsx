@@ -32,7 +32,7 @@ const Signup: React.FC = () => {
     const numberString = (numberOfUsers + 1).toString().padStart(paddingLength, '0');
     return prefix + numberString;
   };
-  const signUp = async (e: React.FormEvent<HTMLFormElement>) => {
+  const signUp = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true);
 
@@ -180,8 +180,8 @@ const Signup: React.FC = () => {
 
             </div>
              <p className='text-red-500'>{error}</p>
-            <Link to='/form'>
-              <button className="mt-4 px-4 bg-blue-500 text-white py-2 rounded-full font-semibold hover:bg-blue-600" >
+           
+              <button type='submit' className="mt-4 px-4 bg-blue-500 text-white py-2 rounded-full font-semibold hover:bg-blue-600" onClick={signUp}>
                 {
                   loading ?
                     <svg aria-hidden="true" className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -192,7 +192,7 @@ const Signup: React.FC = () => {
                     "Sign Up"
                 }
               </button>
-            </Link>
+           
           </form>
         </div>
       </div>
