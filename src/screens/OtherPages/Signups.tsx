@@ -36,6 +36,9 @@ const Signup: React.FC = () => {
   const signUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true);
+
+    if(email !== "" || password !== ""){
+
     try {
       // Sign up the user
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -72,8 +75,11 @@ const Signup: React.FC = () => {
       console.error("Error signing up:", error);
       setError(error as string + "Try Login using Google");
       setLoading(false);
-
     }
+  }
+  else{
+    setError("Email and Password fields are empty.")
+  }
   };
 
   const signInWithGoogle = async () => {
