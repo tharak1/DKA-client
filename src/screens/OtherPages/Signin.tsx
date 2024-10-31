@@ -9,7 +9,12 @@ import { useAppDispatch } from '../../redux/Store';
 import { GuardianModel, UserModel } from '../../models/UserModel';
 import { setUser } from '../../redux/UserSlice';
 import UsersModal from '../../components/UsersModal';
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
+
+
+
 const SignIn: React.FC = () => {
+  const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -127,12 +132,31 @@ const SignIn: React.FC = () => {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-200"
               onChange={(e) => setEmail(e.target.value)}
             />
-            <input
-              type="password"
-              placeholder="Password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-200"
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className='relative'>
+
+              <input
+                type={visible ? "text" : "password"}
+                placeholder="Password"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-200"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+
+              <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600"
+                  onClick={() => setVisible(!visible)}
+              >
+                  {visible ? (
+                      <IoIosEye size={24} />
+                  ) : (
+                      <IoIosEyeOff size={24} />
+                  )}
+              </button>
+
+            </div>
+
+            <Link to='/forgotPassword'><p className='text-blue-400 text-sm text-end mt-2'>Forgot Password</p></Link>
+
             <p className='text-red-500'>{error}</p>
 
             <button type='submit' className="px-4 py-2 bg-blue-500 text-white  rounded-3xl font-semibold hover:bg-blue-600 ">

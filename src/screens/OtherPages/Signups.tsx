@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
 import { Link, useNavigate,  } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
+  const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -156,13 +157,29 @@ const Signup: React.FC = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-200"
             />
-            <input
-            id='loggingPassword'
-              type="password"
-              placeholder="Password"
-              onChange={(e)=>setPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-200"
-            />
+
+            <div className='relative'>
+              <input
+              id='loggingPassword'
+                type={visible ? "text" : "password"}
+                placeholder="Password"
+                onChange={(e)=>setPassword(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-gray-200"
+              />
+
+              <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600"
+                  onClick={() => setVisible(!visible)}
+              >
+                  {visible ? (
+                      <IoIosEye size={24} />
+                  ) : (
+                      <IoIosEyeOff size={24} />
+                  )}
+              </button>
+
+            </div>
              <p className='text-red-500'>{error}</p>
             <Link to='/form'>
               <button className="mt-4 px-4 bg-blue-500 text-white py-2 rounded-full font-semibold hover:bg-blue-600" >

@@ -7,10 +7,13 @@ interface NotificationModalProps{
     heading:string;
     body:string;
     type:string;
+    type1?:string;
     ActionFunction?: ()=>void;
+    ActionFunction2?: ()=>void;
+
 }
 
-const NotificationModal:React.FC<NotificationModalProps> = ({isOpen,onClose,heading,body,type,ActionFunction}) => {
+const NotificationModal:React.FC<NotificationModalProps> = ({isOpen,onClose,heading,body,type,type1,ActionFunction,ActionFunction2}) => {
   return (
     <Transition appear show={isOpen}>
         <Dialog as="div" className="relative z-10 focus:outline-none" onClose={onClose}>
@@ -34,9 +37,9 @@ const NotificationModal:React.FC<NotificationModalProps> = ({isOpen,onClose,head
                   </p>
                   <div className="mt-4">
                     {
-                      type !== "none"&&(
+                      (type !== "none" && !type1)  &&(
                         <Button
-                        className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold  shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white"
+                        className="text-white inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold  shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white"
                         onClick={ActionFunction}
                       >
                         {type}
@@ -44,13 +47,35 @@ const NotificationModal:React.FC<NotificationModalProps> = ({isOpen,onClose,head
                       )
                     }
 
+                    {
+                       type1 &&(
+                        <>
+                          <Button
+                          className="text-white inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold  shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white mr-4"
+                          onClick={ActionFunction}
+                          >
+                            {type === "emailverification"? "Login":""}
+                          </Button>
+                          <Button
+                            className="text-white inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold  shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white"
+                            onClick={ActionFunction2}
+                          >
+                            {type1}
+                          </Button>
+                        </>
+                      )
+                    }
 
+
+
+                  { type !== "emailverification" &&(                    
                     <Button
                       className="ml-2 inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 text-white data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white"
                       onClick={onClose}
                     >
                       close
                     </Button>
+                  )}
                   </div>
                 </DialogPanel>
               </TransitionChild>

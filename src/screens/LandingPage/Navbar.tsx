@@ -174,6 +174,9 @@ const Navbar: React.FC = () => {
                     <Link to="/my_purchases" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My purchases</Link>
                   </li>
                   <li>
+                    <Link to="/changePassword" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Change password</Link>
+                  </li>
+                  <li>
                     <Link to="/my_profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My profile</Link>
                   </li>
                   <li>

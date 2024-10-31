@@ -168,6 +168,9 @@ import { useSelector } from 'react-redux';
 import { GetUser } from './redux/UserSlice';
 import { UserModel } from './models/UserModel';
 import ExamsPage from './screens/OtherPages/ExamsPage';
+import ResetPasswordScreen from './screens/OtherPages/ForgotPasswordScreens/ResetPasswordScreen';
+import EnterIdScreen from './screens/OtherPages/ForgotPasswordScreens/EnterIdScreen';
+import EnterOTPScreen from './screens/OtherPages/ForgotPasswordScreens/EnterOTPScreen';
 
 const App: React.FC = () => {
   const user = useSelector(GetUser) as UserModel | null;
@@ -187,6 +190,11 @@ const App: React.FC = () => {
     <Route path="/signup" element={<Signup />} />
     <Route path="/form" element={<Form />} />
     <Route path="/charityform" element={<CharityForm />} />
+    <Route path="/changePassword" element={<ResetPasswordScreen />} />
+    <Route path="/forgotPassword" element={<EnterIdScreen />} />
+    <Route path="/verifyOtp" element={<EnterOTPScreen />} />
+
+
     
     {/* Make the /course route accessible without authentication */}
     <Route path="/course" element={<CoursesPage />} />
