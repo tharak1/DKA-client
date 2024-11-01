@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DKA from "../../../assets/DKA.png";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ip } from '../../../models/ip';
+import NotificationModal from '../../../components/NotificationModal';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../../../firebase_config';
+import { UserModel } from '../../../models/UserModel';
+import LoginEmailIdSelecetionModal from './LoginEmailIdSelecetionModal';
 
 // navigate('/admin/online_exam_viewport', { state: { examDetails: examReport, regStu: regStuCourse }, replace: true });
 // const { examDetails , regStu } = location.state as AdminOnlineExamViewPortProps;
@@ -12,19 +17,108 @@ const EnterIdScreen:React.FC = () => {
     const navigate = useNavigate();
 
     const [Id, setId] = useState<string>("");
+    const [userSelectedId, setUserSelectedId] = useState<string>("");
     const [loading,setLoading] = useState<boolean>(false);
+    const [isOpen,setIsOpen] = useState<boolean>(false);
+    const [isOpen1,setIsOpen1] = useState<boolean>(false);
+    const [notification,setNotification] = useState({
+        heading:"",
+        body:""
+    })
+    const [usersMailResult, setUsersMailResult] = useState<UserModel []>([]);
+
+    const open1 = () =>{
+        setIsOpen1(true);
+    }
+
+    const close1 = () =>{
+        setIsOpen1(false);
+    }
+
+
+    const open = () =>{
+        setIsOpen(true);
+    }
+
+    const close = () => {
+        setIsOpen(false);
+        // if (userSelectedId) {
+        //     setId(userSelectedId);
+        // }
+    };
+
+    useEffect(() => {
+        setId(userSelectedId);
+    },[userSelectedId]);
+    
+
+
+    const fetchMailAccountsUserId = async() => {
+        const docRef = collection(db, "students");
+        const resultsSnap = await getDocs(query(docRef, where("email", "==", Id)));
+
+        const usersMailResultori: UserModel[] = resultsSnap.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        } as UserModel));
+
+        setUsersMailResult(usersMailResultori);
+
+        if(usersMailResultori.length == 1){
+            await serverRequestForMailVerification(usersMailResultori[0].id)
+        }else{
+            open();
+        }
+    }
+
 
     const verifyIdAndSendMail = async(e:React.FormEvent) => {
         e.preventDefault();
-
         setLoading(true);
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const idRegex = /^DKA\d{5}$/;
+
+
+        if ( !emailRegex.test(Id) && idRegex.test(Id) ){
+
+            await serverRequestForMailVerification(Id);
+
+        }else if(emailRegex.test(Id) && !idRegex.test(Id)){
+
+            await fetchMailAccountsUserId();
+
+        }else{
+
+            setNotification({
+                heading: "Invalid ID",
+                body: "Please enter a valid email address or an ID in the format 'DKAxxxxx'.",
+            });
+
+            open1();
+        }
+    
+        setLoading(false);
+    }
+
+
+    const serverRequestForMailVerification = async(selectedId11 : string) => {
 
         const url = `${ip}/api/forgotPassword/verifyMail`;
         try {
-            const response = await axios.post(url, {Id});
+
+            const response = await axios.post(url, {Id:selectedId11});
             console.log('Response:', response.data);
 
-            navigate("/verifyOtp", { state: { Id: Id, Email: response.data.Email }});
+            if(response.data.Message === "User found and OTP sent !"){
+                navigate("/verifyOtp", { state: { Id: selectedId11, Email: response.data.Email }});
+            }else{
+                setNotification({
+                    heading:"Failed",
+                    body:"We didn't find any accound for the given Id, please check Id and retry again."
+                });
+                open1();
+            }
 
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -33,8 +127,10 @@ const EnterIdScreen:React.FC = () => {
                 console.error('Unexpected error:', error);
             }
         }
-        setLoading(false);
     }
+
+
+
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
@@ -48,7 +144,7 @@ const EnterIdScreen:React.FC = () => {
                     <form className="mt-4 space-y-4 lg:mt-5 md:space-y-5" action="#">
 
                         <p className="mb-1 text-sm font-semibold leading-tight tracking-tight text-gray-500  dark:text-white">
-                            Enter your DKA Id.
+                            Enter your DKA Id or Email.
                         </p>
 
                         <div>
@@ -57,7 +153,7 @@ const EnterIdScreen:React.FC = () => {
                                 type="email" 
                                 name="email" 
                                 id="email" 
-                                placeholder="DKA00000" 
+                                placeholder="Enter Email or DKA Id" 
                                 required={true}
                                 value={Id}
                                 onChange={(e) => {setId(e.target.value)}}
@@ -82,6 +178,9 @@ const EnterIdScreen:React.FC = () => {
                     </form>
                 </div>
             </div>
+            <LoginEmailIdSelecetionModal isOpen = {isOpen} onClose={close} usersMailResult={usersMailResult} setUserSelectedId={setUserSelectedId}/>
+
+            <NotificationModal isOpen = {isOpen1} onClose={close1} heading={notification.heading} body={notification.body} type='none'/>
         </section>
     )
 }
