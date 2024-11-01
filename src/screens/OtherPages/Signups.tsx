@@ -127,7 +127,7 @@ const Signup: React.FC = () => {
           <p className="mb-6">To get connected with us please login with your already registered details</p>
           <Link to="/login">
             <button className="bg-signup-pattern text-white py-2 px-4 rounded-3xl font-semibold hover:bg-gray-200 hover:text-black border border-white">
-              SIGN IN
+              LOG IN
             </button>
           </Link>
         </div>

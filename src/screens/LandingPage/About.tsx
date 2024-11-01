@@ -104,7 +104,7 @@ const About: React.FC<AboutProps> = ({data}) => {
             </div>
             <div className="p-4 flex flex-col items-center justify-center text-center" ref={refNationals}>
               {inViewNationals && <CountUp className="text-5xl font-bold" end={parseInt(data.StudentsParticipatedInNationals)} duration={3} />}
-              <p>Students participated in Nationals</p>
+              <p>Students Participated In Nationals/prestigious compitations</p>
             </div>
           </div>
         </div>
